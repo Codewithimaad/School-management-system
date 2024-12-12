@@ -115,7 +115,7 @@ router.get('/dashboard/admin/edit/:id', authenticateUser, checkRole('admin'), as
         }
 
         // Render the edit form with admin details
-        res.render('dashboard/admin/edit', {
+        res.render('dashboard/admin/Edit', {
             admin,
             success_msg: req.flash('success_msg'),
             error_msg: req.flash('error_msg'),

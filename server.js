@@ -50,13 +50,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(methodOverride('_method'));  // This enables method override
 
-// Use session middleware for flash messages
+app.set('trust proxy', 1); // Trust the reverse proxy
+
+
 app.use(session({
     secret: "flashMessage",
-    saveUninitialized: true,
-    resave: false,
-    cookie: { secure: process.env.NODE_ENV === 'production' }, // Use HTTPS in production
+    saveUninitialized: false, // Don't save empty sessions
+    resave: false,            // Avoid resaving unchanged sessions
+    cookie: {
+        secure: process.env.NODE_ENV === 'production', // HTTPS in production
+        httpOnly: true,                               // Helps protect against XSS
+        maxAge: 3600000                               // 1-hour expiration
+    }
 }));
+
 
 
 // Use flash middleware
