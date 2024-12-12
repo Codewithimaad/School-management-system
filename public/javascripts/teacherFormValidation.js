@@ -98,6 +98,18 @@ document.getElementById('teacher-form').addEventListener('submit', function (e) 
         description.classList.remove('border-red-500');
     }
 
+    // Validate Image
+    const image = document.getElementById('image');
+    const imageError = document.getElementById('image-error');
+    if (!image.value) {
+        imageError.classList.remove('hidden');
+        image.classList.add('border-red-500');
+        valid = false;
+    } else {
+        imageError.classList.add('hidden');
+        image.classList.remove('border-red-500');
+    }
+
 
 
     // If invalid, prevent form submission

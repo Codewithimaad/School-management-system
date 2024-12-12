@@ -100,8 +100,10 @@
                     <div class="mb-6">
                         <label for="joiningDate" class="block text-sm font-medium text-gray-700">Joining Date</label>
                         <input type="date" id="joiningDate" name="joiningDate"
-                            class="mt-1 block w-full py-3  p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" />
+                            class="mt-1 block w-full py-3  p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            value="<%= new Date().toISOString().split('T')[0] %>" />
                     </div>
+
 
                     <!-- ImageUrl Input -->
                     <div class="mb-6">

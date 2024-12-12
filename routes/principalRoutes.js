@@ -22,38 +22,38 @@ router.get('/dashboard/principal/add', authenticateUser, checkRole('admin'), (re
 });
 
 // Route to handle adding a new principal
-router.post('/dashboard/principal/add',
-    authenticateUser, checkRole('admin'), upload.single('image'), async (req, res) => {
-        const { name, email, description } = req.body;
-        const localFilePath = req.file.path;
-
-        try {
-
-            // Upload image to Cloudinary
-            const cloudinaryResponse = await uploadOnCloudinary(localFilePath);
-
-            if (!cloudinaryResponse) {
-                return req.flash('success_msg', 'Failed to upload image.');
-
-            }
-
-            let addPrincipal = await Principal.create({
-                name,
-                email,
-                description,
-                imageUrl: cloudinaryResponse.url
-            });
-            if (addPrincipal) {
-                req.flash('success_msg', 'Principal added successfully!');
-                return res.redirect('/dashboard/principal/report');
-            }
-
-        } catch (error) {
-            req.flash('error_msg', 'Something went wrong.');
-            res.redirect('/dashboard/principal/report');
-
+router.post('/dashboard/principal/add', authenticateUser, checkRole('admin'), upload.single('image'), async (req, res) => {
+    console.log(req.file); // Check if file data is coming through
+    const { name, email, description } = req.body;
+    if (!req.file) {
+        req.flash('error_msg', 'Please upload an image.');
+        return res.redirect('/dashboard/principal/add');
+    }
+    const localFilePath = req.file.path;
+    try {
+        // Upload image to Cloudinary
+        const cloudinaryResponse = await uploadOnCloudinary(localFilePath);
+        if (!cloudinaryResponse) {
+            return req.flash('error_msg', 'Failed to upload image.');
         }
-    });
+
+        let addPrincipal = await Principal.create({
+            name,
+            email,
+            description,
+            imageUrl: cloudinaryResponse.url
+        });
+        if (addPrincipal) {
+            req.flash('success_msg', 'Principal added successfully!');
+            return res.redirect('/dashboard/principal/report');
+        }
+
+    } catch (error) {
+        req.flash('error_msg', 'Something went wrong.');
+        res.redirect('/dashboard/principal/report');
+    }
+});
+
 
 // Route to get all principals for reporting
 router.get('/dashboard/principal/report', authenticateUser, checkRole('admin'), async (req, res) => {

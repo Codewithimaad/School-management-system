@@ -4,6 +4,7 @@ document.getElementById('principal-form').addEventListener('submit', function (e
     // Validate Name
     const name = document.getElementById('name');
     const nameError = document.getElementById('name-error');
+    console.log('Name:', name.value); // Debugging
     if (!name.value.trim()) {
         nameError.classList.remove('hidden');
         name.classList.add('border-red-500');
@@ -17,6 +18,7 @@ document.getElementById('principal-form').addEventListener('submit', function (e
     const email = document.getElementById('email');
     const emailError = document.getElementById('email-error');
     const emailPattern = /\S+@\S+\.\S+/;
+    console.log('Email:', email.value); // Debugging
     if (!email.value.trim() || !emailPattern.test(email.value)) {
         emailError.classList.remove('hidden');
         email.classList.add('border-red-500');
@@ -29,6 +31,7 @@ document.getElementById('principal-form').addEventListener('submit', function (e
     // Validate Description
     const description = document.getElementById('description');
     const descriptionError = document.getElementById('description-error');
+    console.log('Description:', description.value); // Debugging
     if (!description.value.trim()) {
         descriptionError.classList.remove('hidden');
         description.classList.add('border-red-500');
@@ -41,6 +44,7 @@ document.getElementById('principal-form').addEventListener('submit', function (e
     // Validate Image
     const image = document.getElementById('image');
     const imageError = document.getElementById('image-error');
+    console.log('Image:', image.files.length); // Debugging
     if (!image.files.length) {
         imageError.classList.remove('hidden');
         image.classList.add('border-red-500');
