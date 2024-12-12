@@ -18,7 +18,7 @@ router.use(express.urlencoded({ extended: true }));
 router.get('/dashboard/student/add', authenticateUser, checkRole('admin', 'teacher'), async (req, res) => {
     try {
         const classes = await classModel.find();
-        res.render("dashboard/studentpages/studenthome", {
+        res.render("dashboard/studentPages/studenthome", {
             classes,
             students: {}, // Pass an empty student object
             success_msg: req.flash('success_msg'), // Pass success flash message
