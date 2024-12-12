@@ -1,0 +1,164 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow p-2 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
+        <!-- Header Section -->
+        <header class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b px-8 pb-4 mb-6">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-gray-800">Class Reports</h2>
+            <p class="text-sm text-gray-500 hidden sm:block">Overview of all classes with teacher and student details.
+            </p>
+        </header>
+
+        <%- include('../../partials/flashMessage') %>
+
+
+            <!-- Search and Add Button -->
+            <section class="flex flex-col sm:flex-row mb-6 gap-4 px-8">
+                <a href="/dashboard/class/add"
+                    class="px-4 py-2 bg-blue-800 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:ring focus:ring-blue-200 focus:outline-none transition-all duration-200 ease-in-out">
+                    Add Class
+                </a>
+            </section>
+
+            <!-- Class Table -->
+            <section class="overflow-hidden bg-white shadow-lg rounded-lg p-8">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full table-auto">
+                        <thead>
+                            <tr class="bg-gray-100 text-left">
+                                <th class="px-4 py-3 text-sm font-semibold text-gray-700">Class Name</th>
+                                <th class="px-4 py-3 text-sm font-semibold text-gray-700">Section</th>
+                                <th class="px-4 py-3 text-sm font-semibold text-gray-700">Students</th>
+                                <th class="px-4 py-3 text-sm font-semibold text-gray-700 pl-20">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% classes.forEach(classItem=> { %>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="px-4 py-4 text-sm font-medium text-gray-800">
+                                        <%= classItem.name %>
+                                    </td>
+
+                                    <td class="px-4 py-4 text-sm text-gray-700">
+                                        <%= classItem.section %>
+                                    </td>
+
+                                    <td class="px-4 py-4 text-sm text-gray-700">
+                                        <%= classItem.students ? classItem.students.length : 0 %>
+                                    </td>
+                                    <td class="px-4 py-4 flex items-center space-x-4 text-sm text-gray-700">
+                                        <a href="/dashboard/class/edit/<%= classItem._id %>"
+                                            class="text-white bg-green-500 px-3 py-2 rounded-sm hover:bg-green-700 font-medium transition-all duration-200 ease-in-out">
+                                            Edit
+                                        </a>
+                                        <button
+                                            class="text-white bg-red-500 px-3 py-2 rounded-sm hover:bg-red-700 font-medium transition-all duration-200 ease-in-out delete-btn"
+                                            data-id="<%= classItem._id %>">
+                                            Delete
+                                        </button>
+                                        <a href="/dashboard/class/details/<%= classItem._id %>"
+                                            class="text-white bg-green-500 px-3 py-2 rounded-sm hover:bg-green-700 font-medium transition-all duration-200 ease-in-out">
+                                            Details
+                                        </a>
+
+
+
+                                    </td>
+
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+
+            <!-- Pagination -->
+            <section class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 p-8 gap-4">
+                <div class="text-sm text-gray-500">
+                    Showing <%= (currentPage - 1) * 8 + 1 %> to
+                        <%= Math.min(currentPage * 8, totalClasses) %> of <%= totalClasses %> classes
+                </div>
+                <div class="flex gap-2">
+                    <!-- Previous Button -->
+                    <% if (currentPage> 1) { %>
+                        <a href="/dashboard/class/reports?page=<%= currentPage - 1 %>"
+                            class="px-4 py-2 text-sm text-white bg-blue-800 rounded-md shadow hover:bg-blue-700 focus:ring focus:ring-blue-200 focus:outline-none transition-all duration-200 ease-in-out">
+                            Previous
+                        </a>
+                        <% } %>
+
+                            <!-- Page Numbers -->
+                            <% for (let i=1; i <=totalPages; i++) { %>
+                                <a href="/dashboard/class/reports?page=<%= i %>"
+                                    class="px-4 py-2 text-sm rounded-md shadow transition-all duration-200 ease-in-out
+                    <%= currentPage === i ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300' %>">
+                                    <%= i %>
+                                </a>
+                                <% } %>
+
+                                    <!-- Next Button -->
+                                    <% if (currentPage < totalPages) { %>
+                                        <a href="/dashboard/class/reports?page=<%= currentPage + 1 %>"
+                                            class="px-4 py-2 text-sm text-white bg-blue-800 rounded-md shadow hover:bg-blue-700 focus:ring focus:ring-blue-200 focus:outline-none transition-all duration-200 ease-in-out">
+                                            Next
+                                        </a>
+                                        <% } %>
+                </div>
+            </section>
+
+
+    </main>
+
+    <script>
+        // SweetAlert2 script for class delete confirmation
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const deleteID = this.getAttribute('data-id'); // Get class ID
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, keep it',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Send the DELETE request to delete the class
+                        fetch(`/dashboard/class/delete/${deleteID}`, {
+                            method: 'GET',  // Using GET for simplicity
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: "The class has been deleted.",
+                                        icon: "success"
+                                    }).then(() => {
+                                        window.location.href = '/dashboard/class/reports';  // Redirect after deletion
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: "Error",
+                                        text: "There was an issue deleting the class.",
+                                        icon: "error"
+                                    });
+                                }
+                            })
+                            .catch(err => {
+                                console.error(err);
+                                Swal.fire({
+                                    title: "Error",
+                                    text: "Failed to delete the class.",
+                                    icon: "error"
+                                });
+                            });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <%- include('../../partials/dashboardfooter') %>

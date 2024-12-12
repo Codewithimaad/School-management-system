@@ -1,0 +1,94 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow flex-wrap p-4 md:p-8 lg:p-12">
+
+        <%- include('../../partials/flashMessage') %>
+
+            <!-- Principal List Section -->
+            <header
+                class="flex items-center justify-between pb-6 mb-8 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-lg px-8 py-6">
+                <div>
+                    <h2 class="text-3xl font-semibold tracking-wide">Principals</h2>
+                    <p class="text-sm lg:block text-white">Manage Principal Information with ease.</p>
+                </div>
+            </header>
+
+            <!-- Principal Cards Section -->
+            <section id="principal-cards" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <% principals.forEach(principal=> { %>
+                    <div
+                        class="bg-white shadow-xl rounded-lg overflow-hidden transition-all transform hover:scale-105 hover:shadow-2xl duration-300 ease-in-out">
+
+                        <!-- Image Section -->
+                        <div class="relative bg-gray-100">
+                            <% if (principal.imageUrl) { %>
+                                <img src="<%= principal.imageUrl %>" alt="<%= principal.name %>"
+                                    class="w-full h-48 object-cover">
+                                <% } else { %>
+                                    <div class="flex items-center justify-center w-full h-48 bg-gray-200">
+                                        <span class="text-gray-400 text-lg font-semibold">No Image</span>
+                                    </div>
+                                    <% } %>
+                        </div>
+
+                        <!-- Principal Information Section -->
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">
+                                <%= principal.name %>
+                            </h3>
+                            <p class="text-sm text-gray-500 mb-2">
+                                <%= principal.email %>
+                            </p>
+                            <p class="text-sm text-gray-600 mb-4">
+                                <%= principal.description %>
+                            </p>
+
+                            <div class="flex justify-center gap-4">
+                                <a href="/dashboard/principal/edit/<%= principal._id %>"
+                                    class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 transition">
+                                    Edit
+                                </a>
+                                <button
+                                    class="delete-btn px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg shadow hover:bg-red-700 transition"
+                                    data-id="<%= principal._id %>">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </section>
+
+    </main>
+
+    <!-- SweetAlert Confirmation Script -->
+    <script>
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const deleteID = this.getAttribute('data-id');
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, keep it',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "The principal has been deleted.",
+                            icon: "success"
+                        });
+                        // Redirect to delete route if confirmed
+                        window.location.href = `/dashboard/principal/delete/${deleteID}`;
+                    }
+                });
+            });
+        });
+    </script>
+
+    <%- include('../../partials/dashboardfooter') %>

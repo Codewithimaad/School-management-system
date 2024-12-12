@@ -1,0 +1,58 @@
+<!-- Add these styles for toast animations -->
+<style>
+    .toast-message {
+        position: fixed;
+        top: 70px;
+        /* Changed from bottom to top */
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        animation: toast-in 0.5s forwards, toast-out 0.5s 3.5s forwards;
+        z-index: 1000;
+    }
+
+    /* Animation for toast-in */
+    @keyframes toast-in {
+        0% {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+            /* Starts from above the screen */
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            /* Ends at the correct position */
+        }
+    }
+
+    /* Animation for toast-out */
+    @keyframes toast-out {
+        0% {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        100% {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+            /* Moves upwards when disappearing */
+        }
+    }
+</style>
+
+
+<!-- Flash Messages -->
+<% if (success_msg.length> 0) { %>
+    <div id="flash-message-success"
+        class="toast-message bg-green-600 text-white font-semibold text-center py-3 px-8 rounded-lg mb-6 w-full max-w-lg mx-auto shadow-xl transform transition-all duration-500 ease-in-out hover:scale-105">
+        <%= success_msg %>
+    </div>
+    <% } %>
+
+        <% if (error_msg.length> 0) { %>
+            <div id="flash-message-error"
+                class="toast-message bg-red-600 text-white font-semibold text-center py-4 px-8 rounded-lg mb-6 w-full max-w-lg mx-auto shadow-xl transform transition-all duration-500 ease-in-out hover:scale-105">
+                <%= error_msg %>
+            </div>
+            <% } %>

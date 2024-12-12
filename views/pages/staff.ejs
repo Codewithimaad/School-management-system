@@ -1,0 +1,122 @@
+<%- include('../partials/header') %>
+
+    <div class="bg-white mt-20 py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 text-center">
+            <div>
+
+                <!-- Principal Section Header -->
+                <h1 class="text-5xl text-gray-600 font-extrabold mb-4">Meet Our Principal</h1>
+                <p class="text-xl mb-10 text-gray-500 font-semibold">Luminous International School</p>
+
+                <!-- Principal Details Section -->
+                <% principals.forEach(principal=> { %>
+                    <div
+                        class="bg-gradient-to-r from-blue-100 to-blue-300 mb-20 rounded-lg shadow-lg transform transition-all hover:scale-105 hover:shadow-2xl duration-300 ease-in-out max-w-md mx-auto pb-5">
+                        <!-- Image Section -->
+                        <div class="w-full flex items-center justify-center pt-5">
+                            <img src="<%= principal.imageUrl%>" alt="<%= principal.name %>"
+                                class="h-48 w-48 object-cover rounded-full border-4 border-blue-600 shadow-lg">
+                        </div>
+
+                        <!-- Text Section -->
+                        <div class="p-6">
+                            <h3 class="text-3xl font-extrabold text-gray-800 mb-2">
+                                <%= principal.name %>
+                            </h3>
+                            <p class="text-blue-500 font-semibold text-sm uppercase tracking-wide mb-3">
+                                Principal
+                            </p>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                <%= principal.description %>
+                            </p>
+                        </div>
+                    </div>
+                    <% }) %>
+
+            </div>
+
+
+
+
+
+
+
+
+            <div>
+
+
+                <!-- Staff Members Section -->
+
+                <h1 class="text-5xl font-extrabold text-gray-600 mb-8">Meet Our Exceptional Staff</h1>
+                <p class="text-lg text-gray-500 leading-relaxed mb-12">
+                    At our institution, we are proud to have a team of dedicated professionals who bring
+                    passion,
+                    expertise,
+                    and commitment to nurturing future leaders. Each staff member plays a vital role in
+                    fostering a
+                    thriving
+                    learning environment.
+                </p>
+
+                <!-- Teachers Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <% teachers.forEach(teacher=> { %>
+                        <div
+                            class="bg-gradient-to-r from-blue-100 to-blue-300 rounded-lg pb-3 shadow-lg transform transition-all hover:scale-105 hover:shadow-2xl duration-300 ease-in-out">
+                            <!-- Image Section -->
+                            <div class="w-full flex items-center justify-center pt-5">
+                                <% if (teacher.imageUrl) { %>
+                                    <img src="<%=teacher.imageUrl %>" alt="<%= teacher.name %>"
+                                        class="h-40 w-40 object-cover rounded-full border-4 border-blue-500">
+                                    <% } else { %>
+                                        <div class="text-gray-400 text-sm">No Image Available</div>
+                                        <% } %>
+                            </div>
+
+                            <!-- Content Section -->
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                                    <%= teacher.name %>
+                                </h3>
+                                <p class="text-blue-500 font-medium mb-3">
+                                    <%= teacher.subject %>
+                                </p>
+                                <p class="text-gray-600 text-sm leading-relaxed">
+                                    <%= teacher.description %>
+                                </p>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+
+                <!-- See More Button -->
+                <% if (teachers.length < totalTeachers) { %>
+                    <div class="mt-12">
+                        <a href="/staff/more"
+                            class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-200">
+                            See More
+                        </a>
+                    </div>
+                    <% } %>
+            </div>
+
+        </div>
+
+        <!-- Call to Action Section -->
+        <div class="mt-16 text-center">
+            <h2 class="text-4xl font-extrabold text-gray-800 mb-6">
+                Join Our Growing Team
+            </h2>
+            <p class="text-lg text-gray-600 leading-relaxed mb-8 max-w-3xl mx-auto">
+                Are you passionate about education and ready to make a difference? We are always on the lookout for
+                talented individuals to join our dynamic team of professionals.
+            </p>
+            <a href="/contact"
+                class="inline-block px-8 py-3 bg-yellow-500 text-black text-lg font-semibold rounded-full shadow-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105">
+                Apply Now
+            </a>
+        </div>
+
+    </div>
+
+    <%- include('../partials/footer') %>

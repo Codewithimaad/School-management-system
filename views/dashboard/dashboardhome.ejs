@@ -1,0 +1,104 @@
+<!-- Main Content -->
+<%- include('../partials/dashboard') %>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow p-6 md:p-10 bg-gradient-to-r from-blue-50 to-blue-200">
+        <!-- Flash Messages -->
+        <%- include('../partials/flashMessage') %>
+
+
+            <!-- Quick Overview -->
+            <section class="mt-4 bg-white mb-10 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300">
+                <h3 class="text-2xl font-semibold text-gray-800">Quick Overview</h3>
+                <p class="mt-4 text-gray-600">
+                    Welcome to your School Management System Dashboard. Here, you can get an overview of the
+                    current school
+                    statistics. Explore more by navigating through the sidebar.
+                </p>
+            </section>
+
+            <!-- Dashboard Cards -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+
+                <!-- Total Students Card -->
+
+
+                <div
+                    class="bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                    <a href="/dashboard/student/reports">
+                        <div class="flex justify-between items-center">
+                            <div class="text-gray-700">
+                                <h3 class="text-xl font-semibold">Total Students</h3>
+                                <p class="text-3xl font-bold text-blue-700">
+                                    <%= totalStudents %>
+                                </p>
+                            </div>
+                            <div class="icon bg-blue-200 p-3 rounded-full shadow-md">
+                                <i class="fas fa-users text-3xl text-blue-600"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+                <!-- Total Teachers Card -->
+                <div
+                    class="bg-gradient-to-br from-green-100 to-green-200 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                    <a href="/dashboard/teacher/reports">
+                        <div class="flex justify-between items-center">
+                            <div class="text-gray-700">
+                                <h3 class="text-xl font-semibold">Total Teachers</h3>
+                                <p class="text-3xl font-bold text-green-700">
+                                    <%= totalTeachers %>
+                                </p>
+                            </div>
+                            <div class="icon bg-green-200 p-3 rounded-full shadow-md">
+                                <i class="fas fa-chalkboard-teacher text-3xl text-green-600"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Total Classes Card -->
+                <div
+                    class="bg-gradient-to-br from-orange-100 to-orange-200 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                    <a href="/dashboard/class/reports">
+                        <div class="flex justify-between items-center">
+                            <div class="text-gray-700">
+                                <h3 class="text-xl font-semibold">Total Classes</h3>
+                                <p class="text-3xl font-bold text-orange-700">
+                                    <%= totalClasses %>
+                                </p>
+                            </div>
+                            <div class="icon bg-orange-200 p-3 rounded-full shadow-md">
+                                <i class="fas fa-school text-3xl text-orange-600"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Total Fees Collected Card -->
+                <div
+                    class="bg-gradient-to-br from-purple-100 to-purple-200 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                    <a href="/dashboard/fee/reports">
+
+                        <div class="flex justify-between items-center">
+                            <div class="text-gray-700">
+                                <h3 class="text-xl font-semibold">Total Fees Collected</h3>
+                                <p class="text-3xl font-bold text-purple-700">
+                                    PKR <%= feesCollected.toLocaleString() %>
+                                </p>
+                            </div>
+                            <div class="icon bg-purple-200 p-3 rounded-full shadow-md">
+                                <i class="fas fa-money-bill-wave text-3xl text-purple-600"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+    </main>
+
+
+
+    <%- include('../partials/dashboardfooter') %>

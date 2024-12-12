@@ -1,0 +1,81 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow p-6">
+        <!-- Page Header -->
+        <header class="mb-10">
+            <div
+                class="flex justify-between items-center p-6 bg-gradient-to-r from-blue-600 to-blue-900 text-white rounded-lg shadow">
+                <div>
+                    <h2 class="text-3xl font-bold">Student Details</h2>
+                    <p class="text-sm mt-1">Comprehensive information for the selected student.</p>
+                </div>
+            </div>
+        </header>
+
+        <%- include('../../partials/flashMessage') %>
+
+            <!-- Student Details -->
+            <section class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Profile Card -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-br from-indigo-700 to-indigo-900 text-white p-6 flex items-center">
+                        <div
+                            class="w-24 h-24 bg-white text-indigo-700 font-bold rounded-full flex items-center justify-center text-4xl shadow-lg">
+                            <%= student.name[0] %>
+                        </div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-semibold">
+                                <%= student.name %>
+                            </h3>
+                            <p class="mt-1 text-sm">Class: <%= student.stdClass ? student.stdClass[0].name : 'N/A' %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p class="text-sm font-medium text-gray-500">Email</p>
+                            <p class="text-base text-gray-800">
+                                <%= student.email || 'N/A' %>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Phone</p>
+                            <p class="text-base text-gray-800">
+                                <%= student.phone || 'N/A' %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Details Section -->
+                <div class="bg-white rounded-lg shadow-lg lg:col-span-2">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
+                        <% const details=[ { label: "Father's Name" , value: student.fname }, { label: "Roll Number" ,
+                            value: student.roll_number }, { label: "Date of Birth" , value: new
+                            Date(student.dob).toLocaleDateString() }, { label: "Gender" , value: student.gender || 'N/A'
+                            }, { label: "Address" , value: student.address || 'N/A' }, { label: "Enrollment Date" ,
+                            value: new Date(student.enrollmentDate).toLocaleDateString() } ]; %>
+                            <% details.forEach(detail=> { %>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">
+                                        <%= detail.label %>
+                                    </p>
+                                    <p class="text-base text-gray-800 mt-1">
+                                        <%= detail.value %>
+                                    </p>
+                                </div>
+                                <% }); %>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <div class="max-w-6xl mx-auto mt-10 flex justify-between items-center">
+                <a href="/dashboard/student/reports" class="text-indigo-600 hover:underline text-sm">Back to
+                    Students</a>
+            </div>
+    </main>
+
+
+
+    <%- include('../../partials/dashboardfooter') %>

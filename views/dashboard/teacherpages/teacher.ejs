@@ -1,0 +1,124 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow flex-wrap p-2 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
+        <%- include('../../partials/flashMessage') %>
+
+            <header class="flex items-center justify-between border-b pb-4 mb-6">
+                <h2 class="text-3xl font-bold text-gray-800">Add Teacher</h2>
+                <p class="text-sm sm:hidden lg:block text-gray-500">Fill out the form below to add a new teacher.
+                </p>
+            </header>
+
+            <!-- Teacher Form -->
+            <section id="teacher-form">
+                <form action="/dashboard/teacher/add" method="POST" class="bg-white p-8 shadow-md rounded-lg"
+                    enctype="multipart/form-data">
+
+                    <!-- Name Input -->
+                    <div class="mb-6">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                        <input type="text" name="name"
+                            class="mt-1 block w-full py-3  p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Enter teacher's full name" required />
+                    </div>
+
+                    <!-- Subject Input -->
+                    <div class="mb-6">
+                        <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
+                        <input type="text" name="subject"
+                            class="mt-1 block w-full py-3  p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="e.g., Mathematics, Science" required />
+                    </div>
+
+                    <!-- Qualification Input -->
+                    <div class="mb-6">
+                        <label for="qualification" class="block text-sm font-medium text-gray-700">Qualification</label>
+                        <input type="text" name="qualification"
+                            class="mt-1 block w-full py-3  p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="qualification" required />
+                    </div>
+
+                    <!-- Phone No Input -->
+                    <div class="mb-6">
+                        <label for="phone" class="block text-sm font-medium text-gray-700">Phone No</label>
+                        <input type="number" name="phone"
+                            class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Phone no" required />
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="mb-6">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" name="email"
+                            class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Email" required />
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="mb-6">
+                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" name="password"
+                            class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Password" required />
+                    </div>
+
+
+                    <!-- Salary Input -->
+                    <div class="mb-6">
+                        <label for="salary" class="block text-sm font-medium text-gray-700">Salary</label>
+                        <input type="number" name="salary"
+                            class="mt-1 block w-full py-3  p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Salary" required />
+                    </div>
+
+                    <!-- Status Input -->
+                    <div class="mb-6">
+                        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                        <select name="status"
+                            class="mt-1 block w-full p-2 py-3 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+
+
+                    <!-- Description Input -->
+                    <div class="mb-6">
+                        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                        <textarea name="description" rows="4"
+                            class="mt-1 block w-full p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Provide a brief description or biography" required></textarea>
+                    </div>
+
+                    <!-- Joining Date Input -->
+                    <div class="mb-6">
+                        <label for="joiningDate" class="block text-sm font-medium text-gray-700">Joining
+                            Date</label>
+                        <input type="date" name="joiningDate" value="<%= new Date().toISOString().split('T')[0] %>"
+                            class="mt-1 block w-full py-3  p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" />
+                    </div>
+
+                    <!-- ImageUrl Input -->
+                    <div class="mb-6">
+                        <label for="image" class="block text-sm font-medium text-gray-700">Upload File</label>
+                        <input type="file" name="image"
+                            class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Upload Image" required />
+                    </div>
+
+
+
+
+
+                    <!-- Submit Button -->
+                    <div class="flex justify-end">
+                        <button type="submit"
+                            class="px-6 py-2 bg-blue-800 text-white text-sm font-semibold rounded-lg shadow hover:bg-blue-700 focus:ring focus:ring-blue-200 focus:outline-none">
+                            Add Teacher
+                        </button>
+                    </div>
+                </form>
+            </section>
+    </main>
+
+    <%- include('../../partials/dashboardfooter') %>

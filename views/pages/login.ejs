@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal - Luminous International School</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-to-r from-blue-200 to-blue-500 min-h-screen flex items-center justify-center">
+
+    <!-- Back to Home Button -->
+    <div class="absolute top-4 left-4 sm:top-6 sm:left-6">
+        <a href="http://localhost:5000"
+            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:outline-none transition-all transform hover:scale-105">
+            ⬅ Back to Home
+        </a>
+    </div>
+
+    <%- include('../partials/flashMessage') %>
+
+
+        <!-- Login Form Container -->
+        <div class="w-full max-w-md p-8 sm:p-10 bg-white rounded-xl shadow-2xl border border-gray-100">
+
+            <!-- Logo Section -->
+            <div class="flex justify-center mb-4">
+                <a href="/">
+                    <img src="/images/logo.png" alt="Luminous School" class="w-24 sm:w-32 h-auto">
+                </a>
+            </div>
+
+            <!-- Portal Login Title -->
+            <h1 class="text-2xl font-semibold text-gray-800 text-center mb-6">Portal Login</h1>
+
+
+
+            <!-- Login Form -->
+            <form method="POST" action="/login" class="space-y-6">
+
+                <!-- Email Input -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" name="email" placeholder="Email" required
+                        class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-all focus:outline-none text-gray-900">
+                </div>
+
+                <!-- Password Input with Eye Icon -->
+                <div class="relative">
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input id="password" placeholder="Password" type="password" name="password" required
+                        class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-all focus:outline-none text-gray-900">
+                    <i id="eye-icon" class="fa fa-eye absolute right-4 top-12 text-gray-500 cursor-pointer"
+                        onclick="togglePassword()"></i>
+                </div>
+
+                <!-- Role Selection Dropdown -->
+                <div class="mb-4">
+                    <label for="role" class="block text-sm font-medium text-gray-700">Select Role</label>
+                    <select name="role" required
+                        class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-all focus:outline-none text-gray-900">
+                        <option value="Select Role" disabled selected>Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit"
+                    class="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:outline-none transition-all transform hover:scale-105">
+                    Login
+                </button>
+
+            </form>
+        </div>
+
+        <!-- Flash Message Auto-hide Script -->
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const flashMessage = document.getElementById('flash-message');
+                if (flashMessage) {
+                    setTimeout(() => {
+                        flashMessage.style.display = 'none';
+                    }, 5000); // 5 seconds
+                }
+            });
+
+            // Toggle password visibility
+            function togglePassword() {
+                const passwordField = document.getElementById('password');
+                const eyeIcon = document.getElementById('eye-icon');
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    eyeIcon.classList.remove('fa-eye');
+                    eyeIcon.classList.add('fa-eye-slash');
+                } else {
+                    passwordField.type = 'password';
+                    eyeIcon.classList.remove('fa-eye-slash');
+                    eyeIcon.classList.add('fa-eye');
+                }
+            }
+        </script>
+
+</body>
+
+</html>

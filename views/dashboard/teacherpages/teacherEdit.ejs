@@ -1,0 +1,98 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow p-2 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
+        <header class="flex items-center justify-between mb-8">
+            <h2 class="text-3xl font-semibold text-gray-800">Edit Teacher Details</h2>
+            <a href="/dashboard/teacher/reports"
+                class="sm:w-28 md:w-36 lg:w-48 px-4 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 transition-all duration-300">
+                Back to Reports
+            </a>
+        </header>
+
+        <section class="bg-white shadow-lg rounded-lg p-12 border border-gray-200">
+            <form action="/dashboard/teacher/edit/<%= teachers._id %>" method="post" enctype="multipart/form-data">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" name="name" value="<%= teachers.name %>" required
+                                class="w-full mt-1 px-4 py-2 border rounded-lg text-gray-800 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
+                            <input type="text" name="subject" value="<%= teachers.subject %>" required
+                                class="w-full mt-1 px-4 py-2 border rounded-lg text-gray-800 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label for="qualification"
+                                class="block text-sm font-medium text-gray-700">Qualification</label>
+                            <input type="text" name="qualification" value="<%= teachers.qualification %>" required
+                                class="w-full mt-1 px-4 py-2 border rounded-lg text-gray-800 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" name="email" value="<%= teachers.email %>" required
+                                class="w-full mt-1 px-4 py-2 border rounded-lg text-gray-800 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                            <input type="tel" name="phone" value="<%= teachers.phone %>" required
+                                class="w-full mt-1 px-4 py-2 border rounded-lg text-gray-800 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                            <select name="status" required
+                                class="w-full mt-1 px-4 py-2 border rounded-lg text-gray-800 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="Active" <%=teachers.status==='Active' ? 'selected' : '' %>>Active
+                                </option>
+                                <option value="Inactive" <%=teachers.status==='Inactive' ? 'selected' : '' %>>Inactive
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="salary" class="block text-sm font-medium text-gray-700">Salary</label>
+                            <input type="number" name="salary" value="<%= teachers.salary %>" required
+                                class="w-full mt-1 px-4 py-2 border rounded-lg text-gray-800 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea name="description" rows="5" required
+                        class="w-full mt-1 px-4 py-2 border rounded-lg text-gray-800 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"><%= teachers.description || '' %></textarea>
+                </div>
+
+                <!-- Image Display and Upload Section -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700">Current Image</label>
+                    <% if (teachers.imageUrl) { %>
+                        <div class="mb-4">
+                            <img src="<%= teachers.imageUrl %>" alt="Admin Image"
+                                class="w-32 h-32 object-cover rounded-full border-4 border-indigo-600 shadow-md">
+                        </div>
+                        <% } else { %>
+                            <p class="text-sm text-gray-500">No image available.</p>
+                            <% } %>
+
+                                <input type="hidden" name="image" value="<%= teachers.imageUrl %>" />
+
+                                <label for="image" class="block text-sm font-medium text-gray-700 mt-4">Upload New
+                                    Image (Optional)</label>
+                                <input type="file" name="image"
+                                    class="w-full mt-1 px-4 py-2 border rounded-lg text-gray-800 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+
+
+
+                <div class="mt-8 flex justify-end">
+                    <button type="submit"
+                        class="px-6 py-3 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 transition-all duration-300 font-medium">
+                        Update
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <%- include('../../partials/dashboardfooter') %>

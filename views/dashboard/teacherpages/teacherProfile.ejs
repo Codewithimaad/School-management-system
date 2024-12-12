@@ -1,0 +1,55 @@
+<%- include('../../partials/dashboardfooter') %>
+
+    <main class="flex-grow p-2 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
+        <header class="flex items-center justify-between mb-8">
+            <h2 class="text-3xl font-semibold text-gray-800">Teacher Profile</h2>
+        </header>
+
+        <!-- Display Flash Messages -->
+        <%- include('../../partials/flashMessage') %>
+
+
+            <!-- Teacher Profile Card -->
+            <section class="bg-white shadow-xl rounded-xl p-12 max-w-4xl mx-auto" style="background-color: #E4E9F7;">
+                <div class="flex items-center space-x-8">
+
+                    <!-- Teacher Details -->
+                    <div class="space-y-4 text-gray-700">
+                        <div class="text-lg font-semibold"><strong>Name:</strong>
+                            <%= teacherData.name %>
+                        </div>
+                        <div><strong>Email:</strong>
+                            <%= teacherData.email %>
+                        </div>
+                        <div><strong>Phone:</strong>
+                            <%= teacherData.phone %>
+                        </div>
+                        <div><strong>Subject:</strong>
+                            <%= teacherData.subject %>
+                        </div>
+                        <div><strong>Qualification:</strong>
+                            <%= teacherData.qualification %>
+                        </div>
+                        <div><strong>Salary:</strong>
+                            <%= teacherData.salary %>
+                        </div>
+                        <div><strong>Status:</strong>
+                            <%= teacherData.status %>
+                        </div>
+                        <div><strong>Description:</strong>
+                            <%= teacherData.description %>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Edit Profile Button -->
+            <div class="mt-8 text-center">
+                <a href="/dashboard/teacher/edit-profile"
+                    class="px-6 py-2 text-white bg-blue-500 rounded-full hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105">
+                    Edit Profile
+                </a>
+            </div>
+    </main>
+
+    <%- include('../../partials/dashboardfooter') %>

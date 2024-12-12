@@ -1,0 +1,86 @@
+<!-- views/dashboard/announcementPages/add.ejs -->
+
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow p-4 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
+        <%- include('../../partials/flashMessage') %>
+
+
+            <header
+                class="flex items-center justify-between border-b pb-6 mb-8 bg-gradient-to-r from-blue-500 to-blue-900 text-white rounded-lg shadow-lg px-8 py-6">
+                <div>
+                    <h2 class="text-3xl font-semibold tracking-wide">Add Announcement</h2>
+                    <p class="text-sm text-gray-200">Create a new announcement</p>
+                </div>
+            </header>
+
+            <form action="/dashboard/announcement/add" method="POST" class="space-y-4 bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold text-gray-800">Announcement Details</h2>
+
+                <!-- Title Field -->
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                    <input type="text" id="title" name="title" required
+                        class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-blue-500">
+                </div>
+
+                <!-- Content Field -->
+                <div>
+                    <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
+                    <textarea id="content" name="content" required rows="4"
+                        class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-blue-500"></textarea>
+                </div>
+
+                <!-- Audience Selection -->
+                <div>
+                    <label for="audience" class="block text-sm font-medium text-gray-700">Audience</label>
+                    <select id="audience" name="audience" required onchange="toggleClassField(this)"
+                        class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-blue-500">
+                        <option value="teachers">Teachers</option>
+                        <option value="students">Students</option>
+                        <option value="class">Specific Class</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+
+                <!-- Class Selection (Visible only when 'class' is selected) -->
+                <div id="class-selection" class="hidden">
+                    <label for="classId" class="block text-sm font-medium text-gray-700">Select
+                        Class</label>
+                    <select id="classId" name="classId"
+                        class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-blue-500">
+                        <% classes.forEach(classItem=> { %>
+                            <option value="<%= classItem._id %>">
+                                <%= classItem.name %>
+                            </option>
+                            <% }); %>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+                    Add Announcement
+                </button>
+            </form>
+    </main>
+
+
+
+    <%- include('../../partials/dashboardfooter') %>
+
+        <script>
+            // Function to show/hide the class selection field
+            function toggleClassField(selectElement) {
+                const classSelectionDiv = document.getElementById('class-selection');
+                if (selectElement.value === 'class') {
+                    classSelectionDiv.classList.remove('hidden');
+                } else {
+                    classSelectionDiv.classList.add('hidden');
+                }
+            }
+
+            // Ensure correct state on page load (e.g., when editing or on form reset)
+            document.addEventListener('DOMContentLoaded', () => {
+                const audienceSelect = document.getElementById('audience');
+                toggleClassField(audienceSelect); // Set initial state
+            });
+        </script>

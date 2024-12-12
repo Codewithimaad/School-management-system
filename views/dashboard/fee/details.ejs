@@ -1,0 +1,137 @@
+<%- include('../../partials/dashboard') %>
+
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+                /* Hide everything outside the voucher */
+            }
+
+            .print-area,
+            .print-area * {
+                visibility: visible;
+                /* Show only the voucher container */
+            }
+
+            .print-area {
+                position: absolute;
+                /* Ensure proper layout */
+                top: 0;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                width: 100%;
+            }
+        }
+    </style>
+
+
+    <main class="p-8 bg-gradient-to-r from-blue-50 to-blue-200">
+        <!-- Print Button -->
+        <div class="text-right mb-6">
+            <button onclick="window.print()"
+                class="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                Print Voucher
+            </button>
+        </div>
+
+        <!-- Fee Voucher Container with Conditional Background Color -->
+        <!-- Fee Voucher Container with Conditional Background Color -->
+        <div class="print-area p-8 shadow-md rounded-md max-w-3xl mx-auto border border-gray-200 bg-white">
+            <!-- School Info Section -->
+            <div class="text-center mb-6">
+                <img src="/images/logo.png" alt="School Logo" class="h-20 mx-auto">
+                <h1 class="text-3xl font-bold text-gray-800 mt-2">Luminous International School</h1>
+                <p class="font-bold text-gray-800">Shahzadi Dir Lower</p>
+                <h2 class="text-xl font-semibold text-gray-500 mt-3">Fee Voucher</h2>
+                <p class="text-sm lg:block text-gray-400">Details of Fee Payment for Student.</p>
+            </div>
+            <hr class="my-6 border-gray-300">
+
+            <!-- Student Information Section -->
+            <div class="mb-6">
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <p><strong>Name:</strong>
+                            <%= fee.studentId.name %>
+                        </p>
+                        <p><strong>Class:</strong>
+                            <%= fee.classId.name %>
+                        </p>
+                        <p><strong>Roll No:</strong>
+                            <%= fee.studentId.roll_number %>
+                        </p>
+                    </div>
+                    <div>
+                        <p><strong>Category:</strong>
+                            <%= fee.category %>
+                        </p>
+                        <p><strong>Amount:</strong> Rs. <%= fee.amount %>
+                        </p>
+                        <p><strong>Due Date:</strong>
+                            <%= new Date(fee.dueDate).toLocaleDateString() %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-6 border-gray-300">
+
+            <!-- Fee Details Table -->
+            <table class="min-w-full table-auto border-collapse">
+                <thead>
+                    <tr class="bg-green-600 text-white">
+                        <th class="py-2 px-4 text-left">Description</th>
+                        <th class="py-2 px-4 text-left">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Fee Information Rows -->
+                    <tr>
+                        <td class="py-2 px-4 border-b font-semibold">Payment Status</td>
+                        <td class="py-2 px-4 border-b">
+                            <%= fee.paymentStatus %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4 border-b font-semibold">Payment Date</td>
+                        <td class="py-2 px-4 border-b">
+                            <%= fee.paymentDate ? new Date(fee.paymentDate).toLocaleDateString() : 'N/A' %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Status-based Message and Button -->
+            <div class="text-center mt-6">
+                <% if (fee.paymentStatus==='Paid' ) { %>
+                    <!-- Paid Status -->
+                    <div class="bg-green-200 text-green-800 p-4 rounded-lg mb-6">
+                        <p class="font-semibold text-lg">Thank you for your payment!</p>
+                        <p>Fees was successfully Paid on <%= new Date(fee.paymentDate).toLocaleDateString() %>.</p>
+                    </div>
+                    <% } else { %>
+                        <!-- Unpaid Status -->
+                        <div class="bg-red-200 text-red-800 p-4 rounded-lg mb-6">
+                            <p class="font-semibold text-lg">Note:</p>
+                            <p>Please pay your fee by <strong class="text-xl text-black">
+                                    <%= new Date(fee.dueDate).toLocaleDateString() %>
+                                </strong>.</p>
+                        </div>
+                        <% } %>
+            </div>
+        </div>
+    </main>
+
+    <%- include('../../partials/dashboardfooter') %>
+
+        <script>
+            function printVoucher() {
+                const originalContent = document.body.innerHTML;
+                const printContent = document.querySelector('.print-area').innerHTML;
+
+                document.body.innerHTML = printContent; // Replace content with voucher for printing
+                window.print(); // Trigger print dialog
+                document.body.innerHTML = originalContent; // Restore original content
+            }
+        </script>

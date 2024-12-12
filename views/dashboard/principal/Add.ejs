@@ -1,0 +1,60 @@
+<%- include('../../partials/dashboard') %>
+
+    <div class="max-w-4xl mx-auto mt-10 px-4 sm:px-6 lg:px-8">
+        <%- include('../../partials/flashMessage') %>
+
+            <header
+                class="flex items-center justify-between border-b pb-6 mb-8 text-white rounded-lg bg-gradient-to-r from-blue-500 to-blue-900 shadow-lg px-8 py-6">
+                <div>
+                    <h2 class="text-3xl font-semibold tracking-wide text-white">Add Principal</h2>
+                    <p class="text-sm sm:hidden lg:block text-gray-200">Form for adding an Principal.</p>
+                </div>
+            </header>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+
+                <form action="/dashboard/principal/add" method="POST" enctype="multipart/form-data">
+                    <!-- Name -->
+                    <div class="mb-6">
+                        <label for="name" class="block text-gray-700 text-sm font-medium">Principal Name</label>
+                        <input type="text" id="name" name="name" required
+                            class="mt-2 p-4 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out"
+                            placeholder="Enter the principal's name">
+                    </div>
+
+                    <!-- Name -->
+                    <div class="mb-6">
+                        <label for="email" class="block text-gray-700 text-sm font-medium">Principal Email</label>
+                        <input type="email" id="email" name="email" required
+                            class="mt-2 p-4 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out"
+                            placeholder="Enter the principal's email">
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-6">
+                        <label for="description" class="block text-gray-700 text-sm font-medium">Description</label>
+                        <textarea id="description" name="description" required
+                            class="mt-2 p-4 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out"
+                            rows="4" placeholder="Enter the principal's description"></textarea>
+                    </div>
+                    <!-- Image -->
+                    <div class="mb-6">
+                        <label for="image" class="block text-gray-700 text-sm font-medium">Upload Image</label>
+                        <input type="file" id="image" name="image" required
+                            class="mt-2 p-4 w-full border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out"
+                            placeholder="Upload Image">
+                    </div>
+
+
+
+                    <!-- Submit Button -->
+                    <div class="flex justify-center mt-6">
+                        <button type="submit"
+                            class="bg-blue-600 text-white py-3 px-10 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105">
+                            Add Principal
+                        </button>
+                    </div>
+                </form>
+            </div>
+    </div>
+
+    <%- include('../../partials/dashboardfooter') %>

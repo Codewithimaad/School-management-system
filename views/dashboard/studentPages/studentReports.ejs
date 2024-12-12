@@ -1,0 +1,215 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow p-2 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
+        <!-- Flash Messages -->
+        <%- include('../../partials/flashMessage') %>
+
+            <!-- Header Section -->
+            <header
+                class="flex items-center justify-between border-b pb-6 mb-8 bg-gradient-to-r from-blue-500 to-blue-900 text-white rounded-lg shadow-lg px-8 py-6">
+                <div>
+                    <h2 class="text-3xl font-semibold tracking-wide text-white">Student Reports</h2>
+                    <p class="text-sm sm:hidden lg:block text-gray-200">An overview of all enrolled
+                        students.</p>
+                </div>
+            </header>
+
+
+
+
+            <!-- Search Section -->
+            <div
+                class="flex flex-wrap items-center mb-5 justify-between w-full space-y-4 sm:space-y-0 sm:space-x-4 sm:flex-row">
+                <form action="/dashboard/student/reports" method="GET"
+                    class="flex flex-wrap gap-2 justify-start w-full sm:w-1/2 md:w-2/3 lg:w-1/2">
+                    <!-- Search by Name -->
+                    <input type="text" name="search" id="search" value="<%= searchQuery.name %>"
+                        placeholder="Search students by name..."
+                        class="px-4 py-2 w-full sm:w-2/5 md:w-3/5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 text-sm mt-2 sm:mt-0">
+
+                    <!-- Search by Class -->
+                    <select name="stdClass" id="stdClass"
+                        class="px-4 py-2 w-full sm:w-2/5 md:w-3/5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 text-sm mt-2 sm:mt-0">
+                        <option value="">Select Class</option>
+                        <% classes.forEach(classItem=> { %>
+                            <option value="<%= classItem._id %>" <%=searchQuery.stdClass &&
+                                searchQuery.stdClass.toString()===classItem._id.toString() ? 'selected' : '' %> >
+                                <%= classItem.name %>
+                            </option>
+                            <% }) %>
+                    </select>
+
+                    <!-- Search Button -->
+                    <button type="submit" id="search-button"
+                        class="text-white py-2 px-4 bg-green-600 rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-300 transition duration-200 ease-in-out mt-2 sm:mt-0">
+                        <i class="fas fa-search mr-2"></i>Search
+                    </button>
+                </form>
+
+                <!-- Add Student Button -->
+                <a href="/dashboard/student/add"
+                    class="mt-4 sm:mt-0 sm:ml-4 py-3 px-6 bg-blue-800 text-white text-sm font-semibold rounded-md shadow hover:bg-blue-700 focus:ring focus:ring-blue-200 focus:outline-none">
+                    Add Student
+                </a>
+            </div>
+
+            <!-- Total Students Section -->
+            <section class="mb-6">
+                <p class="text-lg font-medium text-gray-700">Total Students: <span class="text-blue-800">
+                        <%= totalStudents %>
+                    </span></p>
+            </section>
+
+            <!-- Student Table Section -->
+            <section class="overflow-hidden bg-white shadow-md rounded-lg">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full table-auto">
+                        <thead>
+                            <tr class="bg-gray-100 text-left">
+                                <th class="px-6 py-3 text-sm font-semibold text-gray-700">Name</th>
+                                <th class="px-6 py-3 text-sm font-semibold text-gray-700">Father's Name</th>
+                                <th class="px-6 py-3 text-sm font-semibold text-gray-700">Roll No</th>
+                                <th class="px-6 py-3 text-sm font-semibold text-gray-700">Phone</th>
+                                <th class="px-6 py-3 text-sm font-semibold text-gray-700">Date of Birth</th>
+                                <th class="px-6 py-3 text-sm font-semibold text-gray-700">Gender</th>
+                                <!-- Added Gender Column -->
+                                <th class="px-6 py-3 text-sm font-semibold text-gray-700">Class</th>
+                                <th class="px-6 py-3 text-sm font-semibold text-gray-700">Enrollment Date
+                                </th>
+                                <th class="px-6 py-3 text-sm font-semibold text-gray-700">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% students.forEach(student=> { %>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-800">
+                                        <%= student.name %>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                        <%= student.fname %>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                        <%= student.roll_number %>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                        <%= student.phone %>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                        <%= new Date(student.dob).toLocaleDateString() %>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-700"> <!-- Gender Column Data -->
+                                        <%= student.gender || 'N/A' %>
+                                            <!-- Display gender or 'N/A' if not available -->
+                                    </td>
+
+                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                        <%= student.stdClass.length> 0 ? student.stdClass[0].name : 'N/A' %>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                        <%= new Date(student.enrollmentDate).toLocaleDateString() %>
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 text-sm text-gray-700 flex flex-col sm:flex-row gap-2 justify-start">
+                                        <a href="/dashboard/student/details/<%= student._id %>"
+                                            class="text-white bg-blue-600 py-2 px-3 hover:bg-green-800">Details</a>
+                                        <a href="/dashboard/student/edit/<%= student._id %>"
+                                            class="px-6 py-2 bg-yellow-500 text-white shadow hover:bg-yellow-600 transition duration-200 text-sm">
+                                            Edit
+                                        </a>
+                                        <button
+                                            class="px-6 py-2 bg-red-500 text-white shadow hover:bg-red-600 transition duration-200 text-sm delete-btn"
+                                            data-id="<%= student._id %>">
+                                            Delete
+                                        </button>
+
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+
+            <!-- Pagination Section -->
+            <section class="flex flex-wrap gap-2 justify-start items-center justify-between mt-6">
+                <div class="text-sm text-gray-500">
+                    Showing <%= (currentPage - 1) * 10 + 1 %> to <%= currentPage * 10 < totalStudents ? currentPage * 10
+                            : totalStudents %> of <%= totalStudents %> students
+                </div>
+                <div class="space-x-2">
+                    <!-- Previous Button -->
+                    <button
+                        class="<%= currentPage === 1 ? 'px-4 py-2 text-sm text-white bg-gray-400 cursor-not-allowed' : 'px-4 py-2 text-sm text-white bg-blue-800 rounded-md shadow hover:bg-blue-700 focus:ring focus:ring-blue-200 focus:outline-none' %>"
+                        <%=currentPage===1 ? 'disabled' : '' %>
+                        onclick="location.href='/dashboard/student/reports?page=<%= currentPage - 1 %>'"
+                            class="mt-2 sm:mt-0">
+                            Previous
+                    </button>
+
+                    <!-- Page Number Links -->
+                    <% for (let i=1; i <=totalPages; i++) { %>
+                        <a href="/dashboard/student/reports?page=<%= i %>"
+                            class="<%= currentPage === i ? 'px-4 py-2 text-sm text-white bg-blue-800 rounded-md' : 'px-4 py-2 text-sm text-blue-800 bg-white border border-gray-300 rounded-md' %>">
+                            <%= i %>
+                        </a>
+                        <% } %>
+
+                            <!-- Next Button -->
+                            <button
+                                class="<%= currentPage === totalPages ? 'px-4 py-2 text-sm text-white bg-gray-400 cursor-not-allowed' : 'px-4 py-2 text-sm text-white bg-blue-800 rounded-md shadow hover:bg-blue-700 focus:ring focus:ring-blue-200 focus:outline-none' %>"
+                                <%=currentPage===totalPages ? 'disabled' : '' %>
+                                onclick="location.href='/dashboard/student/reports?page=<%= currentPage + 1 %>'"
+                                    class="mt-2 sm:mt-0">
+                                    Next
+                            </button>
+                </div>
+            </section>
+    </main>
+
+    <!-- Role-Based Visibility Script -->
+    <script>
+        // Example User Role (e.g., fetched from server or session)
+        const userRole = "teacher"; // Change to "admin", "student", etc., to test
+
+        // Show links based on role
+        document.querySelectorAll(`.role-${userRole}`).forEach(el => {
+            el.classList.remove("hidden");
+        });
+    </script>
+
+
+
+
+    <%- include('../../partials/dashboardfooter') %>
+
+        <script>
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const deleteID = this.dataset.id;
+
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "This action cannot be undone.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'No, cancel',
+                        reverseButtons: true
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            fetch(`/dashboard/student/delete/${deleteID}`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ id: deleteID })
+                            })
+                                .then(response => response.ok ? Swal.fire('Deleted!', 'Student record deleted.', 'success')
+                                    .then(() => window.location.href = '/dashboard/student/reports')
+                                    : Swal.fire('Error', 'Failed to delete record.', 'error'))
+                                .catch(() => Swal.fire('Error', 'Request failed.', 'error'));
+                        }
+                    });
+                });
+            });
+        </script>

@@ -1,0 +1,89 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow flex-wrap p-2 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
+        <%- include('../../partials/flashMessage') %>
+
+
+
+            <!-- Header Section -->
+            <header
+                class="flex items-center justify-between border-b pb-6 mb-8 text-white rounded-lg shadow-md px-8 py-6"
+                style="background-color: #1a2851;">
+                <div>
+                    <h2 class="text-3xl font-semibold tracking-wide">Add Admin</h2>
+                    <p class="text-sm sm:hidden lg:block text-gray-500">Please fill in the admin details
+                        below.</p>
+                </div>
+            </header>
+
+            <!-- Admin Form (Card Style) -->
+            <section id="admin-form">
+                <form action="/dashboard/admin/add" method="POST" class="bg-white p-8 shadow-lg rounded-lg w-full"
+                    enctype="multipart/form-data">
+
+                    <!-- Name Input -->
+                    <div class="mb-6">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Admin's
+                            Name</label>
+                        <input type="text" name="name"
+                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Enter admin's full name" required />
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="mb-6">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Admin's
+                            Email</label>
+                        <input type="email" name="email"
+                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Enter admin's email address" required />
+                    </div>
+
+                    <!-- Phone No Input -->
+                    <div class="mb-6">
+                        <label for="phone" class="block text-sm font-medium text-gray-700">Phone No</label>
+                        <input type="number" name="phone"
+                            class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Phone no" required />
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="mb-6">
+                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" name="password"
+                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Enter password" required />
+                    </div>
+
+                    <!-- Description Input -->
+                    <div class="mb-6">
+                        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                        <textarea name="description" rows="4"
+                            class="mt-1 block w-full p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Provide a brief description or biography" required></textarea>
+                    </div>
+
+                    <!-- ImageUrl Input -->
+                    <div class="mb-6">
+                        <label for="image" class="block text-sm font-medium text-gray-700">Upload File</label>
+                        <input type="file" name="image"
+                            class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Upload Image" required />
+                    </div>
+
+
+
+                    <!-- Submit Button -->
+                    <div class="flex justify-end">
+                        <button type="submit"
+                            class="px-6 py-3 bg-blue-800 text-white text-sm font-semibold rounded-md shadow hover:bg-blue-700 focus:ring focus:ring-blue-200 focus:outline-none">
+                            Add Admin
+                        </button>
+                    </div>
+                </form>
+            </section>
+    </main>
+
+
+
+    <%- include('../../partials/dashboardfooter') %>

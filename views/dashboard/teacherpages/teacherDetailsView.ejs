@@ -1,0 +1,62 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow p-4 md:p-8 lg:p-12 bg-gray-50">
+        <!-- Header Section -->
+        <header
+            class="flex items-center justify-between mb-8 bg-gradient-to-r from-blue-50 to-blue-200 p-4 rounded-lg shadow-sm">
+            <h2 class="text-3xl font-semibold text-gray-800">Teacher Details</h2>
+            <a href="/dashboard/teacher/reports"
+                class="px-6 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 transition-all duration-300">
+                Back to Reports
+            </a>
+        </header>
+
+        <!-- Teacher Details Section -->
+        <section class="bg-white shadow-lg rounded-lg p-8 mb-8 border border-gray-200">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+
+                <!-- Teacher Image Section -->
+                <div class="flex justify-center md:justify-start mb-6 md:mb-0">
+                    <img src="<%= teacher.imageUrl %>" alt="Teacher Image"
+                        class="w-72 h-72 object-cover rounded-full border-4 border-indigo-600 shadow-lg">
+                </div>
+
+                <!-- Teacher Info Section -->
+                <div class="flex flex-col justify-between">
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-4 capitalize">
+                        <%= teacher.name %>
+                    </h3>
+
+                    <div class="space-y-4 text-lg text-gray-700">
+                        <div><strong>Subject:</strong> <span class="text-gray-600">
+                                <%= teacher.subject %>
+                            </span></div>
+                        <div><strong>Email:</strong> <span class="text-gray-600">
+                                <%= teacher.email %>
+                            </span></div>
+                        <div><strong>Phone:</strong> <span class="text-gray-600">
+                                <%= teacher.phone %>
+                            </span></div>
+                        <div><strong>Status:</strong>
+                            <span class="<%= teacher.status === 'Active' ? 'text-green-500' : 'text-red-500' %>">
+                                <%= teacher.status %>
+                            </span>
+                        </div>
+                        <div><strong>Salary:</strong> <span class="text-gray-600">
+                                <%= teacher.salary %>
+                            </span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teacher Description Section -->
+            <div class="mt-8">
+                <h4 class="text-xl font-semibold text-gray-800 mb-2">Description</h4>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    <%= teacher.description %>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <%- include('../../partials/dashboardfooter') %>

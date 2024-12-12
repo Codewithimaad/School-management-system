@@ -1,0 +1,54 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="p-6 bg-gray-100 min-h-screen">
+        <h1 class="text-2xl font-semibold mb-6">My Announcements</h1>
+
+        <% if (success_msg) { %>
+            <div class="bg-green-100 text-green-800 p-4 rounded mb-4">
+                <%= success_msg %>
+            </div>
+            <% } %>
+
+                <% if (error_msg) { %>
+                    <div class="bg-red-100 text-red-800 p-4 rounded mb-4">
+                        <%= error_msg %>
+                    </div>
+                    <% } %>
+
+                        <% if (announcements.length> 0) { %>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <% announcements.forEach(announcement=> { %>
+                                    <div class="p-4 bg-white rounded shadow">
+                                        <h2 class="text-lg font-bold">
+                                            <%= announcement.title %>
+                                        </h2>
+                                        <p class="text-sm text-gray-600">
+                                            <%= announcement.content %>
+                                        </p>
+                                        <% if (announcement.classId) { %>
+                                            <p class="text-sm mt-2 text-gray-500">Class: <%= announcement.classId.name
+                                                    %>
+                                            </p>
+                                            <% } %>
+                                                <p class="text-sm text-gray-400 mt-4">Created on: <%=
+                                                        announcement.createdAt.toDateString() %>
+                                                </p>
+                                                <div class="flex justify-end space-x-2 mt-4">
+                                                    <a href="/dashboard/teacher/edit-announcement/<%= announcement._id %>"
+                                                        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Edit</a>
+                                                    <form
+                                                        action="/dashboard/teacher/delete-announcement/<%= announcement._id %>"
+                                                        method="POST">
+                                                        <button type="submit"
+                                                            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">Delete</button>
+                                                    </form>
+                                                </div>
+                                    </div>
+                                    <% }) %>
+                            </div>
+                            <% } else { %>
+                                <p class="text-gray-500 text-center">No announcements created yet.</p>
+                                <% } %>
+    </main>
+
+    <%- include('../../partials/dashboardfooter') %>

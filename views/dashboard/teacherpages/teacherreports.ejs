@@ -1,0 +1,161 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow p-2 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
+        <!-- Flash Messages -->
+        <%- include('../../partials/flashMessage') %>
+
+
+            <!-- Header Section -->
+            <header class="flex items-center flex-wrap justify-between mb-8">
+                <h2 class="text-1xl md:text-3xl lg:text-3xl font-semibold text-gray-800">Teacher Reports
+                </h2>
+                <a href="/dashboard/teacher/add"
+                    class="w-22 md:w-36 lg:w-48 px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300">
+                    Add Teacher
+                </a>
+            </header>
+
+            <!-- Teacher Reports Overview Section -->
+            <section class="mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200 flex flex-col justify-between">
+                        <h3 class="font-medium text-lg text-gray-700">Total Teachers</h3>
+                        <p class="text-4xl font-bold text-blue-600">
+                            <%= totalTeachers %>
+                        </p>
+                    </div>
+                    <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200 flex flex-col justify-between">
+                        <h3 class="font-medium text-lg text-gray-700">Active Teachers</h3>
+                        <p class="text-4xl font-bold text-green-600">
+                            <%= activeTeachers %>
+                        </p>
+                    </div>
+                    <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200 flex flex-col justify-between">
+                        <h3 class="font-medium text-lg text-gray-700">Teachers on Leave</h3>
+                        <p class="text-4xl font-bold text-yellow-500">
+                            <%= teachersOnLeave %>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Teacher List Section -->
+            <section>
+                <div class="overflow-x-auto bg-white shadow-lg rounded-lg">
+                    <table class="min-w-full table-auto text-sm">
+                        <thead>
+                            <tr class="bg-gray-100 text-left">
+                                <th class="p-4 text-gray-700 font-medium">Name</th>
+                                <th class="p-4 text-gray-700 font-medium">Subject</th>
+                                <th class="p-4 text-gray-700 font-medium">Qualification</th>
+                                <th class="p-4 text-gray-700 font-medium">Status</th>
+                                <th class="p-4 text-gray-700 font-medium">Email</th>
+                                <th class="p-4 text-gray-700 font-medium">Phone No</th>
+                                <th class="p-4 text-gray-700 font-medium">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% teachers.forEach(teacher=> { %>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="p-4">
+                                        <%= teacher.name %>
+                                    </td>
+                                    <td class="p-4">
+                                        <%= teacher.subject %>
+                                    </td>
+                                    <td class="p-4">
+                                        <%= teacher.qualification %>
+                                    </td>
+                                    <td
+                                        class="p-4 <%= teacher.status === 'Active' ? 'text-green-500' : 'text-red-500' %>">
+                                        <%= teacher.status %>
+                                    </td>
+                                    <td class="p-4">
+                                        <%= teacher.email %>
+                                    </td>
+                                    <td class="p-4">
+                                        <%= teacher.phone %>
+                                    </td>
+                                    <td class="p-4">
+                                        <div class="flex flex-wrap gap-2 justify-start">
+                                            <a href="/dashboard/teacher/<%= teacher._id %>"
+                                                class="text-white rounded-sm py-2 px-3 bg-blue-700 hover:bg-blue-900 text-center">
+                                                Details
+                                            </a>
+                                            <!-- Delete Button with SweetAlert Confirmation -->
+                                            <button
+                                                class="text-white rounded-sm py-2 px-3 bg-red-700 hover:bg-red-900 text-center delete-btn"
+                                                data-id="<%= teacher._id %>">
+                                                Delete
+                                            </button>
+                                            <a href="/dashboard/teacher/edit/<%= teacher._id %>"
+                                                class="text-black rounded-sm py-2 px-3 bg-yellow-500 hover:bg-yellow-900 text-center">
+                                                Edit
+                                            </a>
+                                        </div>
+                                    </td>
+
+
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+    </main>
+
+    <script>
+        // SweetAlert2 script for delete confirmation
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const deleteID = this.getAttribute('data-id'); // Get teacher ID
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, keep it',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Send the DELETE request to delete the teacher
+                        fetch(`/dashboard/teacher/delete/${deleteID}`, {
+                            method: 'GET',  // Use GET method (or POST if you want to follow REST principles)
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: "The teacher has been deleted.",
+                                        icon: "success"
+                                    }).then(() => {
+                                        window.location.href = '/dashboard/teacher/reports';  // Redirect after deletion
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: "Error",
+                                        text: "There was an issue deleting the teacher.",
+                                        icon: "error"
+                                    });
+                                }
+                            })
+                            .catch(err => {
+                                console.error(err);
+                                Swal.fire({
+                                    title: "Error",
+                                    text: "Failed to delete the teacher.",
+                                    icon: "error"
+                                });
+                            });
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+    <%- include('../../partials/dashboardfooter') %>

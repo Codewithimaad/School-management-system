@@ -1,0 +1,62 @@
+<%- include('../../partials/dashboard') %>
+
+    <div class="max-w-7xl mx-auto px-6 py-16">
+
+        <%- include('../../partials/flashMessage') %>
+
+            <!-- Header Section -->
+            <header
+                class="flex items-center justify-between border-b pb-6 mb-8 text-white rounded-lg shadow-md px-8 py-6"
+                style="background-color: #1a2851;">
+                <div>
+                    <h2 class="text-3xl font-semibold tracking-wide">Gallery Report</h2>
+                    <p class="text-sm sm:hidden lg:block text-gray-500">Below are all the gallery images.</p>
+                </div>
+            </header>
+            <% if (images.length> 0) { %>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    <% images.forEach((image)=> { %>
+                        <div
+                            class="relative group overflow-hidden rounded-lg shadow-xl bg-white transform transition-transform duration-300 hover:scale-105">
+                            <!-- Image Display -->
+                            <img src="<%= image.imageUrl %>" alt="<%= image.title %>"
+                                class="w-full h-64 object-cover rounded-t-lg">
+
+                            <!-- Image Title -->
+                            <div
+                                class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white text-sm font-light p-4">
+                                <p class="text-center">
+                                    <%= image.title %>
+                                </p>
+                            </div>
+                            <!-- Image Title and Content -->
+                            <div
+                                class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white text-sm font-light p-4">
+                                <p class="text-center">
+                                    <%= image.content %>
+                                </p>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4">
+                                <a href="/dashboard/gallery/edit/<%= image._id %>"
+                                    class="bg-yellow-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-yellow-600 transition duration-300">
+                                    Edit
+                                </a>
+                                <form action="/dashboard/gallery/delete/<%= image._id %>" method="POST" class="inline">
+                                    <button type="submit"
+                                        class="bg-red-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-red-700 transition duration-300">
+                                        Delete
+                                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+                <% } else { %>
+                    <p class="text-center text-lg text-gray-700">No images available in the gallery.</p>
+                    <% } %>
+    </div>
+
+    <%- include('../../partials/dashboardfooter') %>

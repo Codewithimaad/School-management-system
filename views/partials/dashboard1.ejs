@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luminous Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1e40af",  // Primary color for dashboard
+                        secondary: "#2563eb",  // Secondary color for hover and accents
+                        background: "#f8fafc",  // Background color
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+
+<body class="bg-background text-gray-800">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="bg-green-600 text-white flex flex-col fixed h-full lg:w-64 lg:block hidden">
+        <!-- Logo -->
+        <div class="px-6 py-4 border-b border-white-700 flex justify-between items-center">
+            <a href="/dashboard" class="text-3xl font-bold text-center">
+                <h1>Luminous</h1>
+            </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="flex-grow px-4 py-6 space-y-4">
+            <a href="/dashboard" class="flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-secondary">Dashboard</a>
+
+           
+
+            <!-- Students Links (Admin or Teacher Role) -->
+            <% if (userRole === 'admin' || userRole === 'teacher') { %>
+                <div class="relative group">
+                    <a href="#" class="flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-secondary">Students</a>
+                    <div class="absolute left-0 w-48 bg-white shadow-lg rounded-lg mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <a href="/dashboard/student/add" class="block px-4 py-2 text-sm text-gray-800 hover:bg-secondary hover:text-white rounded-lg">Add Student</a>
+                        <a href="/dashboard/student/reports" class="block px-4 py-2 text-sm text-gray-800 hover:bg-secondary hover:text-white rounded-lg">Students Reports</a>
+                    </div>
+                </div>
+            <% } %>
+
+            <!-- Classes Links (Admin Only) -->
+            <% if (userRole === 'admin') { %>
+                <div class="relative group">
+                    <a href="#" class="flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-secondary">Classes</a>
+                    <div class="absolute left-0 w-48 bg-white shadow-lg rounded-lg mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <a href="/dashboard/class/add" class="block px-4 py-2 text-sm text-gray-800 hover:bg-secondary hover:text-white rounded-lg">Add Class</a>
+                        <a href="/dashboard/class/reports" class="block px-4 py-2 text-sm text-gray-800 hover:bg-secondary hover:text-white rounded-lg">Class Reports</a>
+                    </div>
+                </div>
+            <% } %>
+
+            <!-- Fees Links (Admin Only) -->
+            <% if (userRole === 'admin') { %>
+                <div class="relative group">
+                    <a href="#" class="flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-secondary">Fee</a>
+                    <div class="absolute left-0 w-48 bg-white shadow-lg rounded-lg mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <a href="/dashboard/fee/add" class="block px-4 py-2 text-sm text-gray-800 hover:bg-secondary hover:text-white rounded-lg">Add Fees</a>
+                        <a href="/dashboard/fee/reports" class="block px-4 py-2 text-sm text-gray-800 hover:bg-secondary hover:text-white rounded-lg">Fees Reports</a>
+                        <a href="/dashboard/fee/reports" class="block px-4 py-2 text-sm text-gray-800 hover:bg-secondary hover:text-white rounded-lg">Show All Fees</a>
+                    </div>
+                </div>
+            <% } %>
+
+            <!-- Attendance Links (Teacher Only) -->
+            <% if (userRole === 'teacher') { %>
+                <div class="relative group">
+                    <a href="#" class="flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-secondary">Attendance</a>
+                    <div class="absolute left-0 w-48 bg-white shadow-lg rounded-lg mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <a href="/dashboard/attendance" class="block px-4 py-2 text-sm text-gray-800 hover:bg-secondary hover:text-white rounded-lg">Take Attendance</a>
+                        <a href="/dashboard/attendance/reports" class="block px-4 py-2 text-sm text-gray-800 hover:bg-secondary hover:text-white rounded-lg">Attendance Reports</a>
+                    </div>
+                </div>
+            <% } %>
+
+            <!-- Admin Links (Admin Only) -->
+            <% if (userRole === 'admin') { %>
+                <div class="relative group">
+                    <a href="#" class="flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-secondary">Admin</a>
+                    <div class="absolute left-0 w-48 bg-white shadow-lg rounded-lg mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <a href="/dashboard/admin/add" class="block px-4 py-2 text-sm text-gray-800 hover:bg-secondary hover:text-white rounded-lg">Add Admin</a>
+                        <a href="/dashboard/admin/reports" class="block px-4 py-2 text-sm text-gray-800 hover:bg-secondary hover:text-white rounded-lg">Admin Reports</a>
+                        <a href="/dashboard/admin/profile" class="block px-4 py-2 text-sm text-gray-800 hover:bg-secondary hover:text-white rounded-lg">Admin Profile</a>
+                    </div>
+                </div>
+            <% } %>
+
+            <a href="/dashboard/logout" class="flex items-center px-4 py-2 text-lg font-medium rounded-lg hover:bg-secondary">Logout</a>
+        </nav>
+    </aside>
+
+    <!-- Content -->
+    <div class="flex-1 ml-0 lg:ml-64 p-6">
+        <!-- Sidebar Toggle Button on Mobile -->
+        <button id="sidebar-toggle" class="lg:hidden p-4 bg-transparent rounded-full shadow-lg transition-all duration-300 flex items-center justify-center transform hover:scale-110 w-12 h-12">
+            <!-- Hamburger Icon (white lines) -->
+            <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <!-- Close Icon (hidden by default, white X) -->
+            <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
+</body>
+</html>

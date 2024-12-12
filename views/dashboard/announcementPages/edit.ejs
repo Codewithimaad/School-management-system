@@ -1,0 +1,89 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow p-4 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
+        <!-- Flash Messages -->
+        <%- include('../../partials/flashMessage') %>
+
+
+            <header
+                class="flex items-center justify-between border-b pb-6 mb-8 bg-gradient-to-r from-blue-500 to-blue-900 text-white rounded-lg shadow-lg px-8 py-6">
+                <div>
+                    <h2 class="text-3xl font-semibold tracking-wide">Edit Announcement</h2>
+                    <p class="text-sm text-gray-200">Modify the details of the announcement</p>
+                </div>
+            </header>
+
+            <form action="/dashboard/announcement/edit/<%= announcement._id %>" method="POST">
+                <div class="bg-white p-6 rounded-lg shadow-md space-y-4">
+                    <!-- Title Input -->
+                    <div class="form-group">
+                        <label for="title" class="text-sm font-semibold">Title</label>
+                        <input type="text" id="title" name="title" class="w-full p-3 rounded-md border border-gray-300"
+                            value="<%= announcement.title %>" required>
+                    </div>
+
+                    <!-- Content Input -->
+                    <div class="form-group">
+                        <label for="content" class="text-sm font-semibold">Content</label>
+                        <textarea id="content" name="content" class="w-full p-3 rounded-md border border-gray-300"
+                            rows="4" required><%= announcement.content %></textarea>
+                    </div>
+
+                    <!-- Audience Selection -->
+                    <div class="form-group">
+                        <label for="audience" class="text-sm font-semibold">Audience</label>
+                        <select id="audience" name="audience" class="w-full p-3 rounded-md border border-gray-300"
+                            required onchange="toggleClassSelection()">
+                            <option value="students" <% if (announcement.audience==='students' ) { %>
+                                selected <% } %>>Students</option>
+                            <option value="teachers" <% if (announcement.audience==='teachers' ) { %>
+                                selected <% } %>>Teachers</option>
+                            <option value="class" <% if (announcement.audience==='class' ) { %> selected <% } %>>Class
+                            </option>
+                            <option value="all" <% if (announcement.audience==='all' ) { %> selected <% } %>
+                                    >All</option>
+                        </select>
+                    </div>
+
+                    <!-- Class Selection (Only show if audience is 'class') -->
+                    <div id="class-selection" class="form-group" <% if (announcement.audience !=='class' ) { %>
+                        style="display: none;" <% } %>>
+                            <label for="classId" class="text-sm font-semibold">Class</label>
+                            <select id="classId" name="classId" class="w-full p-3 rounded-md border border-gray-300">
+                                <option value="">Select a Class</option>
+                                <% classes.forEach(function(classItem) { %>
+                                    <option value="<%= classItem._id %>" <% if (announcement.classId &&
+                                        announcement.classId._id==classItem._id) { %> selected <% } %>> <%=
+                                                classItem.name %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-md">Update
+                        Announcement</button>
+                </div>
+            </form>
+    </main>
+
+
+
+    <script>
+        function toggleClassSelection() {
+            const audience = document.getElementById('audience').value;
+            const classSelection = document.getElementById('class-selection');
+
+            if (audience === 'class') {
+                classSelection.style.display = 'block';
+            } else {
+                classSelection.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            toggleClassSelection();
+        });
+    </script>
+
+    <%- include('../../partials/dashboardfooter') %>

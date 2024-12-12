@@ -1,0 +1,54 @@
+<%- include('../partials/header') %>
+
+    <div class="bg-gradient-to-r from-blue-50 to-blue-200 py-16 mt-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <!-- Page Title -->
+            <h1 class="text-5xl font-extrabold text-gray-900 mb-6">Our Gallery</h1>
+            <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+                Welcome to our gallery! Explore moments that capture the essence of life at Luminous International
+                School. From vibrant events to cherished memories, immerse yourself in the heartbeat of our community.
+            </p>
+
+
+            <% if (images.length> 0) { %>
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <% images.forEach(image=> { %>
+                        <div
+                            class="relative group overflow-hidden rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105">
+                            <img src="<%= image.imageUrl%>" alt="<%= image.title %>"
+                                class="w-full h-80 object-cover transition-all duration-300">
+
+                            <!-- Overlay with content on hover -->
+                            <div
+                                class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white text-xl font-semibold p-8 transition-opacity duration-300">
+                                <p class="text-sm text-center max-w-xs mx-auto">
+                                    <%= image.content %> <!-- Display content instead of title -->
+                                </p>
+                            </div>
+                        </div>
+                        <% }) %>
+
+                </div>
+
+                <% } else { %>
+                    <p class="text-center text-lg text-gray-700">No images available in the gallery.</p>
+                    <% } %>
+
+                        <!-- Call to Action -->
+                        <div class="mt-12">
+                            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                                Discover more about the vibrant moments that make Luminous International School a place
+                                where
+                                memories are made. Explore and connect with us!
+                            </p>
+                            <a href="/contact"
+                                class="inline-block bg-blue-800 text-white py-4 px-8 rounded-lg shadow-xl hover:bg-blue-900 transition duration-300 ease-in-out transform hover:scale-105">
+                                Get in Touch
+                            </a>
+                        </div>
+        </div>
+    </div>
+
+    <%- include('../partials/footer') %>
