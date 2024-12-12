@@ -19,90 +19,63 @@
         </a>
     </div>
 
-    <%- include('../partials/flashMessage') %>
+    <!-- Login Form Container -->
+    <div class="w-full max-w-md p-8 sm:p-10 bg-white rounded-xl shadow-2xl border border-gray-100">
 
-
-        <!-- Login Form Container -->
-        <div class="w-full max-w-md p-8 sm:p-10 bg-white rounded-xl shadow-2xl border border-gray-100">
-
-            <!-- Logo Section -->
-            <div class="flex justify-center mb-4">
-                <a href="/">
-                    <img src="/images/logo.png" alt="Luminous School" class="w-24 sm:w-32 h-auto">
-                </a>
-            </div>
-
-            <!-- Portal Login Title -->
-            <h1 class="text-2xl font-semibold text-gray-800 text-center mb-6">Portal Login</h1>
-
-
-
-            <!-- Login Form -->
-            <form method="POST" action="/login" class="space-y-6">
-
-                <!-- Email Input -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" placeholder="Email" required
-                        class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-all focus:outline-none text-gray-900">
-                </div>
-
-                <!-- Password Input with Eye Icon -->
-                <div class="relative">
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                    <input id="password" placeholder="Password" type="password" name="password" required
-                        class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-all focus:outline-none text-gray-900">
-                    <i id="eye-icon" class="fa fa-eye absolute right-4 top-12 text-gray-500 cursor-pointer"
-                        onclick="togglePassword()"></i>
-                </div>
-
-                <!-- Role Selection Dropdown -->
-                <div class="mb-4">
-                    <label for="role" class="block text-sm font-medium text-gray-700">Select Role</label>
-                    <select name="role" required
-                        class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-all focus:outline-none text-gray-900">
-                        <option value="Select Role" disabled selected>Select Role</option>
-                        <option value="admin">Admin</option>
-                        <option value="teacher">Teacher</option>
-                        <option value="student">Student</option>
-                    </select>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit"
-                    class="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:outline-none transition-all transform hover:scale-105">
-                    Login
-                </button>
-
-            </form>
+        <!-- Logo Section -->
+        <div class="flex justify-center mb-4">
+            <a href="/">
+                <img src="/images/logo.png" alt="Luminous School" class="w-24 sm:w-32 h-auto">
+            </a>
         </div>
 
-        <!-- Flash Message Auto-hide Script -->
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                const flashMessage = document.getElementById('flash-message');
-                if (flashMessage) {
-                    setTimeout(() => {
-                        flashMessage.style.display = 'none';
-                    }, 5000); // 5 seconds
-                }
-            });
+        <!-- Portal Login Title -->
+        <h1 class="text-2xl font-semibold text-gray-800 text-center mb-6">Portal Login</h1>
 
-            // Toggle password visibility
-            function togglePassword() {
-                const passwordField = document.getElementById('password');
-                const eyeIcon = document.getElementById('eye-icon');
-                if (passwordField.type === 'password') {
-                    passwordField.type = 'text';
-                    eyeIcon.classList.remove('fa-eye');
-                    eyeIcon.classList.add('fa-eye-slash');
-                } else {
-                    passwordField.type = 'password';
-                    eyeIcon.classList.remove('fa-eye-slash');
-                    eyeIcon.classList.add('fa-eye');
-                }
-            }
-        </script>
+        <!-- Login Form -->
+        <form id="login-form" method="POST" action="/login" class="space-y-6">
+
+            <!-- Email Input -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" placeholder="Email"
+                    class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-all focus:outline-none text-gray-900">
+                <p id="email-error" class="text-red-500 text-sm hidden">Please enter a valid email address.</p>
+            </div>
+
+            <!-- Password Input with Eye Icon -->
+            <div class="relative">
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input id="password" name="password" placeholder="Password" type="password"
+                    class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-all focus:outline-none text-gray-900">
+                <p id="password-error" class="text-red-500 text-sm hidden">Password must be at least 8 characters.</p>
+                <i id="eye-icon" class="fa fa-eye absolute right-4 top-12 text-gray-500 cursor-pointer"
+                    onclick="togglePassword()"></i>
+            </div>
+
+            <!-- Role Selection Dropdown -->
+            <div class="mb-4">
+                <label for="role" class="block text-sm font-medium text-gray-700">Select Role</label>
+                <select id="role" name="role"
+                    class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-all focus:outline-none text-gray-900">
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="student">Student</option>
+                </select>
+                <p id="role-error" class="text-red-500 text-sm hidden">Please select a role.</p>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                class="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:outline-none transition-all transform hover:scale-105">
+                Login
+            </button>
+
+        </form>
+    </div>
+
+    <script src="/javascripts/loginFormValidation.js"></script>
 
 </body>
 

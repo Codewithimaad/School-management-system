@@ -3,75 +3,74 @@
     <main class="flex-grow flex-wrap p-2 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
         <%- include('../../partials/flashMessage') %>
 
-
-
             <!-- Header Section -->
             <header
                 class="flex items-center justify-between border-b pb-6 mb-8 text-white rounded-lg shadow-md px-8 py-6"
                 style="background-color: #1a2851;">
                 <div>
                     <h2 class="text-3xl font-semibold tracking-wide">Add Admin</h2>
-                    <p class="text-sm sm:hidden lg:block text-gray-500">Please fill in the admin details
-                        below.</p>
+                    <p class="text-sm sm:hidden lg:block text-gray-500">Please fill in the admin details below.</p>
                 </div>
             </header>
 
             <!-- Admin Form (Card Style) -->
             <section id="admin-form">
-                <form action="/dashboard/admin/add" method="POST" class="bg-white p-8 shadow-lg rounded-lg w-full"
-                    enctype="multipart/form-data">
+                <form id="add-admin-form" action="/dashboard/admin/add" method="POST"
+                    class="bg-white p-8 shadow-lg rounded-lg w-full" enctype="multipart/form-data">
 
                     <!-- Name Input -->
                     <div class="mb-6">
-                        <label for="name" class="block text-sm font-medium text-gray-700">Admin's
-                            Name</label>
-                        <input type="text" name="name"
+                        <label for="name" class="block text-sm font-medium text-gray-700">Admin's Name</label>
+                        <input type="text" name="name" id="name"
                             class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter admin's full name" required />
+                            placeholder="Enter admin's full name" />
+                        <p id="name-error" class="text-red-500 text-sm hidden">Please enter the admin's name.</p>
                     </div>
 
                     <!-- Email Input -->
                     <div class="mb-6">
-                        <label for="email" class="block text-sm font-medium text-gray-700">Admin's
-                            Email</label>
-                        <input type="email" name="email"
+                        <label for="email" class="block text-sm font-medium text-gray-700">Admin's Email</label>
+                        <input type="email" name="email" id="email"
                             class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter admin's email address" required />
+                            placeholder="Enter admin's email address" />
+                        <p id="email-error" class="text-red-500 text-sm hidden">Please enter a valid email address.</p>
                     </div>
 
                     <!-- Phone No Input -->
                     <div class="mb-6">
                         <label for="phone" class="block text-sm font-medium text-gray-700">Phone No</label>
-                        <input type="number" name="phone"
+                        <input type="number" name="phone" id="phone"
                             class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Phone no" required />
+                            placeholder="Phone no" />
+                        <p id="phone-error" class="text-red-500 text-sm hidden">Please enter a valid phone number.</p>
                     </div>
 
                     <!-- Password Input -->
                     <div class="mb-6">
                         <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                        <input type="password" name="password"
+                        <input type="password" name="password" id="password"
                             class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter password" required />
+                            placeholder="Enter password" />
+                        <p id="password-error" class="text-red-500 text-sm hidden">Please enter a password.</p>
                     </div>
 
                     <!-- Description Input -->
                     <div class="mb-6">
                         <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                        <textarea name="description" rows="4"
+                        <textarea name="description" id="description" rows="4"
                             class="mt-1 block w-full p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Provide a brief description or biography" required></textarea>
+                            placeholder="Provide a brief description or biography"></textarea>
+                        <p id="description-error" class="text-red-500 text-sm hidden">Please enter a description.</p>
                     </div>
 
-                    <!-- ImageUrl Input -->
+                    <!-- Image Upload Input -->
                     <div class="mb-6">
                         <label for="image" class="block text-sm font-medium text-gray-700">Upload File</label>
-                        <input type="file" name="image"
+                        <input type="file" name="image" id="image"
                             class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Upload Image" required />
+                            placeholder="Upload Image" />
+                        <p id="image-error" class="text-red-500 text-sm hidden">Please upload an image.</p>
                     </div>
-
-
 
                     <!-- Submit Button -->
                     <div class="flex justify-end">
@@ -84,6 +83,6 @@
             </section>
     </main>
 
-
-
     <%- include('../../partials/dashboardfooter') %>
+
+        <script src="/javascripts/adminFormValidation.js"></script>

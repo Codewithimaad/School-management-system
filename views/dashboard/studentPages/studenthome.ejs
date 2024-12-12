@@ -4,103 +4,104 @@
         <!-- Flash Messages -->
         <%- include('../../partials/flashMessage') %>
 
-
             <header
                 class="flex items-center justify-between border-b pb-6 mb-8 text-white rounded-lg bg-gradient-to-r from-blue-500 to-blue-900 shadow-lg px-8 py-6">
                 <div>
                     <h2 class="text-3xl font-semibold tracking-wide text-white">Add Student</h2>
-                    <p class="text-sm sm:hidden lg:block text-gray-200">Form for adding an student.</p>
+                    <p class="text-sm sm:hidden lg:block text-gray-200">Form for adding a student.</p>
                 </div>
             </header>
 
             <!-- Student Form (Full-width Card Style) -->
             <section id="student-form">
-                <form action="/dashboard/student/add" method="POST" class="bg-white p-8 shadow-lg rounded-lg w-full">
-                    <!-- Changed max-w-4xl mx-auto to w-full -->
-
+                <form id="student-form" action="/dashboard/student/add" method="POST"
+                    class="bg-white p-8 shadow-lg rounded-lg w-full" enctype="multipart/form-data">
                     <!-- Name Input -->
                     <div class="mb-6">
-                        <label for="name" class="block text-sm font-medium text-gray-700">Student's
-                            Name</label>
-                        <input type="text" name="name"
+                        <label for="name" class="block text-sm font-medium text-gray-700">Student's Name</label>
+                        <input type="text" id="name" name="name"
                             class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter student's full name" required />
+                            placeholder="Enter student's full name" />
+                        <p id="name-error" class="text-red-500 text-sm hidden">Please enter a valid name.</p>
                     </div>
 
                     <!-- Father's Name Input -->
                     <div class="mb-6">
-                        <label for="fname" class="block text-sm font-medium text-gray-700">Father's
-                            Name</label>
-                        <input type="text" name="fname"
+                        <label for="fname" class="block text-sm font-medium text-gray-700">Father's Name</label>
+                        <input type="text" id="fname" name="fname"
                             class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter father's full name" required />
+                            placeholder="Enter father's full name" />
+                        <p id="fname-error" class="text-red-500 text-sm hidden">Please enter a father's name.</p>
                     </div>
 
                     <!-- Roll Number Input -->
                     <div class="mb-6">
-                        <label for="roll_number" class="block text-sm font-medium text-gray-700">Roll
-                            Number</label>
-                        <input type="number" name="roll_number"
+                        <label for="roll_number" class="block text-sm font-medium text-gray-700">Roll Number</label>
+                        <input type="number" id="roll_number" name="roll_number"
                             class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter roll number" required />
+                            placeholder="Enter roll number" />
+                        <p id="roll_number-error" class="text-red-500 text-sm hidden">Please enter a valid roll number.
+                        </p>
                     </div>
+
                     <!-- Email Input -->
                     <div class="mb-6">
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" name="email"
+                        <input type="email" id="email" name="email"
                             class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Email" required />
+                            placeholder="Email" />
+                        <p id="email-error" class="text-red-500 text-sm hidden">Please enter a valid email address.</p>
                     </div>
+
                     <!-- Password Input -->
                     <div class="mb-6">
                         <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                        <input type="password" name="password"
+                        <input type="password" id="password" name="password"
                             class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Password" required />
+                            placeholder="Password" />
+                        <p id="password-error" class="text-red-500 text-sm hidden">Password must be at least 8
+                            characters long.</p>
                     </div>
 
                     <!-- Phone and Date of Birth (Side by Side) -->
                     <div class="mb-6 flex gap-6">
                         <!-- Phone Input -->
                         <div class="flex-1">
-                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone
-                                Number</label>
-                            <input type="text" name="phone"
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                            <input type="text" id="phone" name="phone"
                                 class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                                placeholder="Enter student's phone number" required />
+                                placeholder="Enter student's phone number" />
+                            <p id="phone-error" class="text-red-500 text-sm hidden">Please enter a valid phone number.
+                            </p>
                         </div>
 
                         <!-- Date of Birth Input -->
                         <div class="flex-1">
-                            <label for="dob" class="block text-sm font-medium text-gray-700">Date of
-                                Birth</label>
-                            <input type="date" name="dob"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                                required />
+                            <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                            <input type="date" id="dob" name="dob"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" />
+                            <p id="dob-error" class="text-red-500 text-sm hidden">Please select a valid date of birth.
+                            </p>
                         </div>
                     </div>
 
                     <!-- Gender Input -->
                     <div class="mb-6">
-                        <select name="gender"
+                        <select name="gender" id="gender"
                             class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
                             <option value="Select Gender" disabled selected>Select Gender</option>
-                            <option value="Male" <%=students.gender==='Male' ? 'selected' : '' %>>Male
-                            </option>
-                            <option value="Female" <%=students.gender==='Female' ? 'selected' : '' %>>Female
-                            </option>
-                            <option value="Other" <%=students.gender==='Other' ? 'selected' : '' %>>Other
-                            </option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
                         </select>
+                        <p id="gender-error" class="text-red-500 text-sm hidden">Please select a gender.</p>
                     </div>
 
                     <!-- Class Selection -->
                     <div class="mb-6">
-                        <label for="class" class="block text-sm font-semibold text-gray-700">Select
-                            Class</label>
+                        <label for="class" class="block text-sm font-semibold text-gray-700">Select Class</label>
                         <select id="class" name="stdClass"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            required>
+                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
                             <option value="" disabled selected>Select Class</option>
                             <% classes.forEach(classItem=> { %>
                                 <option value="<%= classItem._id %>">
@@ -108,21 +109,25 @@
                                 </option>
                                 <% }) %>
                         </select>
+                        <p id="class-error" class="text-red-500 text-sm hidden">Please select a class.</p>
                     </div>
 
                     <!-- Address Input -->
                     <div class="mb-6">
                         <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-                        <input type="text" name="address"
+                        <input type="text" id="address" name="address"
                             class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
                             placeholder="Enter student's address" />
+                        <p id="address-error" class="text-red-500 text-sm hidden">Address field is required.</p>
+
                     </div>
 
                     <!-- Enrollment Date Input -->
                     <div class="mb-6">
                         <label for="enrollmentDate" class="block text-sm font-medium text-gray-700">Enrollment
                             Date</label>
-                        <input type="date" name="enrollmentDate" value="<%= new Date().toISOString().split('T')[0] %>"
+                        <input type="date" id="enrollmentDate" name="enrollmentDate"
+                            value="<%= new Date().toISOString().split('T')[0] %>"
                             class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" />
                     </div>
 
@@ -137,6 +142,6 @@
             </section>
     </main>
 
-
-
     <%- include('../../partials/dashboardfooter') %>
+
+        <script src="/javascripts/studentFormValidation.js"></script>

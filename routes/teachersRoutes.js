@@ -51,46 +51,8 @@ router.post(
     authenticateUser,
     checkRole('admin'),
     upload.single('image'),
-    [
-        // Validation rules
-        body('name').notEmpty().withMessage('Name is required.'),
-        body('subject').notEmpty().withMessage('Subject is required.'),
-        body('salary')
-            .notEmpty().withMessage('Salary is required.')
-            .isNumeric().withMessage('Salary must be a numeric value.'),
-        body('qualification').notEmpty().withMessage('Qualification is required.'),
-        body('email')
-            .notEmpty().withMessage('Email is required.')
-            .isEmail().withMessage('Invalid email format.')
-            .custom(async (email) => {
-                // Check if email already exists
-                const existingTeacher = await teacherModel.findOne({ email });
-                if (existingTeacher) {
-                    throw new Error('Email is already registered.');
-                }
-                return true;
-            }),
-        body('phone')
-            .notEmpty().withMessage('Phone number is required.')
-            .isMobilePhone().withMessage('Invalid phone number.'),
-        body('password')
-            .notEmpty().withMessage('Password is required.')
-            .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long.'),
-        body('status')
-            .isIn(['Active', 'Inactive']).withMessage('Status must be either "Active" or "Inactive".'),
-        body('description')
-            .optional()
-            .isLength({ max: 400 }).withMessage('Description cannot exceed 400 characters.')
-    ],
-    async (req, res) => {
-        // Capture validation errors
-        const errors = validationResult(req);
 
-        if (!errors.isEmpty()) {
-            // If validation errors exist, flash the error messages and redirect back
-            req.flash('error_msg', errors.array().map(error => error.msg).join(', '));
-            return res.redirect('/dashboard/teacher/add');
-        }
+    async (req, res) => {
 
         const { name, subject, salary, qualification, email, phone, password, status, description } = req.body;
         const localFilePath = req.file.path;

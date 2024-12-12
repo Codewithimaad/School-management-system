@@ -35,49 +35,8 @@ router.post(
     '/dashboard/student/add',
     authenticateUser,
     checkRole('admin', 'teacher'),
-    [
-        // Validation rules
-        body('name').notEmpty().withMessage('Name is required.'),
-        body('fname').notEmpty().withMessage('Father\'s name is required.'),
-        body('dob').notEmpty().withMessage('Date of birth is required.').isDate().withMessage('Invalid date format.'),
-        body('phone')
-            .notEmpty().withMessage('Phone number is required.')
-            .isMobilePhone().withMessage('Invalid phone number.'),
-        body('email')
-            .notEmpty().withMessage('Email is required.')
-            .isEmail().withMessage('Invalid email format.')
-            .custom(async (email) => {
-                // Check if email already exists
-                const student = await studentModel.findOne({ email });
-                if (student) {
-                    throw new Error('Email is already in use.');
-                }
-                return true;
-            }),
-        body('address').notEmpty().withMessage('Address is required.'),
-        body('password')
-            .notEmpty().withMessage('Password is required.')
-            .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long.'),
-        body('enrollmentDate')
-            .optional()
-            .isDate().withMessage('Invalid enrollment date format.'),
-        body('roll_number')
-            .notEmpty().withMessage('Roll number is required.')
-            .isAlphanumeric().withMessage('Roll number must be alphanumeric.'),
-        body('stdClass')
-            .notEmpty().withMessage('Class is required.')
-            .isMongoId().withMessage('Invalid class ID.'),
-        body('gender').isIn(['Male', 'Female', 'Other']).withMessage('Invalid gender selected.'),
-    ],
-    async (req, res) => {
-        // Capture validation errors
-        const errors = validationResult(req);
 
-        if (!errors.isEmpty()) {
-            // If there are validation errors, send them back as flash messages
-            req.flash('error_msg', errors.array().map(error => error.msg).join(', '));
-            return res.redirect('/dashboard/student/add'); // Redirect back to the form
-        }
+    async (req, res) => {
 
         let { name, fname, dob, phone, email, address, password, enrollmentDate, roll_number, stdClass, gender } = req.body;
 

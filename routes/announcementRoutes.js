@@ -28,29 +28,9 @@ router.get('/dashboard/announcement/add', authenticateUser, checkRole('admin'), 
 
 // Add Announcement (POST request)
 router.post('/dashboard/announcement/add', authenticateUser, checkRole('admin'),
-    // Validation rules
-    [
-        body('title').notEmpty().withMessage('Title is required'),
-        body('content').notEmpty().withMessage('Content is required'),
-        body('audience').isIn(['admin', 'teacher', 'student', 'class', 'all']).withMessage('Invalid audience selected'),
-        body('classId').optional().isMongoId().withMessage('Invalid class ID').custom((value, { req }) => {
-            // Only validate classId if audience is 'class'
-            if (req.body.audience === 'class' && !value) {
-                req.flash('error_msg', 'Class ID is required when audience is "class"');
-                return false;  // Return false to indicate validation failed
-            }
-            return true;
-        }),
-    ],
-    async (req, res) => {
-        // Capture validation errors
-        const errors = validationResult(req);
 
-        if (!errors.isEmpty()) {
-            // If there are validation errors, send them back as flash messages
-            req.flash('error_msg', errors.array().map(error => error.msg).join(', '));
-            return res.redirect('/dashboard/announcement/add'); // Redirect back to the form
-        }
+    async (req, res) => {
+
 
         const { title, content, audience, classId } = req.body;
 

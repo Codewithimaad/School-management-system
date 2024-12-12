@@ -27,21 +27,9 @@ router.get('/dashboard/admin/add', authenticateUser, checkRole('admin'), async (
 router.post('/dashboard/admin/add',
     authenticateUser, checkRole('admin'), upload.single('image'),
 
-    // Validation rules
-    [
-        body('name').notEmpty().withMessage('Name is required'),
-        body('email').isEmail().withMessage('Please enter a valid email address'),
-        body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters long'),
-    ],
-    async (req, res) => {
-        // Capture validation errors
-        const errors = validationResult(req);
 
-        if (!errors.isEmpty()) {
-            // If there are validation errors, send them back as flash messages
-            req.flash('error_msg', errors.array().map(error => error.msg).join(', '));
-            return res.redirect('/dashboard/admin/add'); // Redirect back to the form
-        }
+    async (req, res) => {
+
 
         const { name, email, password, phone, description } = req.body;
         const localFilePath = req.file.path;
