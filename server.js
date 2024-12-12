@@ -55,8 +55,9 @@ app.use(session({
     secret: "flashMessage",
     saveUninitialized: true,
     resave: false,
-    cookie: { secure: false }, // Set secure to true if using HTTPS
+    cookie: { secure: process.env.NODE_ENV === 'production' }, // Use HTTPS in production
 }));
+
 
 // Use flash middleware
 app.use(flash());
@@ -89,8 +90,7 @@ app.use(galleryRoutes);
 
 
 // Start the server
-const PORT = process.env.PORT || 5000;
-
+const PORT = process.env.PORT || 5000;  // Render will provide a dynamic port
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
