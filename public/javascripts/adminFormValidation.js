@@ -41,13 +41,15 @@ document.getElementById('add-admin-form').addEventListener('submit', function (e
     // Validate Password
     const password = document.getElementById('password');
     const passwordError = document.getElementById('password-error');
-    if (!password.value.trim()) {
+    const passwordStrength = document.getElementById('password-strength');
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/; // Regex for password validation
+    if (!password.value) {
         passwordError.classList.remove('hidden');
         password.classList.add('border-red-500');
         valid = false;
-    } else {
-        passwordError.classList.add('hidden');
-        password.classList.remove('border-red-500');
+    } else if (!passwordPattern.test(password.value)) {
+        passwordStrength.classList.remove('hidden');
+        password.classList.add('border-red-500')
     }
 
     // Validate Description
