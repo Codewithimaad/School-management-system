@@ -196,6 +196,24 @@ router.get('/dashboard/announcement/class', authenticateUser, checkRole('student
     }
 });
 
+// Route to display announcements for all audience
+router.get('/dashboard/announcement/all', authenticateUser, checkRole('teacher', 'student'), async (req, res) => {
+    try {
+        // Fetch announcements for teachers
+        const announcements = await Announcement.find({ audience: 'all' })
+            .sort({ createdAt: -1 }); // Sort by most recent announcements
+
+        res.render('dashboard/announcementPages/All', {
+            announcements,
+            success_msg: req.flash('success_msg'),
+            error_msg: req.flash('error_msg')
+        });
+    } catch (error) {
+        req.flash('error_msg', 'Failed to load all announcements.');
+        res.redirect('/dashboard');
+    }
+});
+
 
 
 

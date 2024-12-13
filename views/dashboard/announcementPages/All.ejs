@@ -1,0 +1,42 @@
+<!-- views/dashboard/announcementPages/teacherAnnouncements.ejs -->
+
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow p-4 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
+        <!-- Flash Messages -->
+        <%- include('../../partials/flashMessage') %>
+
+
+            <header
+                class="flex items-center justify-between border-b pb-6 mb-8 bg-gradient-to-r from-blue-500 to-blue-900 text-white rounded-lg shadow-lg px-8 py-6">
+                <div>
+                    <h2 class="text-3xl font-semibold tracking-wide">All Announcements</h2>
+                    <p class="text-sm text-gray-200">View the latest announcements for All audience</p>
+                </div>
+            </header>
+
+            <section class="space-y-4">
+                <% if (announcements.length> 0) { %>
+                    <% announcements.forEach(announcement=> { %>
+                        <div class="bg-white shadow-md rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-800">
+                                <%= announcement.title %>
+                            </h3>
+                            <p class="text-gray-600 mt-2">
+                                <%= announcement.content %>
+                            </p>
+                            <p class="text-gray-400 text-sm mt-2">Posted on: <%=
+                                    announcement.createdAt.toLocaleDateString() %>
+                            </p>
+                        </div>
+                        <% }); %>
+                            <% } else { %>
+                                <div class="bg-white p-6 rounded-lg shadow-md">
+                                    <p class="text-gray-600">No announcements available for teachers at the
+                                        moment.</p>
+                                </div>
+                                <% } %>
+            </section>
+    </main>
+
+    <%- include('../../partials/dashboardfooter') %>

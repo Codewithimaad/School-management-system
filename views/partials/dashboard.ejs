@@ -436,14 +436,14 @@
                     <% if (userRole==='admin' ){ %>
                         <li>
                             <div class="iocn-link">
-                                <a href="/dashboard/teacher/reports">
+                                <a href="#">
                                     <i class="fa-solid fa-person-chalkboard"></i> <span
                                         class="link_name">Teachers</span>
                                 </a>
                                 <i class='bx bxs-chevron-down arrow'></i>
                             </div>
                             <ul class="sub-menu">
-                                <li><a class="link_name" href="/dashboard/teacher/reports">Teachers</a></li>
+                                <li><a class="link_name" href="#">Teachers</a></li>
                                 <li><a href="/dashboard/principal/add">Add Principal</a></li>
                                 <li><a href="/dashboard/principal/report">Principal Report</a></li>
                                 <li><a href="/dashboard/teacher/add">Add Teacher</a></li>
@@ -456,7 +456,7 @@
 
                                 <li>
                                     <div class="iocn-link">
-                                        <a href="/dashboard/student/reports">
+                                        <a href="#">
                                             <i class="fa-solid fa-users"></i>
                                             <span class="link_name">Students</span>
                                         </a>
@@ -473,7 +473,7 @@
 
                                         <li>
                                             <div class="iocn-link">
-                                                <a href="/dashboard/class/reports">
+                                                <a href="#">
                                                     <i class="fa-solid fa-people-group"></i> <span
                                                         class="link_name">Classes</span>
                                                 </a>
@@ -490,14 +490,14 @@
 
                                                 <li>
                                                     <div class="iocn-link">
-                                                        <a href="/dashboard/fee/reports">
+                                                        <a href="#">
                                                             <i class="fa-solid fa-money-bill-wave"></i> <span
                                                                 class="link_name">Fees</span>
                                                         </a>
                                                         <i class='bx bxs-chevron-down arrow'></i>
                                                     </div>
                                                     <ul class="sub-menu">
-                                                        <li><a class="link_name" href="/dashboard/fee/reports">Fees</a>
+                                                        <li><a class="link_name" href="#">Fees</a>
                                                         </li>
                                                         <li><a href="/dashboard/fee/add">Add Fee</a></li>
                                                         <li><a href="/dashboard/fee/reports">Fee Reports</a></li>
@@ -507,7 +507,7 @@
 
                                                     <li>
                                                         <div class="iocn-link">
-                                                            <a href="/dashboard/attendance/reports">
+                                                            <a href="#">
                                                                 <i class="fa-solid fa-clipboard-user"></i> <span
                                                                     class="link_name">Attendance</span>
                                                             </a>
@@ -515,8 +515,7 @@
                                                         </div>
                                                         <ul class="sub-menu">
                                                             <% if (userRole==='teacher' || userRole==='admin' ) { %>
-                                                                <li><a class="link_name"
-                                                                        href="/dashboard/attendance/reports">Attendance</a>
+                                                                <li><a class="link_name" href="#">Attendance</a>
                                                                 </li>
                                                                 <li><a href="/dashboard/attendance/mark">Take
                                                                         Attendance</a>
@@ -537,7 +536,7 @@
 
                                                         <li>
                                                             <div class="iocn-link">
-                                                                <a href="/dashboard/admin/reports">
+                                                                <a href="">
                                                                     <i class="fa-solid fa-user-tie"></i> <span
                                                                         class="link_name">Admin</span>
                                                                 </a>
@@ -556,13 +555,13 @@
 
             <li>
                 <div class="iocn-link">
-                    <a href="/dashboard/announcements">
+                    <a href="#">
                         <i class="bi bi-megaphone-fill"></i> <span class="link_name">Announcement</span>
                     </a>
                     <i class='bx bxs-chevron-down arrow'></i>
                 </div>
                 <ul class="sub-menu">
-                    <li><a class="link_name" href="/dashboard/announcements">Announcement</a></li>
+                    <li><a class="link_name" href="#">Announcement</a></li>
 
                     <% if(userRole==='admin' ){ %>
                         <li><a href="/dashboard/announcement/add">Add
@@ -588,45 +587,56 @@
                                                 for Teacher</a>
                                         </li>
                                         <% } %>
+                                            <% if(userRole==='teacher' || userRole==='student' ){ %>
+
+                                                <li><a href="/dashboard/announcement/all">
+                                                        for all Audience</a>
+                                                </li>
+                                                <% } %>
+
 
 
                 </ul>
             </li>
 
-            <li>
-                <div class="iocn-link">
-                    <a href="/dashboard/student/reports">
-                        <i class="fa-solid fa-gear"></i> <span class="link_name">Settings</span>
-                    </a>
-                    <i class='bx bxs-chevron-down arrow'></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a href="/dashboard/academics/add">Add Academics</a></li>
-                    <li><a href="/dashboard/academics/reports">Academics Reports</a></li>
-                    <li><a href="/dashboard/gallery/add">Add Image to Gallery</a></li>
-                    <li><a href="/dashboard/gallery/report">Gallery Report</a></li>
-                </ul>
-            </li>
+            <% if(userRole==='admin' ){ %>
+
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class="fa-solid fa-gear"></i> <span class="link_name">Settings</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a href="/dashboard/academics/add">Add Academics</a></li>
+                        <li><a href="/dashboard/academics/reports">Academics Reports</a></li>
+                        <li><a href="/dashboard/gallery/add">Add Image to Gallery</a></li>
+                        <li><a href="/dashboard/gallery/report">Gallery Report</a></li>
+                    </ul>
+                </li>
+                <% } %>
 
 
 
 
 
 
-            <li>
-                <a href="/dashboard/logout">
-                    <i class='bx bx-log-out'></i> <span class="link_name">Logout</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="/dashboard/logout">Logout</a>
+
+                    <li>
+                        <a href="/dashboard/logout">
+                            <i class='bx bx-log-out'></i> <span class="link_name">Logout</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                            <li><a class="link_name" href="/dashboard/logout">Logout</a>
+                            </li>
+                        </ul>
                     </li>
-                </ul>
-            </li>
 
 
 
 
-            </ul>
+                    </ul>
     </div>
 
 
