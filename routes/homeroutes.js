@@ -10,9 +10,22 @@ const Image = require('../models/galleryModel');
 
 // Define routes for home pages
 router.get('/', async (req, res) => {
-    // Get the first principal from the database
-    let principals = await Principal.find().limit(1); // Limit to only 1 principal
-    res.render("pages/home", { principals });
+    try {
+        const images = await Image.find().limit(3); // Fetch all images from the database
+
+        res.render('pages/home', {
+            images, // Pass the images array to the view
+            success_msg: req.flash('success_msg'),
+            error_msg: req.flash('error_msg')
+        });
+    } catch (error) {
+        // Render the custom error page
+        res.status(500).render("pages/error", {
+            errorCode: 500,
+            errorMessage: "An error occurred while fetching gallery details.",
+            homeLink: "/"
+        });
+    }
 });
 
 
@@ -25,7 +38,10 @@ router.get('/facilities', (req, res) => {
 
 // Define routes for home pages
 router.get('/becometeacher', (req, res) => {
-    res.render("pages/becomeTeacher");
+    res.render("pages/becomeTeacher", {
+        success_msg: req.flash('success_msg'),
+        error_msg: req.flash('error_msg')
+    });
 });
 
 
@@ -47,8 +63,35 @@ router.get('/academics', async (req, res) => {
 });
 
 
-router.get('/about', (req, res) => {
-    res.render("pages/aboutus");
+router.get('/about', async (req, res) => {
+
+    try {
+        // Fetch only the first 3 teachers
+        let teachers = await teacherModel.find().limit(3);
+
+        if (teachers.length === 0) {
+            console.log('No teachers found');
+        }
+        // Get total teacher count to check if more are available
+        const totalTeachers = await teacherModel.countDocuments();
+
+        // Get the first principal from the database
+        let principals = await Principal.find().limit(1); // Limit to only 1 principal
+
+        // Render the staff page with teachers data
+        res.render("pages/aboutus", {
+            teachers,
+            totalTeachers,
+            principals
+        });
+    } catch (error) {
+        // Render the custom error page
+        res.status(500).render("pages/error", {
+            errorCode: 500,
+            errorMessage: "An error occurred while fetching staff details.",
+            homeLink: "/"
+        });
+    }
 });
 
 
@@ -56,7 +99,7 @@ router.get('/about', (req, res) => {
 router.get('/staff', async (req, res) => {
     try {
         // Fetch only the first 3 teachers
-        let teachers = await teacherModel.find().limit(3);
+        let teachers = await teacherModel.find();
 
         if (teachers.length === 0) {
             console.log('No teachers found');
@@ -66,18 +109,10 @@ router.get('/staff', async (req, res) => {
 
         // Get total teacher count to check if more are available
         const totalTeachers = await teacherModel.countDocuments();
-
-        // Get the first principal from the database
-        let principals = await Principal.find().limit(1); // Limit to only 1 principal
-
-
-
-
         // Render the staff page with teachers data
         res.render("pages/staff", {
             teachers,
             totalTeachers,
-            principals
         });
     } catch (error) {
         // Render the custom error page
@@ -120,6 +155,30 @@ router.post('/contact', async (req, res) => {
     }
 });
 
+// Handle form submission
+router.post('/apply-teacher', async (req, res) => {
+    const { name, email, phone, message, subject, qualification } = req.body;
+
+    const mailOptions = {
+        from: email,
+        to: 'imadhussain6655@gmail.com', // Your Gmail address
+        subject: `Teacher Apply Form Submission from ${name} - ${phone}`,
+        text: `You have received a message from ${name} (${email}).\n\nPhone: ${phone}\nSubject Specialization: ${subject}\nHighest Qualification: ${qualification}\nMessage:\n${message}`
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        req.flash('success_msg', 'Your application has been successfully submitted. Thank you for applying to join our team!');
+        res.redirect('/becometeacher');
+    } catch (error) {
+        req.flash('error_msg', 'Unfortunately, we encountered an issue while submitting your application. Please try again later.');
+        res.redirect('/becometeacher');
+    }
+});
+
+
+
+
 
 
 // Route to fetch all teachers when "See More" is clicked
@@ -145,6 +204,10 @@ router.get('/discipline', (req, res) => {
 
 router.get('/sidebar', (req, res) => {
     res.render('partials/sidebar');
+})
+
+router.get('/feestructure', (req, res) => {
+    res.render('pages/feeStructure');
 })
 
 // Route to display all uploaded images and content in the gallery

@@ -1,58 +1,108 @@
 <%- include('../partials/header1') %>
 
-
     <div class="container-xxl bg-white p-0">
+        <!--Flash Message-->
+        <%- include('../partials/formFlashMessage') %>
 
-        <!-- Page Header End -->
-        <div class="container-xxl py-5 page-header position-relative mb-5">
-            <div class="container py-5">
-                <h1 class="display-2 text-white animated slideInDown mb-4">Become A Teachers</h1>
-                <nav aria-label="breadcrumb animated slideInDown">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                        <li class="breadcrumb-item text-white active" aria-current="page">Become A Teachers</li>
-                    </ol>
-                </nav>
+            <!-- Page Header End -->
+            <div class="container-xxl py-5 page-header position-relative mb-5">
+                <div class="container py-5">
+                    <h1 class="display-2 text-white animated slideInDown mb-4">Become A Teacher</h1>
+                    <nav aria-label="breadcrumb animated slideInDown">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Become A
+                                Teacher</li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
-        </div>
-        <!-- Page Header End -->
+            <!-- Page Header End -->
 
 
-        <!-- Call To Action Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="bg-light rounded">
-                    <div class="row g-0">
-                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s" style="min-height: 400px;">
-                            <div class="position-relative h-100">
-                                <img class="position-absolute w-100 h-100 rounded" src="img/call-to-action.jpg"
-                                    style="object-fit: cover;">
-                            </div>
+            <!-- Teacher Information Section Start -->
+            <div class="container-xxl py-5">
+                <div class="container">
+                    <div class="row g-5">
+                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                            <img class="img-fluid rounded mt-4" src="/img/teacherapplyyyy.jpg"
+                                alt="Teacher in classroom" style="object-fit: cover;">
                         </div>
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                            <div class="h-100 d-flex flex-column justify-content-center p-5">
-                                <h1 class="mb-4">Become A Teacher</h1>
-                                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam
-                                    amet
-                                    diam et eos.
-                                    Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore
-                                    erat
-                                    amet
-                                </p>
-                                <a class="btn btn-primary py-3 px-5" href="">Get Started Now<i
-                                        class="fa fa-arrow-right ms-2"></i></a>
-                            </div>
+                            <h2 class="mb-4">Why Become a Teacher?</h2>
+                            <p class="mb-4">Teaching is more than just a profession – it's a calling. By
+                                becoming a
+                                teacher, you not only shape the future of individuals but also contribute to
+                                society.
+                                You'll inspire young minds, encourage critical thinking, and help students
+                                unlock their
+                                full potential. Teaching is a rewarding career that offers personal growth
+                                and the joy
+                                of seeing your students succeed.</p>
+                            <h4 class="mb-4">What We Offer</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-check-circle text-success me-2"></i>Supportive work
+                                    environment</li>
+                                <li><i class="fa fa-check-circle text-success me-2"></i>Opportunities for
+                                    professional
+                                    development</li>
+                                <li><i class="fa fa-check-circle text-success me-2"></i>Chance to make a
+                                    real difference
+                                    in students' lives</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Call To Action End -->
+            <!-- Teacher Information Section End -->
+
+            <!-- Teacher Application Form Start -->
+            <div id="application-form" class="container-xxl py-5">
+                <div class="container">
 
 
-
-
+                    <h2 class="mb-4 text-center">Teacher Application Form</h2>
+                    <form action="/apply-teacher" method="POST" class="bg-light p-5 rounded">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    placeholder="Enter your full name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="Enter your email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" name="phone"
+                                    placeholder="Enter your phone number" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="subject" class="form-label">Subject Specialization</label>
+                                <input type="text" class="form-control" id="subject" name="subject"
+                                    placeholder="Enter your subject specialization" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="qualification" class="form-label">Highest Qualification</label>
+                                <input type="text" class="form-control" id="qualification" name="qualification"
+                                    placeholder="Enter your highest qualification" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="message" class="form-label">Why do you want to join us?</label>
+                                <textarea class="form-control" id="message" name="message" rows="5"
+                                    placeholder="Write a short message" required></textarea>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn py-2 px-4">Submit
+                                Application</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Teacher Application Form End -->
 
 
     </div>

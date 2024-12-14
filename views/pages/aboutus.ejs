@@ -17,10 +17,14 @@
         </div>
         <!-- Page Header End -->
 
+
         <!-- About Start -->
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <img class="img-fluid rounded" src="/img/about-1.jpg" alt="Our Mission and Cultural Heritage">
+                    </div>
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <h1 class="mb-4">Our Mission and Cultural Heritage</h1>
                         <p>We are dedicated to creating an inspiring educational environment where academic excellence
@@ -30,9 +34,7 @@
                             engaging extracurricular programs to prepare individuals for leadership and meaningful
                             contributions in a global society.</p>
                     </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <img class="img-fluid rounded" src="/img/about-1.jpg" alt="Our Mission and Cultural Heritage">
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -40,34 +42,9 @@
 
 
 
-        <!-- Our Mission Start -->
-        <div class="container-xxl py-5 bg-light">
-            <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <h2 class="mb-3">Our Mission</h2>
-                    <p>To inspire and empower students to achieve their full potential through quality education and
-                        innovative learning methods.</p>
-                </div>
-            </div>
-        </div>
-        <!-- Our Mission End -->
 
-        <!-- Our Vision Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <img class="img-fluid rounded" src="/img/vision.jpeg" alt="">
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <h2 class="mb-4">Our Vision</h2>
-                        <p>We envision a world where every student receives the education and skills to make a
-                            meaningful difference in their communities.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Our Vision End -->
+
+
 
         <!-- Our History Start -->
         <div class="container-xxl py-5 bg-light">
@@ -122,54 +99,34 @@
                         education.</p>
                 </div>
                 <div class="row g-4" id="team-cards">
-                    <!-- Teacher Card 1 -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="card shadow border-0 rounded-3 d-flex flex-column">
-                            <img class="card-img-top rounded-circle w-50 mx-auto mt-4" src="img/team-1.jpg"
-                                alt="Teacher">
-                            <div class="card-body text-center d-flex flex-column">
-                                <h4 class="card-title">John Doe</h4>
-                                <p class="card-text text-muted">Mathematics Teacher</p>
-                                <p class="teacher-description">John has over 15 years of experience in teaching
-                                    mathematics. He is dedicated to making math enjoyable and accessible for every
-                                    student. His teaching methodology emphasizes problem-solving and critical thinking.
-                                </p>
+                    <!-- Teacher Card -->
+                    <% teachers.forEach(teacher=> { %>
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="card shadow border-0 rounded-3 d-flex flex-column">
+                                <img class="card-img-top rounded-circle w-50 mx-auto mt-4" src="<%= teacher.imageUrl %>"
+                                    alt="Teacher">
+                                <div class="card-body text-center d-flex flex-column">
+                                    <h4 class="card-title">
+                                        <%= teacher.name %>
+                                    </h4>
+                                    <p class="card-text text-muted">
+                                        <%= teacher.subject%>
+                                    </p>
+                                    <p class="teacher-description">
+                                        <%=teacher.description %>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Teacher Card 2 -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="card shadow border-0 rounded-3 d-flex flex-column">
-                            <img class="card-img-top rounded-circle w-50 mx-auto mt-4" src="img/team-2.jpg"
-                                alt="Teacher">
-                            <div class="card-body text-center d-flex flex-column">
-                                <h4 class="card-title">Jane Smith</h4>
-                                <p class="card-text text-muted">Science Teacher</p>
-                                <p class="teacher-description">Jane has a passion for science and strives to make every
-                                    lesson engaging and interactive. With a focus on inquiry-based learning, she
-                                    encourages students to explore the wonders of the natural world.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Teacher Card 3 -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="card shadow border-0 rounded-3 d-flex flex-column">
-                            <img class="card-img-top rounded-circle w-50 mx-auto mt-4" src="img/team-3.jpg"
-                                alt="Teacher">
-                            <div class="card-body text-center d-flex flex-column">
-                                <h4 class="card-title">Mark Wilson</h4>
-                                <p class="card-text text-muted">History Teacher</p>
-                                <p class="teacher-description">Mark has been teaching history for over 10 years and
-                                    enjoys bringing historical stories to life. He believes that understanding history
-                                    helps us understand current events and shape our future.</p>
-                            </div>
-                        </div>
-                    </div>
+                        <%}) %>
 
-                    <!-- See More Button -->
-                    <div class="text-center mt-5">
-                        <a href="/staff" class="btn rounded-pill py-3 px-5">See More</a>
-                    </div>
+
+
+
+                            <!-- See More Button -->
+                            <div class="text-center mt-5">
+                                <a href="/staff" class="btn rounded-pill py-3 px-5">See More</a>
+                            </div>
                 </div>
             </div>
         </div>

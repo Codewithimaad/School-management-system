@@ -31,49 +31,26 @@
                         education.</p>
                 </div>
                 <div class="row g-4" id="team-cards">
-                    <!-- Teacher Card 1 -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="card shadow border-0 rounded-3 d-flex flex-column">
-                            <img class="card-img-top rounded-circle w-50 mx-auto mt-4" src="img/team-1.jpg"
-                                alt="Teacher">
-                            <div class="card-body text-center d-flex flex-column">
-                                <h4 class="card-title">John Doe</h4>
-                                <p class="card-text text-muted">Mathematics Teacher</p>
-                                <p class="teacher-description">John has over 15 years of experience in teaching
-                                    mathematics. He is dedicated to making math enjoyable and accessible for every
-                                    student. His teaching methodology emphasizes problem-solving and critical thinking.
-                                </p>
+                    <!-- Teacher Card -->
+                    <% teachers.forEach(teacher=> { %>
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="card shadow border-0 rounded-3 d-flex flex-column">
+                                <img class="card-img-top rounded-circle w-50 mx-auto mt-4" src="<%= teacher.imageUrl %>"
+                                    alt="Teacher">
+                                <div class="card-body text-center d-flex flex-column">
+                                    <h4 class="card-title">
+                                        <%= teacher.name %>
+                                    </h4>
+                                    <p class="card-text text-muted">
+                                        <%= teacher.subject%>
+                                    </p>
+                                    <p class="teacher-description">
+                                        <%=teacher.description %>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Teacher Card 2 -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="card shadow border-0 rounded-3 d-flex flex-column">
-                            <img class="card-img-top rounded-circle w-50 mx-auto mt-4" src="img/team-2.jpg"
-                                alt="Teacher">
-                            <div class="card-body text-center d-flex flex-column">
-                                <h4 class="card-title">Jane Smith</h4>
-                                <p class="card-text text-muted">Science Teacher</p>
-                                <p class="teacher-description">Jane has a passion for science and strives to make every
-                                    lesson engaging and interactive. With a focus on inquiry-based learning, she
-                                    encourages students to explore the wonders of the natural world.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Teacher Card 3 -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="card shadow border-0 rounded-3 d-flex flex-column">
-                            <img class="card-img-top rounded-circle w-50 mx-auto mt-4" src="img/team-3.jpg"
-                                alt="Teacher">
-                            <div class="card-body text-center d-flex flex-column">
-                                <h4 class="card-title">Mark Wilson</h4>
-                                <p class="card-text text-muted">History Teacher</p>
-                                <p class="teacher-description">Mark has been teaching history for over 10 years and
-                                    enjoys bringing historical stories to life. He believes that understanding history
-                                    helps us understand current events and shape our future.</p>
-                            </div>
-                        </div>
-                    </div>
+                        <%}) %>
                 </div>
             </div>
         </div>

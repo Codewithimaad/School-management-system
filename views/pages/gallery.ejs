@@ -1,7 +1,44 @@
 <%- include('../partials/header1') %>
+    <style>
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 300px;
+            /* Fixed height for uniformity */
+        }
+
+        .gallery-item img {
+            object-fit: cover;
+            /* Ensures the image covers the area without stretching or distortion */
+            width: 100%;
+            height: 100%;
+        }
+
+        .gallery-overlay {
+            background: rgba(0, 0, 0, 0.4);
+            /* Optional, for better visibility of the view button */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 992px) {
+            .gallery-item {
+                height: 250px;
+                /* Adjust height for medium screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-item {
+                height: 200px;
+                /* Adjust height for smaller screens */
+            }
+        }
+    </style>
 
     <div class="container-xxl bg-white p-0">
-
         <!-- Page Header Start -->
         <div class="container-xxl py-5 page-header position-relative mb-5">
             <div class="container py-5">
@@ -26,39 +63,24 @@
                         achievements.</p>
                 </div>
                 <div class="row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="gallery-item position-relative overflow-hidden rounded">
-                            <img class="img-fluid w-100" src="/img/gallery-1.jpg" alt="Gallery Image 1">
-                            <div
-                                class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
-                                <a href="/img/gallery-1.jpg" class="btn btn-primary rounded-pill py-2 px-4">View</a>
+                    <% images.forEach(image=> { %>
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="gallery-item position-relative overflow-hidden rounded">
+                                <img class="img-fluid w-100 gallery-image" src="<%= image.imageUrl %>"
+                                    alt="Gallery Image">
+                                <div
+                                    class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                                    <a href="<%= image.imageUrl %>" class="btn rounded-pill py-2 px-4">View</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="gallery-item position-relative overflow-hidden rounded">
-                            <img class="img-fluid w-100" src="/img/gallery-2.jpg" alt="Gallery Image 2">
-                            <div
-                                class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
-                                <a href="/img/gallery-2.jpg" class="btn btn-primary rounded-pill py-2 px-4">View</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="gallery-item position-relative overflow-hidden rounded">
-                            <img class="img-fluid w-100" src="/img/gallery-3.jpg" alt="Gallery Image 3">
-                            <div
-                                class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
-                                <a href="/img/gallery-3.jpg" class="btn btn-primary rounded-pill py-2 px-4">View</a>
-                            </div>
-                        </div>
-                    </div>
+                        <% }) %>
                 </div>
-
             </div>
         </div>
         <!-- Gallery End -->
-
     </div>
+
+
 
     <%- include('../partials/footer1') %>
