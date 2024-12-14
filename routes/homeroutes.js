@@ -9,9 +9,26 @@ const Image = require('../models/galleryModel');
 
 
 // Define routes for home pages
-router.get('/', (req, res) => {
-    res.render("pages/home");
+router.get('/', async (req, res) => {
+    // Get the first principal from the database
+    let principals = await Principal.find().limit(1); // Limit to only 1 principal
+    res.render("pages/home", { principals });
 });
+
+
+
+// Define routes for home pages
+router.get('/facilities', (req, res) => {
+    res.render("pages/facilities");
+});
+
+
+// Define routes for home pages
+router.get('/becometeacher', (req, res) => {
+    res.render("pages/becomeTeacher");
+});
+
+
 
 router.get('/academics', async (req, res) => {
     try {
@@ -78,29 +95,28 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'imadhussain6655@gmail.com', // Your Gmail address
-        pass: 'grni bjng sisc qgpn'        // App password generated from Google
+        pass: 'grni bjng sisc qgpn',        // App password generated from Google
     }
 });
 
 // Handle form submission
 router.post('/contact', async (req, res) => {
-    const { name, email, message } = req.body;
+    const { name, email, phone, message } = req.body;
 
     const mailOptions = {
         from: email,
         to: 'imadhussain6655@gmail.com', // Your Gmail address
-        subject: `Contact Form Submission from ${name}`,
-        text: `You have received a message from ${name} (${email}).\n\nMessage:\n${message}`,
+        phone: `Contact Form Submission from ${name} - ${phone}`,
+        text: `You have received a message from ${name} (${email}).\n\nPhone: ${phone}\nMessage:\n${message}`,
     };
 
     try {
         await transporter.sendMail(mailOptions);
-        req.flash('success_msg', 'Message Send Successfully.');
+        req.flash('success_msg', 'Message Sent Successfully!');
         res.redirect('/contact');
     } catch (error) {
-        req.flash('error_msg', 'Failed to send the message. Please try again later');
-        req.redirect('/contact');
-
+        req.flash('error_msg', 'Failed to send the message. Please try again later.');
+        res.redirect('/contact');
     }
 });
 
@@ -123,8 +139,8 @@ router.get('/staff/more', async (req, res) => {
     }
 });
 
-router.get('/dicipline', (req, res) => {
-    res.render('pages/dicipline');
+router.get('/discipline', (req, res) => {
+    res.render('pages/discipline');
 })
 
 router.get('/sidebar', (req, res) => {

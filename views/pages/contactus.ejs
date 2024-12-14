@@ -1,108 +1,130 @@
-<%- include('../partials/header') %>
+<%- include('../partials/header1') %>
 
-    <div class="bg-gradient-to-r from-blue-100 to-blue-300 py-16 mt-20">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h1 class="text-4xl font-extrabold text-gray-900 mb-6">Contact Us</h1>
-            <p class="text-xl text-gray-700 mb-12">
-                We're here to assist you. Whether you have a question or need support, feel free to reach out.
-            </p>
 
-            <!-- Contact Information Section -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-12 mb-12">
-                <!-- Address and Phone -->
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Our Location</h3>
-                    <p class="text-gray-700 mb-4">
-                        <strong class="text-gray-900">Address:</strong> Shahzadi Payeen District dir lower timergara,
-                        Kpk
-                    </p>
-                    <p class="text-gray-700 mb-4">
-                        <strong class="text-gray-900">Phone:</strong> <a href="tel:+15551234567"
-                            class="text-blue-600 hover:text-blue-800">+1 (555) 123-4567</a>
-                    </p>
-                    <p class="text-gray-700">
-                        <strong class="text-gray-900">Email:</strong> <a href="mailto:info@schoolsystem.com"
-                            class="text-blue-600 hover:text-blue-800">info@schoolsystem.com</a>
-                    </p>
+    <div class="container-xxl bg-white p-0">
+        <%- include('../partials/flashMessage') %>
+
+            <!-- Page Header End -->
+            <div class="container-xxl py-5 page-header position-relative mb-5">
+                <div class="container py-5">
+                    <h1 class="display-2 text-white animated slideInDown mb-4">Contact Us</h1>
+                    <nav aria-label="breadcrumb animated slideInDown">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Contact Us</li>
+                        </ol>
+                    </nav>
                 </div>
+            </div>
+            <!-- Page Header End -->
 
-                <!-- OpenStreetMap Section using Leaflet -->
-                <div class="bg-white p-6 rounded-lg shadow-lg z-1 relative">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Find Us Here</h3>
-                    <div id="map" class="w-full h-64 rounded-lg overflow-hidden"></div> <!-- Map Container -->
+
+            <!-- Contact Start -->
+            <div class="container-xxl py-5">
+                <div class="container">
+                    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                        <h1 class="mb-3 text">Get In Touch</h1>
+                        <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum
+                            sit
+                            eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                    </div>
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-6 col-lg-4 text-center wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                                style="width: 75px; height: 75px;">
+                                <i class="fa fa-map-marker-alt fa-2x text"></i>
+                            </div>
+                            <h6>123 Street, New York, USA</h6>
+                        </div>
+                        <div class="col-md-6 col-lg-4 text-center wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                                style="width: 75px; height: 75px;">
+                                <i class="fa fa-envelope-open fa-2x text"></i>
+                            </div>
+                            <h6>info@example.com</h6>
+                        </div>
+                        <div class="col-md-6 col-lg-4 text-center wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                                style="width: 75px; height: 75px;">
+                                <i class="fa fa-phone-alt fa-2x text"></i>
+                            </div>
+                            <h6>+012 345 6789</h6>
+                        </div>
+                    </div>
+
+
+                    <div class="bg-light rounded">
+                        <div class="row g-0">
+                            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                                <div class="h-100 d-flex flex-column justify-content-center p-5">
+                                    <h1>Send us Message</h1>
+                                    <p class="mb-4">Thank you for reaching out to us! Please use the form above to send
+                                        your
+                                        inquiries, feedback, or suggestions. We will get back to you as soon as
+                                        possible.
+                                        Your message is important to us, and we appreciate your time and effort in
+                                        contacting us.</p>
+
+                                    <form method="POST" action="/contact">
+                                        <div class="row g-3">
+                                            <div class="col-sm-6">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control border-0" id="name"
+                                                        name="name" placeholder="Your Name" required>
+                                                    <label for="name">Your Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-floating">
+                                                    <input type="email" class="form-control border-0" id="email"
+                                                        name="email" placeholder="Your Email" required>
+                                                    <label for="email">Your Email</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <input type="number" class="form-control border-0" id="subject"
+                                                        name="phone" placeholder="Phone No" required>
+                                                    <label for="phone">Phone No</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <textarea class="form-control border-0"
+                                                        placeholder="Leave a message here" id="message" name="message"
+                                                        style="height: 100px" required></textarea>
+                                                    <label for="message">Message</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <button class="btn w-100 py-3" type="submit">Send Message</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" style="min-height: 400px;">
+                                <div class="position-relative h-100">
+                                    <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d778.3463575693856!2d71.86946273215997!3d34.86814799491798!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2s!4v1734174909892!5m2!1sen!2s"
+                                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
+            <!-- Contact End -->
 
-            <!-- Contact Form Section -->
-            <div class="bg-white p-10 rounded-xl shadow-lg max-w-2xl mx-auto mt-12">
-                <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center tracking-tight">Send Us a Message</h3>
 
-                <!-- Flash Messages -->
-                <%- include('../partials/flashMessage') %>
 
-                    <!-- Contact Form -->
-                    <form action="/contact" method="POST" class="space-y-8">
-                        <!-- Name Field -->
-                        <div>
-                            <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-                            <input type="text" id="name" name="name"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder-gray-400"
-                                placeholder="Enter your Name" required>
-                        </div>
 
-                        <!-- Email Field -->
-                        <div>
-                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email
-                                Address</label>
-                            <input type="email" id="email" name="email"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder-gray-400"
-                                placeholder="Enter your Email" required>
-                        </div>
 
-                        <!-- Message Field -->
-                        <div>
-                            <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Message</label>
-                            <textarea id="message" name="message" rows="5"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder-gray-400"
-                                placeholder="Write your message here..." required></textarea>
-                        </div>
 
-                        <!-- Submit Button -->
-                        <div class="text-center">
-                            <button type="submit"
-                                class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-blue-700 hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-blue-400">
-                                Send Message
-                            </button>
-                        </div>
-                    </form>
-            </div>
-        </div>
     </div>
 
-    <%- include('../partials/footer') %>
 
-        <!-- Map Script -->
-        <script>
-            var map = L.map('map').setView([34.8682909, 71.8706888], 15); // Coordinates for your location
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-
-            L.marker([34.8682909, 71.8706888]).addTo(map)
-                .bindPopup('<b>Our Location</b><br> Luminous International School Shahzadi, Kpk, Dir Lower')
-                .openPopup();
-        </script>
-
-        <!-- Flash Message Auto-hide -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const flashMessage = document.getElementById('flash-message');
-                if (flashMessage) {
-                    setTimeout(() => {
-                        flashMessage.style.display = 'none';
-                    }, 5000);
-                }
-            });
-        </script>
+    <%- include('../partials/footer1') %>

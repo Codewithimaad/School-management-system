@@ -1,122 +1,107 @@
-<%- include('../partials/header') %>
+<%- include('../partials/header1') %>
 
-    <div class="bg-white mt-20 py-20">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 text-center">
-            <div>
+    <div class="container-xxl bg-white p-0">
 
-                <!-- Principal Section Header -->
-                <h1 class="text-5xl text-gray-600 font-extrabold mb-4">Meet Our Principal</h1>
-                <p class="text-xl mb-10 text-gray-500 font-semibold">Luminous International School</p>
 
-                <!-- Principal Details Section -->
-                <% principals.forEach(principal=> { %>
-                    <div
-                        class="bg-gradient-to-r from-blue-100 to-blue-300 mb-20 rounded-lg shadow-lg transform transition-all hover:scale-105 hover:shadow-2xl duration-300 ease-in-out max-w-md mx-auto pb-5">
-                        <!-- Image Section -->
-                        <div class="w-full flex items-center justify-center pt-5">
-                            <img src="<%= principal.imageUrl%>" alt="<%= principal.name %>"
-                                class="h-48 w-48 object-cover rounded-full border-4 border-blue-600 shadow-lg">
-                        </div>
 
-                        <!-- Text Section -->
-                        <div class="p-6">
-                            <h3 class="text-3xl font-extrabold text-gray-800 mb-2">
-                                <%= principal.name %>
-                            </h3>
-                            <p class="text-blue-500 font-semibold text-sm uppercase tracking-wide mb-3">
-                                Principal
-                            </p>
-                            <p class="text-gray-600 text-sm leading-relaxed">
-                                <%= principal.description %>
-                            </p>
-                        </div>
-                    </div>
-                    <% }) %>
 
+        <!-- Page Header End -->
+        <div class="container-xxl py-5 page-header position-relative mb-5">
+            <div class="container py-5">
+                <h1 class="display-2 text-white animated slideInDown mb-4">Teachers</h1>
+                <nav aria-label="breadcrumb animated slideInDown">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Our Staff</li>
+                    </ol>
+                </nav>
             </div>
+        </div>
+        <!-- Page Header End -->
 
 
-
-
-
-
-
-
-            <div>
-
-
-                <!-- Staff Members Section -->
-
-                <h1 class="text-5xl font-extrabold text-gray-600 mb-8">Meet Our Exceptional Staff</h1>
-                <p class="text-lg text-gray-500 leading-relaxed mb-12">
-                    At our institution, we are proud to have a team of dedicated professionals who bring
-                    passion,
-                    expertise,
-                    and commitment to nurturing future leaders. Each staff member plays a vital role in
-                    fostering a
-                    thriving
-                    learning environment.
-                </p>
-
-                <!-- Teachers Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <% teachers.forEach(teacher=> { %>
-                        <div
-                            class="bg-gradient-to-r from-blue-100 to-blue-300 rounded-lg pb-3 shadow-lg transform transition-all hover:scale-105 hover:shadow-2xl duration-300 ease-in-out">
-                            <!-- Image Section -->
-                            <div class="w-full flex items-center justify-center pt-5">
-                                <% if (teacher.imageUrl) { %>
-                                    <img src="<%=teacher.imageUrl %>" alt="<%= teacher.name %>"
-                                        class="h-40 w-40 object-cover rounded-full border-4 border-blue-500">
-                                    <% } else { %>
-                                        <div class="text-gray-400 text-sm">No Image Available</div>
-                                        <% } %>
-                            </div>
-
-                            <!-- Content Section -->
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold text-gray-800 mb-2">
-                                    <%= teacher.name %>
-                                </h3>
-                                <p class="text-blue-500 font-medium mb-3">
-                                    <%= teacher.subject %>
-                                </p>
-                                <p class="text-gray-600 text-sm leading-relaxed">
-                                    <%= teacher.description %>
-                                </p>
-                            </div>
-                        </div>
-                        <% }) %>
+        <!-- Team Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">Our Staff</h1>
+                    <p class="text-muted">Meet our dedicated and passionate educators who make a difference in students'
+                        lives. Our staff members bring years of experience and expertise to ensure the highest quality
+                        education.</p>
                 </div>
-
-                <!-- See More Button -->
-                <% if (teachers.length < totalTeachers) { %>
-                    <div class="mt-12">
-                        <a href="/staff/more"
-                            class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-200">
-                            See More
-                        </a>
+                <div class="row g-4" id="team-cards">
+                    <!-- Teacher Card 1 -->
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="card shadow border-0 rounded-3 d-flex flex-column">
+                            <img class="card-img-top rounded-circle w-50 mx-auto mt-4" src="img/team-1.jpg"
+                                alt="Teacher">
+                            <div class="card-body text-center d-flex flex-column">
+                                <h4 class="card-title">John Doe</h4>
+                                <p class="card-text text-muted">Mathematics Teacher</p>
+                                <p class="teacher-description">John has over 15 years of experience in teaching
+                                    mathematics. He is dedicated to making math enjoyable and accessible for every
+                                    student. His teaching methodology emphasizes problem-solving and critical thinking.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <% } %>
+                    <!-- Teacher Card 2 -->
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="card shadow border-0 rounded-3 d-flex flex-column">
+                            <img class="card-img-top rounded-circle w-50 mx-auto mt-4" src="img/team-2.jpg"
+                                alt="Teacher">
+                            <div class="card-body text-center d-flex flex-column">
+                                <h4 class="card-title">Jane Smith</h4>
+                                <p class="card-text text-muted">Science Teacher</p>
+                                <p class="teacher-description">Jane has a passion for science and strives to make every
+                                    lesson engaging and interactive. With a focus on inquiry-based learning, she
+                                    encourages students to explore the wonders of the natural world.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Teacher Card 3 -->
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="card shadow border-0 rounded-3 d-flex flex-column">
+                            <img class="card-img-top rounded-circle w-50 mx-auto mt-4" src="img/team-3.jpg"
+                                alt="Teacher">
+                            <div class="card-body text-center d-flex flex-column">
+                                <h4 class="card-title">Mark Wilson</h4>
+                                <p class="card-text text-muted">History Teacher</p>
+                                <p class="teacher-description">Mark has been teaching history for over 10 years and
+                                    enjoys bringing historical stories to life. He believes that understanding history
+                                    helps us understand current events and shape our future.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
+        <!-- Team End -->
 
-        <!-- Call to Action Section -->
-        <div class="mt-16 text-center">
-            <h2 class="text-4xl font-extrabold text-gray-800 mb-6">
-                Join Our Growing Team
-            </h2>
-            <p class="text-lg text-gray-600 leading-relaxed mb-8 max-w-3xl mx-auto">
-                Are you passionate about education and ready to make a difference? We are always on the lookout for
-                talented individuals to join our dynamic team of professionals.
-            </p>
-            <a href="/contact"
-                class="inline-block px-8 py-3 bg-yellow-500 text-black text-lg font-semibold rounded-full shadow-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105">
-                Apply Now
-            </a>
-        </div>
+        <script>
+            // Function to adjust the height of all cards to match the tallest one
+            window.onload = function () {
+                var cards = document.querySelectorAll('.card');
+                var maxHeight = 0;
+
+                // Find the tallest card
+                cards.forEach(function (card) {
+                    var cardHeight = card.offsetHeight;
+                    if (cardHeight > maxHeight) {
+                        maxHeight = cardHeight;
+                    }
+                });
+
+                // Set all cards to the tallest height
+                cards.forEach(function (card) {
+                    card.style.height = maxHeight + 'px';
+                });
+            };
+        </script>
+
+
 
     </div>
 
-    <%- include('../partials/footer') %>
+    <%- include('../partials/footer1') %>

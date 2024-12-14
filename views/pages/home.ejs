@@ -1,117 +1,355 @@
-<%- include('../partials/header') %>
+<%- include('../partials/header1') %>
 
-  <!-- Hero Section with Background Image -->
-  <section class="relative mt-20 h-screen bg-cover bg-center object-cover bg-gradient-to-r from-blue-100 to-blue-300"
-    style="background-image: url('/images/Luminous.jpg'); background-color: #E4E9F7;">
-    <div class="absolute inset-0 bg-black opacity-50"></div> <!-- Dark Overlay -->
-    <div class="relative z-10 flex items-center justify-center h-full px-6 text-center text-white">
-      <div>
-        <h1 class="text-5xl font-extrabold leading-tight md:text-6xl">Welcome to Luminous International School</h1>
-        <p class="mt-6 text-lg md:text-xl">A place where education meets excellence and future leaders are nurtured.</p>
-        <a href="/about"
-          class="mt-8 inline-block px-8 py-4 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transform hover:scale-105 transition-all">
-          Learn More
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Our Vision Section -->
-  <section class="py-20 bg-gradient-to-r from-blue-100 to-blue-300">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold text-gray-800 leading-tight">Our Vision</h2>
-      <p class="mt-6 text-lg text-gray-700 mx-auto max-w-3xl">
-        At Luminous International School, we strive to provide an enriching environment that fosters academic
-        excellence, personal growth, and social responsibility. We are committed to shaping the leaders of tomorrow with
-        a comprehensive, values-based education.
-      </p>
-      <div class="mt-8 flex justify-center">
-        <div class="w-16 h-1 bg-yellow-500 rounded-full"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="bg-gradient-to-r from-blue-50 to-blue-200 py-20">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-      <h2 class="text-4xl font-bold text-gray-800">What We Offer</h2>
-      <p class="mt-4 text-lg text-gray-600">Discover the features that set us apart and empower our students for
-        success.</p>
-      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-        <!-- Feature 1 -->
-        <div
-          class="bg-white p-8 rounded-lg shadow-xl transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl">
-          <div class="mb-6">
-            <svg class="w-16 h-16 text-blue-600 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 4v16m8-8H4"></path>
-            </svg>
+  <!-- Carousel Start -->
+  <div class="container-fluid p-0 mb-5">
+    <div class="owl-carousel header-carousel position-relative">
+      <div class="owl-carousel-item position-relative">
+        <img class="img-fluid" src="/img/carousel-1.jpg" alt="Luminous School Campus">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+          style="background: rgba(0, 0, 0, .4);">
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col-12 col-lg-8">
+                <h1 class="display-3 text-white animated slideInDown mb-4">Welcome to Luminous School</h1>
+                <p class="fs-4 fw-medium text-white mb-4 pb-2">At Luminous School, we are dedicated to fostering an
+                  environment where every student thrives, focusing on their academic, social, and emotional growth to
+                  ensure a well-rounded education.</p>
+                <a href="/about" class="btn rounded-pill py-sm-3 px-sm-5 me-3 animated slideInLeft">Discover
+                  Our Story</a>
+                <a href="/contact" class="btn -pill py-sm-3 px-sm-5 animated slideInRight">Get
+                  in Touch</a>
+              </div>
+            </div>
           </div>
-          <h3 class="text-2xl font-semibold text-gray-800">High-Quality Education</h3>
-          <p class="mt-4 text-gray-600">We offer a world-class curriculum designed to provide students with the skills
-            needed to succeed in the modern world.</p>
         </div>
-        <!-- Feature 2 -->
-        <div
-          class="bg-white p-8 rounded-lg shadow-xl transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl">
-          <div class="mb-6">
-            <svg class="w-16 h-16 text-blue-600 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 4v16l14-8z"></path>
-            </svg>
+      </div>
+      <div class="owl-carousel-item position-relative">
+        <img class="img-fluid" src="/img/carousel-2.jpg" alt="Students Engaging in Activities">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+          style="background: rgba(0, 0, 0, .4);">
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col-12 col-lg-8">
+                <h1 class="display-3 text-white animated slideInDown mb-4">Shaping a Brighter Future</h1>
+                <p class="fs-4 fw-medium text-white mb-4 pb-2">We provide a comprehensive education that blends academic
+                  excellence with extracurricular opportunities, empowering students to achieve their fullest potential
+                  and succeed in an ever-changing world.</p>
+                <a href="/about" class="btn rounded-pill py-sm-3 px-sm-5 me-3 animated slideInLeft">Learn
+                  More</a>
+                <a href="/contact" class="btn rounded-pill py-sm-3 px-sm-5 animated slideInRight">Contact Us</a>
+              </div>
+            </div>
           </div>
-          <h3 class="text-2xl font-semibold text-gray-800">Experienced Staff</h3>
-          <p class="mt-4 text-gray-600">Our experienced educators are dedicated to helping every student achieve their
-            full potential.</p>
-        </div>
-        <!-- Feature 3 -->
-        <div
-          class="bg-white p-8 rounded-lg shadow-xl transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl">
-          <div class="mb-6">
-            <svg class="w-16 h-16 text-blue-600 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8l7 7 7-7"></path>
-              <path d="M3 16l7-7 7 7"></path>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-semibold text-gray-800">State-of-the-Art Facilities</h3>
-          <p class="mt-4 text-gray-600">Our school is equipped with modern facilities to support both academic and
-            extracurricular activities.</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+  <!-- Carousel End -->
 
-  <!-- Visit Gallery Section -->
-  <section class="py-16 text-center bg-gradient-to-r from-blue-200 to-blue-300">
-    <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-4xl font-extrabold text-gray-800">Visit Our Gallery</h2>
-      <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-        Explore the vibrant moments captured at Luminous International School. From events to everyday life, discover
-        the heart of our community.
-      </p>
-      <div class="mt-8">
-        <a href="/gallery"
-          class="inline-block px-8 py-4 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transform hover:scale-105 transition-all">
-          Visit Gallery
-        </a>
+
+
+
+  <!-- Facilities Start -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <h1 class="mb-3">School Facilities</h1>
+        <p>Our school is equipped with modern facilities to ensure a safe, engaging, and supportive learning environment
+          for every student.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="facility-item">
+            <div class="facility-icon bg-primary">
+              <span class="bg-primary"></span>
+              <i class="fa fa-bus-alt fa-3x text-primary"></i>
+              <span class="bg-primary"></span>
+            </div>
+            <div class="facility-text bg-primary">
+              <h3 class="text-primary mb-3">School Bus</h3>
+              <p class="mb-0">Safe and reliable transportation for students with trained drivers and attendants.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="facility-item">
+            <div class="facility-icon bg-success">
+              <span class="bg-success"></span>
+              <i class="fa fa-futbol fa-3x text-success"></i>
+              <span class="bg-success"></span>
+            </div>
+            <div class="facility-text bg-success">
+              <h3 class="text-success mb-3">Playground</h3>
+              <p class="mb-0">Spacious and well-maintained playgrounds for physical activities and sports events.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+          <div class="facility-item">
+            <div class="facility-icon bg-warning">
+              <span class="bg-warning"></span>
+              <i class="fa fa-utensils fa-3x text-warning"></i>
+              <span class="bg-warning"></span>
+            </div>
+            <div class="facility-text bg-warning">
+              <h3 class="text-warning mb-3">Healthy Canteen</h3>
+              <p class="mb-0">Nutritious and hygienic meals served to promote healthy eating habits among students.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+          <div class="facility-item">
+            <div class="facility-icon bg-info">
+              <span class="bg-info"></span>
+              <i class="fa fa-chalkboard-teacher fa-3x text-info"></i>
+              <span class="bg-info"></span>
+            </div>
+            <div class="facility-text bg-info">
+              <h3 class="text-info mb-3">Smart Classrooms</h3>
+              <p class="mb-0">Interactive classrooms equipped with the latest technology for an enriched learning
+                experience.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- See More Button -->
+      <div class="text-center mt-4">
+        <a href="/facilities" class="btn rounded-pill py-3 px-5">See More</a>
       </div>
     </div>
-  </section>
+  </div>
+  <!-- Facilities End -->
 
-  <!-- Call to Action Section -->
-  <section class="py-16 text-white text-center bg-gradient-to-r from-blue-50 to-blue-200">
-    <div class="max-w-6xl mx-auto px-6 md:px-12">
-      <h2 class="text-4xl font-extrabold leading-tight text-gray-800">Join Our Community Today</h2>
-      <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">Become a part of the Luminous family and experience a
-        world-class education that will shape your future. Our doors are always open for passionate learners.</p>
-      <div class="mt-8">
-        <a href="/contact"
-          class="inline-block px-8 py-4 bg-yellow-500 text-black text-lg font-semibold rounded-full shadow-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105">
-          Get in Touch
-        </a>
+
+
+
+  <!-- About Start -->
+  <div class="container-xxl py-5 bg-light">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+          <h1 class="mb-4">Learn More About Our Work And Our Cultural Activities</h1>
+          <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum
+            et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+          <p class="mb-4">Stet no et lorem dolor et diam, amet duo ut dolore vero eos. No stet est diam rebum amet diam
+            ipsum. Clita clita labore, dolor duo nonumy clita sit at, sed sit sanctus dolor eos, ipsum labore duo duo
+            sit no sea diam. Et dolor et kasd ea. Eirmod diam at dolor est vero nonumy magna.</p>
+          <div class="row g-4 align-items-center">
+            <div class="col-sm-6">
+              <a class="btn rounded-pill py-3 px-5" href="">Read More</a>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center">
+                <img class="rounded-circle flex-shrink-0" src="/img/user.jpg" alt="" style="width: 45px; height: 45px;">
+                <div class="ms-3">
+                  <h6 class="text-success mb-1">Jhon Doe</h6>
+                  <small>CEO & Founder</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 about-img wow fadeInUp" data-wow-delay="0.5s">
+          <div class="row">
+            <div class="col-12 text-center">
+              <img class="img-fluid w-75 rounded-circle bg-light p-3" src="/img/about-1.jpg" alt="">
+            </div>
+            <div class="col-6 text-start" style="margin-top: -150px;">
+              <img class="img-fluid w-100 rounded-circle bg-light p-3" src="/img/about-2.jpg" alt="">
+            </div>
+            <div class="col-6 text-end" style="margin-top: -150px;">
+              <img class="img-fluid w-100 rounded-circle bg-light p-3" src="/img/about-3.jpg" alt="">
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
-  </section>
+  </div>
+  <!-- About End -->
 
-  <%- include('../partials/footer') %>
+
+
+
+  <!-- Call To Action Start -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="bg-light rounded">
+        <div class="row g-0">
+          <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s" style="min-height: 400px;">
+            <div class="position-relative h-100">
+              <img class="position-absolute w-100 h-100 rounded" src="/img/call-to-action.jpg"
+                style="object-fit: cover;">
+            </div>
+          </div>
+          <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+            <div class="h-100 d-flex flex-column justify-content-center p-5">
+              <h1 class="mb-4">Become A Teacher</h1>
+              <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos.
+                Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet
+              </p>
+              <a class="btn py-3 px-5" href="">Get Started Now<i class="fa fa-arrow-right ms-2"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Call To Action End -->
+
+
+  <!-- Gallery Start -->
+  <div class="container-xxl py-5 bg-light">
+    <div class="container">
+      <div class="text-center mx-auto mb-5" style="max-width: 600px;">
+        <h1 class="mb-3">Our Gallery</h1>
+        <p>Explore the moments that define our vibrant community, showcasing our events, activities, and achievements.
+        </p>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="gallery-item position-relative overflow-hidden rounded">
+            <img class="img-fluid w-100" src="/images/Luminous.jpg" alt="Gallery Image 1">
+            <div
+              class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+              <a href="/img/gallery-1.jpg" class="btn rounded-pill py-2 px-4">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="gallery-item position-relative overflow-hidden rounded">
+            <img class="img-fluid w-100" src="/images/Luminous.jpg" alt="Gallery Image 2">
+            <div
+              class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+              <a href="/img/gallery-2.jpg" class="btn rounded-pill py-2 px-4">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+          <div class="gallery-item position-relative overflow-hidden rounded">
+            <img class="img-fluid w-100" src="/images/Luminous.jpg" alt="Gallery Image 3">
+            <div
+              class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+              <a href="/images/Luminous.jpg" class="btn rounded-pill py-2 px-4">View</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- See More Button -->
+      <div class="text-center mt-4">
+        <a href="/gallery" class="btn btn-outline-primary rounded-pill py-3 px-5">See More</a>
+      </div>
+    </div>
+  </div>
+  <!-- Gallery End -->
+
+
+
+  <!-- Discipline Start -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <h1 class="mb-3">Our Discipline Policy</h1>
+        <p>We believe in fostering a respectful, safe, and productive learning environment, where students
+          are encouraged to follow the rules and regulations that ensure the success and well-being of
+          everyone in our community.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="discipline-item">
+            <h3 class="mb-3">Respect for Others</h3>
+            <p>We expect all students to show respect for their peers, teachers, and staff members.
+              Disrespect, bullying, or any behavior that disrupts the harmony of our school will not
+              be tolerated.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="discipline-item">
+            <h3 class="mb-3">Timeliness</h3>
+            <p>Students are expected to be punctual for all classes, activities, and appointments.
+              Consistent tardiness will be addressed to ensure that the academic schedule runs
+              smoothly.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+          <div class="discipline-item">
+            <h3 class="mb-3">Academic Integrity</h3>
+            <p>Cheating, plagiarism, and dishonesty in academic work will not be tolerated. We encourage
+              students to uphold the highest standards of academic integrity.</p>
+          </div>
+        </div>
+
+
+      </div>
+      <!-- See More Button -->
+      <div class="text-center mt-4">
+        <a href="/discipline" class="btn rounded-pill py-3 px-5">Learn More</a>
+      </div>
+    </div>
+  </div>
+  <!-- Discipline End -->
+
+
+
+
+
+
+
+  <!-- Our Vision Start -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <h1 class="mb-3">Our Vision!</h1>
+        <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit.
+          Ipsum diam justo sed rebum vero dolor duo.</p>
+      </div>
+      <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+        <div class="testimonial-item bg-light rounded p-5">
+          <p class="fs-5">Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam
+            stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+          <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
+            <img class="img-fluid flex-shrink-0 rounded-circle" src="/img/testimonial-1.jpg"
+              style="width: 90px; height: 90px;">
+            <div class="ps-3">
+              <h3 class="mb-1">Client Name</h3>
+              <span>Profession</span>
+            </div>
+            <i class="fa fa-quote-right fa-3x ms-auto d-none d-sm-flex"></i>
+          </div>
+        </div>
+        <div class="testimonial-item bg-light rounded p-5">
+          <p class="fs-5">Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam
+            stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+          <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
+            <img class="img-fluid flex-shrink-0 rounded-circle" src="/img/testimonial-2.jpg"
+              style="width: 90px; height: 90px;">
+            <div class="ps-3">
+              <h3 class="mb-1">Client Name</h3>
+              <span>Profession</span>
+            </div>
+            <i class="fa fa-quote-right fa-3x ms-auto d-none d-sm-flex"></i>
+          </div>
+        </div>
+        <div class="testimonial-item bg-light rounded p-5">
+          <p class="fs-5">Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam
+            stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+          <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
+            <img class="img-fluid flex-shrink-0 rounded-circle" src="/img/testimonial-3.jpg"
+              style="width: 90px; height: 90px;">
+            <div class="ps-3">
+              <h3 class="mb-1">Client Name</h3>
+              <span>Profession</span>
+            </div>
+            <i class="fa fa-quote-right fa-3x text-primary ms-auto d-none d-sm-flex"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Testimonial End -->
+
+
+
+
+  <%- include('../partials/footer1') %>
