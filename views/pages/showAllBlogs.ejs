@@ -1,0 +1,49 @@
+<%- include('../partials/header1') %>
+
+    <!-- Page Header End -->
+    <div class="container-fluid py-5 page-header position-relative mb-5">
+        <div class="container py-5">
+            <h1 class="display-2 text-white animated slideInDown mb-4">Blogs</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page"><a href="/blogs">All Blogs</a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Show All Blogs Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5">
+                <h1 class="mb-3">All Blog Posts</h1>
+                <p>Check out our latest blog posts below!</p>
+            </div>
+
+            <div class="row">
+                <% showAllBlogs.forEach(blog=> { %>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card shadow-sm border-light rounded h-100">
+                            <img class="card-img-top" src="<%= blog.imageUrl %>" alt="<%= blog.title %>">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title mb-3">
+                                    <%= blog.title %>
+                                </h5>
+                                <p class="card-text flex-grow-1">
+                                    <%= blog.shortContent %> <!-- If you want to limit to 30 words -->
+                                </p>
+                                <a href="/blog/<%= blog._id %>" class="btn mt-auto">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+    <!-- Show All Blogs End -->
+
+    <%- include('../partials/footer1') %>

@@ -1,4 +1,3 @@
-
 document.getElementById('teacher-form').addEventListener('submit', function (e) {
     let valid = true;
 
@@ -73,13 +72,13 @@ document.getElementById('teacher-form').addEventListener('submit', function (e) 
         valid = false;
     } else if (!passwordPattern.test(password.value)) {
         passwordStrength.classList.remove('hidden');
-        password.classList.add('border-red-500')
-    }
-    else {
+        password.classList.add('border-red-500');
+        valid = false; // Fix: Prevent submission if password fails strength test
+    } else {
         passwordError.classList.add('hidden');
+        passwordStrength.classList.add('hidden');
         password.classList.remove('border-red-500');
     }
-
 
     // Validate Salary
     const salary = document.getElementById('salary');
@@ -116,8 +115,6 @@ document.getElementById('teacher-form').addEventListener('submit', function (e) 
         imageError.classList.add('hidden');
         image.classList.remove('border-red-500');
     }
-
-
 
     // If invalid, prevent form submission
     if (!valid) {

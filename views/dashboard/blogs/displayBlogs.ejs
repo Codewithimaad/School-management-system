@@ -1,0 +1,126 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow p-4 md:p-8 bg-gradient-to-r from-blue-50 to-blue-200">
+        <%- include('../../partials/flashMessage') %>
+
+            <!-- Header -->
+            <header
+                class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b pb-6 mb-8 text-white rounded-lg bg-gradient-to-r from-blue-500 to-blue-900 shadow-lg px-6 md:px-8 py-6">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-semibold tracking-wide">Blogs</h2>
+                    <p class="text-sm hidden sm:block text-gray-200">Browse all the blogs available on the website.</p>
+                </div>
+                <div class="mt-4 sm:mt-0">
+                    <a href="/dashboard/blogs/add"
+                        class="inline-block bg-white text-blue-600 font-semibold py-2 px-4 md:px-6 rounded-lg shadow-md hover:bg-blue-100 hover:shadow-lg transition-all duration-300">
+                        Add New Blog
+                    </a>
+                </div>
+            </header>
+
+            <!-- Display Blogs Section -->
+            <section
+                class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 md:p-8 rounded-lg shadow-xl transition-all duration-300 hover:shadow-2xl">
+                <h4 class="text-xl md:text-2xl font-semibold text-gray-700 mb-6">Latest Blogs</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+
+                    <% if(showBlogs.length> 0){ %>
+                        <!-- Blog Card 1 -->
+                        <% showBlogs.forEach(blog=> { %>
+                            <div
+                                class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                                <img src="<%= blog.imageUrl %>" alt="Sample Blog 1"
+                                    class="rounded-t-lg w-full h-40 md:h-48 object-cover">
+                                <h5 class="text-lg font-semibold text-gray-800 mt-4">
+                                    <%= blog.title %>
+                                </h5>
+                                <h4 class="text-md font-semibold text-gray-800 mt-4">
+                                    <%= blog.author %>
+                                        </h5>
+                                        <p class="text-gray-600 mt-2 line-clamp-3">
+                                            <%= blog.content %>
+
+                                        </p>
+                                        <a href="/dashboard/blogs/display/<%= blog._id %>"
+                                            class="text-blue-600 mt-4 inline-block font-medium hover:underline">Read
+                                            More</a>
+
+                                        <a href="/dashboard/blogs/delete/<%= blog._id %>"
+                                            class="delete-btn text-red-600 mt-4 inline-block font-medium hover:underline"
+                                            data-id="<%= blog._id %>">
+                                            Delete Blog
+                                        </a>
+
+                            </div>
+                            <% }) %>
+                                <% } else { %>
+
+                                    <!-- Placeholder for No Blogs -->
+                                    <div class="col-span-full text-center mt-6">
+                                        <p class="text-gray-600">No blogs available. Start by adding one!</p>
+                                    </div>
+                                    <% } %>
+
+
+
+                </div>
+            </section>
+
+    </main>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+
+    <script>
+        // SweetAlert2 script for delete confirmation
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const blogID = this.getAttribute('data-id'); // Get blog ID
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "This action cannot be undone!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Send the DELETE request to delete the blog
+                        fetch(`/dashboard/blogs/delete/${blogID}`, {
+                            method: 'GET', // Use GET or DELETE depending on your server route
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: "The blog has been successfully deleted.",
+                                        icon: "success"
+                                    }).then(() => {
+                                        window.location.reload(); // Reload the page after deletion
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: "Error!",
+                                        text: "Failed to delete the blog. Try again.",
+                                        icon: "error"
+                                    });
+                                }
+                            })
+                            .catch(err => {
+                                console.error(err);
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: "An unexpected error occurred.",
+                                    icon: "error"
+                                });
+                            });
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <%- include('../../partials/dashboardfooter') %>

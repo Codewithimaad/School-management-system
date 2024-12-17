@@ -3,13 +3,20 @@
     <div class="max-w-4xl mx-auto mt-10 px-4 sm:px-6 lg:px-8">
         <%- include('../../partials/flashMessage') %>
 
+            <!-- Header Section -->
             <header
-                class="flex items-center justify-between border-b pb-6 mb-8 text-white rounded-lg bg-gradient-to-r from-blue-500 to-blue-900 shadow-lg px-8 py-6">
+                class="flex items-center justify-between bg-blue-600 text-white rounded-lg shadow-md px-8 py-6 mb-8">
                 <div>
-                    <h2 class="text-3xl font-semibold tracking-wide text-white">Add Principal</h2>
-                    <p class="text-sm sm:hidden lg:block text-gray-200">Form for adding a Principal.</p>
+                    <h2 class="text-3xl font-semibold tracking-wide">Add Principal</h2>
+                    <p class="text-sm lg:block hidden">Form for adding a Principal.
+                    <p>
                 </div>
+                <a href="/dashboard/principal/report"
+                    class="bg-white text-green-600 hover:bg-gray-100 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
+                    All Principal Reports
+                </a>
             </header>
+
             <div class="bg-white rounded-lg shadow-lg p-8">
 
                 <form id="principal-form" action="/dashboard/principal/add" method="POST" enctype="multipart/form-data">

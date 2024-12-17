@@ -4,12 +4,19 @@
         <%- include('../../partials/flashMessage') %>
 
 
+
+            <!-- Header Section -->
             <header
-                class="flex items-center justify-between border-b pb-6 mb-8 bg-gradient-to-r from-blue-500 to-blue-900 text-white rounded-lg shadow-lg px-8 py-6">
+                class="flex items-center justify-between bg-blue-600 text-white rounded-lg shadow-md px-8 py-6 mb-8">
                 <div>
-                    <h2 class="text-3xl font-semibold tracking-wide">Announcements</h2>
-                    <p class="text-sm text-gray-200">List of all announcements</p>
+                    <h2 class="text-3xl font-semibold tracking-wide">All Announcement</h2>
+                    <p class="text-sm lg:block hidden">List of all announcements
+                    <p>
                 </div>
+                <a href="/dashboard/announcement/add"
+                    class="bg-white text-green-600 hover:bg-gray-100 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
+                    Add Announcement
+                </a>
             </header>
 
             <div class="space-y-4">

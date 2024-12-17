@@ -4,13 +4,18 @@
 
         <%- include('../../partials/flashMessage') %>
 
-            <!-- Principal List Section -->
+
+            <!-- Header Section -->
             <header
-                class="flex items-center justify-between pb-6 mb-8 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-lg px-8 py-6">
+                class="flex items-center justify-between bg-blue-600 text-white rounded-lg shadow-md px-8 py-6 mb-8">
                 <div>
                     <h2 class="text-3xl font-semibold tracking-wide">Principals</h2>
-                    <p class="text-sm lg:block text-white">Manage Principal Information with ease.</p>
+                    <p class="text-sm lg:block hidden">Manage Principal Information with ease.</ <p>
                 </div>
+                <a href="/dashboard/principal/add"
+                    class="bg-white text-green-600 hover:bg-gray-100 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
+                    All new Principal
+                </a>
             </header>
 
             <!-- Principal Cards Section -->

@@ -4,12 +4,18 @@
         <!-- Flash Messages -->
         <%- include('../../partials/flashMessage') %>
 
+
+            <!-- Header Section -->
             <header
-                class="flex items-center justify-between border-b pb-6 mb-8 text-white rounded-lg bg-gradient-to-r from-blue-500 to-blue-900 shadow-lg px-8 py-6">
+                class="flex items-center justify-between bg-blue-600 text-white rounded-lg shadow-md px-8 py-6 mb-8">
                 <div>
-                    <h2 class="text-3xl font-semibold tracking-wide text-white">Add Student</h2>
-                    <p class="text-sm sm:hidden lg:block text-gray-200">Form for adding a student.</p>
+                    <h2 class="text-3xl font-semibold tracking-wide">Add Student</h2>
+                    <p class="text-sm lg:block hidden">Form for adding a student.</ <p>
                 </div>
+                <a href="/dashboard/student/reports"
+                    class="bg-white text-green-600 hover:bg-gray-100 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
+                    All Students Reports
+                </a>
             </header>
 
             <!-- Student Form (Full-width Card Style) -->

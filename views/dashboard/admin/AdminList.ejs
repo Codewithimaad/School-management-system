@@ -4,12 +4,18 @@
 
         <%- include('../../partials/flashMessage') %>
 
-            <!-- Admins List Section -->
+            <!-- Header -->
             <header
-                class="flex items-center justify-between mb-8 bg-indigo-600 text-white rounded-lg shadow-xl px-8 py-6">
+                class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b pb-6 mb-8 text-white rounded-lg bg-gradient-to-r from-blue-500 to-blue-900 shadow-lg px-6 md:px-8 py-6">
                 <div>
-                    <h2 class="text-3xl font-semibold tracking-wide">All Admins</h2>
-                    <p class="text-sm lg:block hidden text-white">List of all registered admins.</p>
+                    <h2 class="text-2xl md:text-3xl font-semibold tracking-wide">All Admins</h2>
+                    <p class="text-sm hidden sm:block text-gray-200">List of all registered admins.</p>
+                </div>
+                <div class="mt-4 sm:mt-0">
+                    <a href="/dashboard/admin/add"
+                        class="inline-block bg-white text-blue-600 font-semibold py-2 px-4 md:px-6 rounded-lg shadow-md hover:bg-blue-100 hover:shadow-lg transition-all duration-300">
+                        Add new Admin
+                    </a>
                 </div>
             </header>
 

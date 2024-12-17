@@ -4,16 +4,22 @@
 
         <%- include('../../partials/flashMessage') %>
 
+
             <!-- Header Section -->
             <header
-                class="flex items-center justify-between border-b pb-6 mb-8 text-white rounded-lg shadow-md px-8 py-6"
-                style="background-color: #1a2851;">
+                class="flex items-center justify-between bg-blue-600 text-white rounded-lg shadow-md px-8 py-6 mb-8">
                 <div>
                     <h2 class="text-3xl font-semibold tracking-wide">Upload New Image</h2>
-                    <p class="text-sm sm:hidden lg:block text-gray-500">Please fill in the details below to add an
-                        image.</p>
+                    <p class="text-sm lg:block hidden">Please fill in the details below to add an
+                        image.
+                    <p>
                 </div>
+                <a href="/dashboard/gallery/report"
+                    class="bg-white text-green-600 hover:bg-gray-100 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
+                    All Gallery Reports
+                </a>
             </header>
+
 
             <!-- Form Section -->
             <section class="space-y-8">

@@ -16,7 +16,7 @@ document.getElementById('add-admin-form').addEventListener('submit', function (e
     // Validate Email
     const email = document.getElementById('email');
     const emailError = document.getElementById('email-error');
-    const emailPattern = /\S+@\S+\.\S+/;
+    const emailPattern = /\S+@\S+\.\S+/; // Regex for email validation
     if (!email.value.trim() || !emailPattern.test(email.value)) {
         emailError.classList.remove('hidden');
         email.classList.add('border-red-500');
@@ -42,14 +42,20 @@ document.getElementById('add-admin-form').addEventListener('submit', function (e
     const password = document.getElementById('password');
     const passwordError = document.getElementById('password-error');
     const passwordStrength = document.getElementById('password-strength');
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/; // Regex for password validation
-    if (!password.value) {
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/; // Password regex
+
+    if (!password.value.trim()) {
         passwordError.classList.remove('hidden');
         password.classList.add('border-red-500');
         valid = false;
     } else if (!passwordPattern.test(password.value)) {
         passwordStrength.classList.remove('hidden');
-        password.classList.add('border-red-500')
+        password.classList.add('border-red-500');
+        valid = false;
+    } else {
+        passwordError.classList.add('hidden');
+        passwordStrength.classList.add('hidden');
+        password.classList.remove('border-red-500');
     }
 
     // Validate Description
@@ -67,7 +73,7 @@ document.getElementById('add-admin-form').addEventListener('submit', function (e
     // Validate Image Upload
     const image = document.getElementById('image');
     const imageError = document.getElementById('image-error');
-    if (!image.files.length) {
+    if (!image.files || !image.files.length) {
         imageError.classList.remove('hidden');
         image.classList.add('border-red-500');
         valid = false;
@@ -76,7 +82,7 @@ document.getElementById('add-admin-form').addEventListener('submit', function (e
         image.classList.remove('border-red-500');
     }
 
-    // If invalid, prevent form submission
+    // Prevent form submission if validation fails
     if (!valid) {
         e.preventDefault();
     }

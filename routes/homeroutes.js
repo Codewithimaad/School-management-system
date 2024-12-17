@@ -6,20 +6,36 @@ const nodemailer = require('nodemailer');
 const Principal = require('../models/principalModel');
 const Academics = require('../models/academicsModel');
 const Image = require('../models/galleryModel');
+const Blogs = require('../models/blogsModel');
 
 
-// Define routes for home pages
 router.get('/', async (req, res) => {
     try {
         const images = await Image.find().limit(3); // Fetch all images from the database
+        const displayBlogs = await Blogs.find().lean(); // Retrieve all blogs from the database
+
+        // Limit the content of each blog to 30 words
+        displayBlogs.forEach(blog => {
+            if (blog.content) {
+                // Clean up HTML tags and trim spaces
+                const cleanedContent = blog.content.replace(/<[^>]*>/g, '').trim();
+                const words = cleanedContent.split(' ').slice(0, 30); // Limit to 30 words
+                blog.shortContent = words.join(' ') + (words.length === 30 ? '...' : ''); // Add '...' if the content is trimmed
+            } else {
+                blog.shortContent = ''; // Handle empty content
+            }
+        });
+
+        console.log('Display Blogs:', displayBlogs); // Debugging step to see the processed blogs
 
         res.render('pages/home', {
             images, // Pass the images array to the view
+            displayBlogs,
             success_msg: req.flash('success_msg'),
             error_msg: req.flash('error_msg')
         });
     } catch (error) {
-        // Render the custom error page
+        console.error('Error fetching blogs:', error); // Log the error for debugging
         res.status(500).render("pages/error", {
             errorCode: 500,
             errorMessage: "An error occurred while fetching gallery details.",
@@ -27,6 +43,80 @@ router.get('/', async (req, res) => {
         });
     }
 });
+
+router.get('/blogs', async (req, res) => { // Corrected the route definition
+    try {
+        const showAllBlogs = await Blogs.find().lean(); // Fetch all blogs from the database
+        // Limit the content of each blog to 30 words
+        showAllBlogs.forEach(blog => {
+            if (blog.content) {
+                // Clean up HTML tags and trim spaces
+                const cleanedContent = blog.content.replace(/<[^>]*>/g, '').trim();
+                const words = cleanedContent.split(' ').slice(0, 30); // Limit to 30 words
+                blog.shortContent = words.join(' ') + (words.length === 30 ? '...' : ''); // Add '...' if the content is trimmed
+            } else {
+                blog.shortContent = ''; // Handle empty content
+            }
+        });
+        res.render('pages/showAllBlogs', { showAllBlogs }); // Pass the blogs to the view
+    } catch (error) {
+        console.error('Error fetching blog:', error);
+        res.status(500).render("pages/error", {
+            errorCode: 500,
+            errorMessage: "An error occurred while fetching the all blog posts.",
+            homeLink: "/"
+        });
+    }
+});
+
+
+// Function to add a line break after every 5th sentence
+function addLineBreaks(content) {
+    const sentences = content.split(/(?<=[.?!])\s+/); // Split content into sentences using regex
+    let modifiedContent = '';
+
+    sentences.forEach((sentence, index) => {
+        modifiedContent += sentence;
+        if ((index + 1) % 5 === 0) {
+            modifiedContent += '<br> <br>'; // Add an empty line after every 5th sentence
+        }
+    });
+    return modifiedContent;
+}
+
+router.get('/blog/:id', async (req, res) => {
+    try {
+        const showBlog = await Blogs.findById(req.params.id);
+        if (!showBlog) {
+            return res.status(404).send('Blog not found');
+        }
+
+        // Add line breaks to the blog content
+        const modifiedContent = addLineBreaks(showBlog.content);
+
+        res.render('pages/showBlog', {
+            showBlog: {
+                ...showBlog._doc, // Spread the original blog data
+                content: modifiedContent, // Pass the modified content
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching blog:', error);
+        res.status(500).render("pages/error", {
+            errorCode: 500,
+            errorMessage: "An error occurred while fetching the blog post.",
+            homeLink: "/"
+        });
+    }
+});
+
+
+
+
+
+
+
+
 
 
 

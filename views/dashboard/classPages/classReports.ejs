@@ -1,11 +1,18 @@
 <%- include('../../partials/dashboard') %>
 
     <main class="flex-grow p-2 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
+
         <!-- Header Section -->
-        <header class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b px-8 pb-4 mb-6">
-            <h2 class="text-2xl sm:text-3xl font-semibold text-gray-800">Class Reports</h2>
-            <p class="text-sm text-gray-500 hidden sm:block">Overview of all classes with teacher and student details.
-            </p>
+        <header class="flex items-center justify-between bg-blue-600 text-white rounded-lg shadow-md px-8 py-6 mb-8">
+            <div>
+                <h2 class="text-3xl font-semibold tracking-wide">Class Reports</h2>
+                <p class="text-sm lg:block hidden">Overview of all classes with teacher and student details.
+                <p>
+            </div>
+            <a href="/dashboard/class/add"
+                class="bg-white text-green-600 hover:bg-gray-100 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
+                Add Class
+            </a>
         </header>
 
         <%- include('../../partials/flashMessage') %>

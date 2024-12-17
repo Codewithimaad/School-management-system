@@ -24,56 +24,52 @@ router.get('/dashboard/admin/add', authenticateUser, checkRole('admin'), async (
 });
 
 // Add admin route (POST)
-router.post('/dashboard/admin/add',
-    authenticateUser, checkRole('admin'), upload.single('image'),
+router.post('/dashboard/admin/add', authenticateUser, checkRole('admin'), upload.single('image'), async (req, res) => {
 
 
-    async (req, res) => {
+    const { name, email, password, phone, description } = req.body;
+    const localFilePath = req.file.path;
 
+    try {
+        // Upload image to Cloudinary
+        const cloudinaryResponse = await uploadOnCloudinary(localFilePath);
 
-        const { name, email, password, phone, description } = req.body;
-        const localFilePath = req.file.path;
+        if (!cloudinaryResponse) {
+            return req.flash('success_msg', 'Failed to upload image.');
 
-        try {
-            // Upload image to Cloudinary
-            const cloudinaryResponse = await uploadOnCloudinary(localFilePath);
-
-            if (!cloudinaryResponse) {
-                return req.flash('success_msg', 'Failed to upload image.');
-
-            }
-
-            // Check if the admin already exists
-            let admin = await adminModel.findOne({ email });
-            if (admin) {
-                req.flash('error_msg', 'User with the same email already exists.');
-                return res.redirect('/dashboard/admin/add');
-            }
-
-            // Hash the password before saving
-            const salt = await bcrypt.genSalt(10);
-            const hashedPassword = await bcrypt.hash(password, salt);
-
-            // Create the new admin
-            await adminModel.create({
-                name,
-                email,
-                phone,
-                description,
-                password: hashedPassword,
-                imageUrl: cloudinaryResponse.url,
-                role: 'admin',
-            });
-
-            req.flash('success_msg', 'Admin added successfully.');
-            // Redirect to the reports page
-            res.redirect('/dashboard/admin/reports');
-        } catch (error) {
-            req.flash('error_msg', 'Something went wrong.');
-            // Render the error page with message
-            res.render('error', { message: 'Something went wrong while adding the admin.' });
         }
+
+        // Check if the admin already exists
+        let admin = await adminModel.findOne({ email });
+        if (admin) {
+            req.flash('error_msg', 'User with the same email already exists.');
+            return res.redirect('/dashboard/admin/add');
+        }
+
+        // Hash the password before saving
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        // Create the new admin
+        await adminModel.create({
+            name,
+            email,
+            phone,
+            description,
+            password: hashedPassword,
+            imageUrl: cloudinaryResponse.url,
+            role: 'admin',
+        });
+
+        req.flash('success_msg', 'Admin added successfully.');
+        // Redirect to the reports page
+        res.redirect('/dashboard/admin/reports');
+    } catch (error) {
+        req.flash('error_msg', 'Something went wrong.');
+        // Render the error page with message
+        res.render('error', { message: 'Something went wrong while adding the admin.' });
     }
+}
 );
 
 

@@ -4,7 +4,8 @@ document.getElementById('login-form').addEventListener('submit', function (e) {
     // Validate Email
     const email = document.getElementById('email');
     const emailError = document.getElementById('email-error');
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+    const emailPattern = /\S+@\S+\.\S+/; // Regex for email validation
+    if (!email.value.trim() || !emailPattern.test(email.value)) {
         emailError.classList.remove('hidden');
         email.classList.add('border-red-500');
         valid = false;
@@ -16,7 +17,7 @@ document.getElementById('login-form').addEventListener('submit', function (e) {
     // Validate Password
     const password = document.getElementById('password');
     const passwordError = document.getElementById('password-error');
-    if (!password.value || password.value.length < 8) {
+    if (!password.value.trim() || password.value.length < 8) {
         passwordError.classList.remove('hidden');
         password.classList.add('border-red-500');
         valid = false;
@@ -28,7 +29,7 @@ document.getElementById('login-form').addEventListener('submit', function (e) {
     // Validate Role
     const role = document.getElementById('role');
     const roleError = document.getElementById('role-error');
-    if (!role.value) {
+    if (!role.value.trim()) {
         roleError.classList.remove('hidden');
         role.classList.add('border-red-500');
         valid = false;

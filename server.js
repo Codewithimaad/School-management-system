@@ -19,6 +19,7 @@ const announcementRoutes = require('./routes/announcementRoutes');
 const principalRoutes = require('./routes/principalRoutes');
 const academicsRoutes = require('./routes/academicsroutes');
 const galleryRoutes = require('./routes/galleryRoutes');
+const blogsRoutes = require('./routes/blogsRoutes');
 
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -92,6 +93,7 @@ app.use(announcementRoutes);
 app.use(principalRoutes);
 app.use(academicsRoutes);
 app.use(galleryRoutes);
+app.use(blogsRoutes);
 
 
 

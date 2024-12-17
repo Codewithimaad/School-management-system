@@ -3,9 +3,17 @@
     <main class="flex-grow flex-wrap p-2 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
         <%- include('../../partials/flashMessage') %>
 
-            <header class="flex items-center justify-between border-b pb-4 mb-6">
-                <h2 class="text-3xl font-bold text-gray-800">Add Teacher</h2>
-                <p class="text-sm sm:hidden lg:block text-gray-500">Fill out the form below to add a new teacher.</p>
+            <!-- Header Section -->
+            <header
+                class="flex items-center justify-between bg-blue-600 text-white rounded-lg shadow-md px-8 py-6 mb-8">
+                <div>
+                    <h2 class="text-3xl font-semibold tracking-wide">Add Teacher</h2>
+                    <p class="text-sm lg:block hidden">Fill out the form below to add a new teacher.</ <p>
+                </div>
+                <a href="/dashboard/teacher/reports"
+                    class="bg-white text-green-600 hover:bg-gray-100 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
+                    All Teacher Reports
+                </a>
             </header>
 
             <!-- Teacher Form -->

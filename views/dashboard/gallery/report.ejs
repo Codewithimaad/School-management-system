@@ -4,15 +4,21 @@
 
         <%- include('../../partials/flashMessage') %>
 
+
             <!-- Header Section -->
             <header
-                class="flex items-center justify-between border-b pb-6 mb-8 text-white rounded-lg shadow-md px-8 py-6"
-                style="background-color: #1a2851;">
+                class="flex items-center justify-between bg-blue-600 text-white rounded-lg shadow-md px-8 py-6 mb-8">
                 <div>
                     <h2 class="text-3xl font-semibold tracking-wide">Gallery Report</h2>
-                    <p class="text-sm sm:hidden lg:block text-gray-500">Below are all the gallery images.</p>
+                    <p class="text-sm lg:block hidden">Below are all the gallery images.
+                    <p>
                 </div>
+                <a href="/dashboard/gallery/add"
+                    class="bg-white text-green-600 hover:bg-gray-100 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
+                    All new Gallery
+                </a>
             </header>
+
             <% if (images.length> 0) { %>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                     <% images.forEach((image)=> { %>

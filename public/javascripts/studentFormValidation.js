@@ -60,7 +60,12 @@ document.getElementById('student-form').addEventListener('submit', function (e) 
         valid = false;
     } else if (!passwordPattern.test(password.value)) {
         passwordStrength.classList.remove('hidden');
-        password.classList.add('border-red-500')
+        password.classList.add('border-red-500');
+        valid = false; // Fix: Set valid to false here
+    } else {
+        passwordError.classList.add('hidden');
+        passwordStrength.classList.add('hidden');
+        password.classList.remove('border-red-500');
     }
 
     // Validate Phone
@@ -111,7 +116,7 @@ document.getElementById('student-form').addEventListener('submit', function (e) 
         classItem.classList.remove('border-red-500');
     }
 
-    // Validate Class
+    // Validate Address
     const address = document.getElementById('address');
     const addressError = document.getElementById('address-error');
     if (!address.value) {

@@ -57,6 +57,19 @@ body, html {
     color: #FFFFFF
 }
 
+.container, .container-fluid {
+    max-width: 100%;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.header-carousel {
+    width: 100%;
+    max-width: 100%;
+}
+
+
 .text{
     color: rgb(5, 27, 98);
 }
