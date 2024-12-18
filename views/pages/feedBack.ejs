@@ -1,0 +1,135 @@
+<%- include('../partials/header1') %>
+
+    <div class="container-fluid bg-white p-0">
+        <%- include('../partials/formFlashMessage') %>
+
+            <!-- Page Header -->
+            <div class="container-fluid py-5 page-header position-relative mb-5">
+                <div class="container py-5">
+                    <h1 class="display-2 text-white animated slideInDown mb-4">Feedback</h1>
+                    <nav aria-label="breadcrumb animated slideInDown">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Feedback</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!-- Page Header End -->
+
+            <!-- Feedback Section Start -->
+            <div class="container-xxl py-5">
+                <div class="container">
+                    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                        <h1 class="mb-3">We Value Your Feedback</h1>
+                        <p>Your feedback helps us understand how we can improve and create a better experience for
+                            everyone in our school community.</p>
+                    </div>
+
+                    <% if (Allfeedbacks.length> 0) { %>
+                        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                            <% Allfeedbacks.forEach(feedback=> { %>
+                                <!-- Feedback Card -->
+                                <div class="testimonial-item bg-light rounded p-5" style="height: 320px;">
+                                    <p class="fs-5" style="min-height: 120px; overflow: hidden;">
+                                        "<%= feedback.comments %>"
+                                    </p>
+                                    <div class="d-flex align-items-center bg-white me-n5"
+                                        style="border-radius: 50px 0 0 50px;">
+                                        <img class="img-fluid flex-shrink-0 rounded-circle"
+                                            src="<%= feedback.imageUrl %>" alt="Feedback Image"
+                                            style="width: 90px; height: 90px;">
+                                        <div class="ps-3">
+                                            <h3 class="mb-1">
+                                                <%= feedback.name %>
+                                            </h3>
+                                            <span>
+                                                <%= feedback.role %>
+                                            </span>
+                                        </div>
+                                        <i class="fa fa-quote-right fa-3x ms-auto d-none d-sm-flex"></i>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </div>
+                        <% } else { %>
+                            <div class="alert alert-info text-center" role="alert">
+                                No feedbacks available yet. Be the first to share your thoughts!
+                            </div>
+                            <% } %>
+                </div>
+            </div>
+            <!-- Feedback Section End -->
+
+
+
+
+            <!-- Feedback Form Section -->
+            <div class="container-xxl py-5">
+                <div class="container">
+                    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                        <h1 class="mb-3">We Value Your Feedback</h1>
+                        <p>Your insights and opinions help us improve our services and enhance the experience for
+                            everyone in our school community.</p>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-lg-10">
+                            <div class="rounded p-5" style=" background-color: var(--light);">
+                                <div class="row g-4">
+                                    <div class="col-12">
+                                        <h1>Share Your Thoughts</h1>
+                                        <p class="mb-4">Please fill out the form below to send us your feedback,
+                                            suggestions, or concerns. Your input is greatly appreciated.</p>
+                                    </div>
+
+                                    <form method="POST" action="/feedback" enctype="multipart/form-data">
+                                        <div class="row g-3">
+                                            <div class="col-sm-6">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control border-0" id="name"
+                                                        name="name" placeholder="Your Name" required>
+                                                    <label for="name">Your Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control border-0" id="role"
+                                                        name="role" placeholder="Your Role" required>
+                                                    <label for="role">Your Role</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-floating">
+                                                    <input type="file" class="form-control border-0" id="image"
+                                                        name="image" placeholder="Upload Image" required>
+                                                    <label for="email">Upload Image</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <textarea class="form-control border-0"
+                                                        placeholder="Leave your feedback here" id="comments"
+                                                        name="comments" style="height: 150px" required></textarea>
+                                                    <label for="comments">Your Feedback</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <button class="btn w-100 py-3" type="submit">Submit
+                                                    Feedback</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Feedback Form Section End -->
+
+
+    </div>
+
+    <%- include('../partials/footer1') %>

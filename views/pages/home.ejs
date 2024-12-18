@@ -156,63 +156,8 @@
   </div>
   <!-- Facilities End -->
 
-  <!-- Our Vision Start -->
-  <div class="container-xxl py-5">
-    <div class="container">
-      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-        <h1 class="mb-3">Our Vision!</h1>
-        <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit.
-          Ipsum diam justo sed rebum vero dolor duo.</p>
-      </div>
-      <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-        <div class="testimonial-item bg-light rounded p-5">
-          <p class="fs-5">Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam
-            stet. Est stet ea lorem amet est kasd kasd erat eos</p>
-          <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
-            <img class="img-fluid flex-shrink-0 rounded-circle" src="/img/testimonial-1.jpg"
-              style="width: 90px; height: 90px;">
-            <div class="ps-3">
-              <h3 class="mb-1">Client Name</h3>
-              <span>Profession</span>
-            </div>
-            <i class="fa fa-quote-right fa-3x ms-auto d-none d-sm-flex"></i>
-          </div>
-        </div>
-        <div class="testimonial-item bg-light rounded p-5">
-          <p class="fs-5">Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam
-            stet. Est stet ea lorem amet est kasd kasd erat eos</p>
-          <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
-            <img class="img-fluid flex-shrink-0 rounded-circle" src="/img/testimonial-2.jpg"
-              style="width: 90px; height: 90px;">
-            <div class="ps-3">
-              <h3 class="mb-1">Client Name</h3>
-              <span>Profession</span>
-            </div>
-            <i class="fa fa-quote-right fa-3x ms-auto d-none d-sm-flex"></i>
-          </div>
-        </div>
-        <div class="testimonial-item bg-light rounded p-5">
-          <p class="fs-5">Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam
-            stet. Est stet ea lorem amet est kasd kasd erat eos</p>
-          <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
-            <img class="img-fluid flex-shrink-0 rounded-circle" src="/img/testimonial-3.jpg"
-              style="width: 90px; height: 90px;">
-            <div class="ps-3">
-              <h3 class="mb-1">Client Name</h3>
-              <span>Profession</span>
-            </div>
-            <i class="fa fa-quote-right fa-3x text-primary ms-auto d-none d-sm-flex"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-
   <!-- About Start -->
-  <div class="container-fluid py-5 bg-light">
+  <div class="container-fluid py-5" style=" background-color: var(--light);">
     <div class="container-xxl">
       <div class="row g-5 align-items-center">
         <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -256,9 +201,6 @@
     </div>
   </div>
   <!-- About End -->
-
-
-
 
   <!-- Call To Action Start -->
   <div class="container-xxl py-5">
@@ -319,7 +261,7 @@
 
 
   <!-- Discipline Start -->
-  <div class="container-fluid py-5 bg-light">
+  <div class="container-fluid py-5" style=" background-color: var(--light);">
     <div class="container-xxl">
       <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
         <h1 class="mb-3">Our Discipline Policy</h1>
@@ -395,6 +337,53 @@
     </div>
   </div>
   <!-- Blog Posts End -->
+
+  <!-- Feedback Section Start -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <h1 class="mb-3">We Value Your Feedback</h1>
+        <p>Your feedback helps us understand how we can improve and create a better experience for
+          everyone in our school community.</p>
+      </div>
+
+      <% if (Allfeedbacks.length> 0) { %>
+        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+          <% Allfeedbacks.forEach(feedback=> { %>
+            <!-- Feedback Card -->
+            <div class="testimonial-item bg-light rounded p-5" style="height: 320px;">
+              <p class="fs-5" style="min-height: 120px; overflow: hidden;">
+                "<%= feedback.comments %>"
+              </p>
+              <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
+                <img class="img-fluid flex-shrink-0 rounded-circle" src="<%= feedback.imageUrl %>" alt="Feedback Image"
+                  style="width: 90px; height: 90px;">
+                <div class="ps-3">
+                  <h3 class="mb-1">
+                    <%= feedback.name %>
+                  </h3>
+                  <span>
+                    <%= feedback.role %>
+                  </span>
+                </div>
+                <i class="fa fa-quote-right fa-3x ms-auto d-none d-sm-flex"></i>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+        <% } else { %>
+          <div class="alert alert-info text-center" role="alert">
+            No feedbacks available yet. Be the first to share your thoughts!
+          </div>
+          <% } %>
+
+            <div class="text-center mt-5">
+              <a href="/feedback" class="btn rounded-pill py-3 px-5">Add your Feedback</a>
+            </div>
+    </div>
+  </div>
+  <!-- Feedback Section End -->
+
 
 
 

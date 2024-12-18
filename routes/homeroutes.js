@@ -7,13 +7,14 @@ const Principal = require('../models/principalModel');
 const Academics = require('../models/academicsModel');
 const Image = require('../models/galleryModel');
 const Blogs = require('../models/blogsModel');
+const Feedbacks = require('../models/feedBackModel');
 
 
 router.get('/', async (req, res) => {
     try {
         const images = await Image.find().limit(3); // Fetch all images from the database
         const displayBlogs = await Blogs.find().lean(); // Retrieve all blogs from the database
-
+        const Allfeedbacks = await Feedbacks.find().limit(5);
         // Limit the content of each blog to 30 words
         displayBlogs.forEach(blog => {
             if (blog.content) {
@@ -31,6 +32,7 @@ router.get('/', async (req, res) => {
         res.render('pages/home', {
             images, // Pass the images array to the view
             displayBlogs,
+            Allfeedbacks,
             success_msg: req.flash('success_msg'),
             error_msg: req.flash('error_msg')
         });
@@ -110,21 +112,10 @@ router.get('/blog/:id', async (req, res) => {
     }
 });
 
-
-
-
-
-
-
-
-
-
-
 // Define routes for home pages
 router.get('/facilities', (req, res) => {
     res.render("pages/facilities");
 });
-
 
 // Define routes for home pages
 router.get('/becometeacher', (req, res) => {
@@ -133,8 +124,6 @@ router.get('/becometeacher', (req, res) => {
         error_msg: req.flash('error_msg')
     });
 });
-
-
 
 router.get('/academics', async (req, res) => {
     try {
@@ -151,7 +140,6 @@ router.get('/academics', async (req, res) => {
         });
     }
 });
-
 
 router.get('/about', async (req, res) => {
 
@@ -184,7 +172,6 @@ router.get('/about', async (req, res) => {
     }
 });
 
-
 // Route to render the staff page with the first 6 teachers
 router.get('/staff', async (req, res) => {
     try {
@@ -213,7 +200,6 @@ router.get('/staff', async (req, res) => {
         });
     }
 });
-
 
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -265,11 +251,6 @@ router.post('/apply-teacher', async (req, res) => {
         res.redirect('/becometeacher');
     }
 });
-
-
-
-
-
 
 // Route to fetch all teachers when "See More" is clicked
 router.get('/staff/more', async (req, res) => {

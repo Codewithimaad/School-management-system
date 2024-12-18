@@ -20,6 +20,7 @@ const principalRoutes = require('./routes/principalRoutes');
 const academicsRoutes = require('./routes/academicsroutes');
 const galleryRoutes = require('./routes/galleryRoutes');
 const blogsRoutes = require('./routes/blogsRoutes');
+const feedbackRoutes = require('./routes/feedbackRoutes');
 
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -94,13 +95,18 @@ app.use(principalRoutes);
 app.use(academicsRoutes);
 app.use(galleryRoutes);
 app.use(blogsRoutes);
+app.use(feedbackRoutes);
 
 
 
 
 // Start the server
-const PORT = process.env.PORT || 5000;  // Render will provide a dynamic port
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+// app.listen(8000, () => {
+//     console.log('Server is running on Port 8000');
+// });
 
