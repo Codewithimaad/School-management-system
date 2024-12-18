@@ -16,7 +16,6 @@ router.get('/feedback', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Error fetching blog:', error);
         res.status(500).render("pages/error", {
             errorCode: 500,
             errorMessage: "An error occurred while fetching the feedback Page.",
@@ -59,7 +58,6 @@ router.post('/feedback', upload.single('image'), async (req, res) => {
 
 
     } catch (error) {
-        console.error('Error adding blog:', error);
         req.flash('error_msg', 'Something went wrong while adding Feedback.');
         return res.redirect('/feedback');
     }

@@ -17,7 +17,6 @@ router.get('/dashboard/blogs/add', authenticateUser, checkRole('admin'), (req, r
         });
 
     } catch {
-        console.error(error)
         req.flash('error_msg', 'Something went wrong.');
         res.redirect('/dashboard/blogs/add');
     }
@@ -29,7 +28,6 @@ router.post('/dashboard/blogs/add', authenticateUser, checkRole('admin'), upload
 
 
     const { title, content, author, } = req.body;
-    console.log('Request Body:', req.body);
 
     if (!req.file) {
         req.flash('error_msg', 'Image upload is required.');
@@ -60,7 +58,6 @@ router.post('/dashboard/blogs/add', authenticateUser, checkRole('admin'), upload
 
 
 
-        console.log('New Blog Object:', newBlog);
 
 
         if (newBlog) {
@@ -69,7 +66,6 @@ router.post('/dashboard/blogs/add', authenticateUser, checkRole('admin'), upload
         }
 
     } catch (error) {
-        console.error('Error adding blog:', error);
         req.flash('error_msg', 'Something went wrong.');
         return res.redirect('/dashboard/blogs/add');
     }

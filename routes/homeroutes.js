@@ -27,7 +27,6 @@ router.get('/', async (req, res) => {
             }
         });
 
-        console.log('Display Blogs:', displayBlogs); // Debugging step to see the processed blogs
 
         res.render('pages/home', {
             images, // Pass the images array to the view
@@ -37,7 +36,6 @@ router.get('/', async (req, res) => {
             error_msg: req.flash('error_msg')
         });
     } catch (error) {
-        console.error('Error fetching blogs:', error); // Log the error for debugging
         res.status(500).render("pages/error", {
             errorCode: 500,
             errorMessage: "An error occurred while fetching gallery details.",
@@ -62,7 +60,6 @@ router.get('/blogs', async (req, res) => { // Corrected the route definition
         });
         res.render('pages/showAllBlogs', { showAllBlogs }); // Pass the blogs to the view
     } catch (error) {
-        console.error('Error fetching blog:', error);
         res.status(500).render("pages/error", {
             errorCode: 500,
             errorMessage: "An error occurred while fetching the all blog posts.",
@@ -103,7 +100,6 @@ router.get('/blog/:id', async (req, res) => {
             }
         });
     } catch (error) {
-        console.error('Error fetching blog:', error);
         res.status(500).render("pages/error", {
             errorCode: 500,
             errorMessage: "An error occurred while fetching the blog post.",
@@ -147,9 +143,7 @@ router.get('/about', async (req, res) => {
         // Fetch only the first 3 teachers
         let teachers = await teacherModel.find().limit(3);
 
-        if (teachers.length === 0) {
-            console.log('No teachers found');
-        }
+
         // Get total teacher count to check if more are available
         const totalTeachers = await teacherModel.countDocuments();
 
@@ -273,9 +267,7 @@ router.get('/discipline', (req, res) => {
     res.render('pages/discipline');
 })
 
-router.get('/sidebar', (req, res) => {
-    res.render('partials/sidebar');
-})
+
 
 router.get('/feestructure', (req, res) => {
     res.render('pages/feeStructure');

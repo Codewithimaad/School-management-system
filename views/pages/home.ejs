@@ -209,17 +209,24 @@
         <div class="row g-0">
           <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s" style="min-height: 400px;">
             <div class="position-relative h-100">
-              <img class="position-absolute w-100 h-100 rounded" src="/img/call-to-action.jpg"
+              <!-- Updated Image Path -->
+              <img class="position-absolute w-100 h-100 rounded" src="/img/call-to-action.jpg" alt="Become a Teacher"
                 style="object-fit: cover;">
             </div>
           </div>
           <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
             <div class="h-100 d-flex flex-column justify-content-center p-5">
+              <!-- Updated Heading and Text -->
               <h1 class="mb-4">Become A Teacher</h1>
-              <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos.
-                Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet
+              <p class="mb-4">
+                Join our team of dedicated educators and make a difference in the lives of students. Whether you're
+                looking to share your expertise or inspire the next generation, becoming a teacher is a rewarding career
+                choice.
               </p>
-              <a class="btn py-3 px-4" href="/becometeacher">Get Started Now<i class="fa fa-arrow-right ms-2"></i></a>
+              <!-- Updated Link and Button Text -->
+              <a class="btn py-3 px-4" href="/becometeacher">
+                Get Started Now <i class="fa fa-arrow-right ms-2"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -227,37 +234,6 @@
     </div>
   </div>
   <!-- Call To Action End -->
-
-
-  <!-- Gallery Start -->
-  <div class="container-xxl py-5">
-    <div class="container">
-      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-        <h1 class="mb-3">Our Gallery</h1>
-        <p>Explore the moments that define our vibrant community, showcasing our events, activities, and
-          achievements.</p>
-      </div>
-      <div class="row g-4">
-        <% images.forEach(image=> { %>
-          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="gallery-item position-relative overflow-hidden rounded">
-              <img class="img-fluid w-100 gallery-image" src="<%= image.imageUrl %>" alt="Gallery Image">
-              <div
-                class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
-                <a href="<%= image.imageUrl %>" class="btn rounded-pill py-2 px-4">View</a>
-              </div>
-            </div>
-          </div>
-          <% }) %>
-      </div>
-      <!-- See More Button -->
-      <div class="text-center mt-5">
-        <a href="/galley" class="btn rounded-pill py-3 px-5">See More</a>
-      </div>
-    </div>
-  </div>
-  <!-- Gallery End -->
-
 
 
   <!-- Discipline Start -->
@@ -305,9 +281,40 @@
   <!-- Discipline End -->
 
 
-  <!-- Blog Posts Start -->
+  <!-- Gallery Start -->
   <div class="container-xxl py-5">
     <div class="container">
+      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <h1 class="mb-3">Our Gallery</h1>
+        <p>Explore the moments that define our vibrant community, showcasing our events, activities, and
+          achievements.</p>
+      </div>
+      <div class="row g-4">
+        <% images.forEach(image=> { %>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="gallery-item position-relative overflow-hidden rounded">
+              <img class="img-fluid w-100 gallery-image" src="<%= image.imageUrl %>" alt="Gallery Image">
+              <div
+                class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                <a href="<%= image.imageUrl %>" class="btn rounded-pill py-2 px-4">View</a>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+      </div>
+      <!-- See More Button -->
+      <div class="text-center mt-5">
+        <a href="/galley" class="btn rounded-pill py-3 px-5">See More</a>
+      </div>
+    </div>
+  </div>
+  <!-- Gallery End -->
+
+
+
+  <!-- Blog Posts Start -->
+  <div class="container-fluid py-5" style=" background-color: var(--light);">
+    <div class="container-xxl">
       <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
         <h1 class="mb-3">Latest Blog Posts</h1>
         <p>Stay updated with our latest insights, tips, and stories. Check out our blog to learn more!</p>
