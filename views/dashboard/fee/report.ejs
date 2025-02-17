@@ -53,13 +53,11 @@
                     <label for="paymentStatus" class="text-lg">Payment Status:</label>
                     <select name="paymentStatus" id="paymentStatus"
                         class="px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 w-full sm:w-auto">
-                        <option value="">All Statuses</option>
+                        <option value="">All</option>
                         <option value="Paid" <%=filters.paymentStatus==='Paid' ? 'selected' : '' %>>Paid
                         </option>
                         <option value="Unpaid" <%=filters.paymentStatus==='Unpaid' ? 'selected' : '' %>
                             >Unpaid</option>
-                        <option value="Pending" <%=filters.paymentStatus==='Pending' ? 'selected' : '' %>
-                            >Pending</option>
                     </select>
                 </div>
 
@@ -92,6 +90,7 @@
                             <th class="px-6 py-3 text-left font-semibold text-sm">Student</th>
                             <th class="px-6 py-3 text-left font-semibold text-sm">Category</th>
                             <th class="px-6 py-3 text-left font-semibold text-sm">Amount</th>
+                            <th class="px-6 py-3 text-left font-semibold text-sm">Month</th>
                             <th class="px-6 py-3 text-left font-semibold text-sm">Due Date</th>
                             <th class="px-6 py-3 text-left font-semibold text-sm">Payment Status</th>
                             <th class="px-6 py-3 text-left font-semibold text-sm">Payment Date</th>
@@ -106,15 +105,16 @@
                                         <%= fee.classId.name %>
                                     </td>
                                     <td class="px-6 py-4 text-sm">
-                                        <%= fee.studentId && fee.studentId.name ? fee.studentId.name : 'Unknown Student'
-                                            %>
+                                        <%= fee.studentId.name %>
                                     </td>
-
                                     <td class="px-6 py-4 text-sm">
                                         <%= fee.category %>
                                     </td>
                                     <td class="px-6 py-4 text-sm">
                                         <%= fee.amount %>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                        <%= fee.month %>
                                     </td>
                                     <td class="px-6 py-4 text-sm">
                                         <%= new Date(fee.dueDate).toLocaleDateString() %>
@@ -134,23 +134,23 @@
                                             View
                                         </a>
 
-                                        <a href="/dashboard/fee/delete/<%= fee._id %>"
-                                            class="text-white rounded-md px-4 py-2 bg-red-500 hover:bg-red-800 w-full sm:w-auto text-center sm:text-left"
-                                            Delete </a>
+                                        <button
+                                            class="text-white rounded-md px-4 py-2 bg-red-500 hover:bg-red-800 w-full sm:w-auto text-center sm:text-left delete-btn"
+                                            data-id="<%= fee._id %>">
+                                            Delete </button>
 
+                                        <% if (fee.paymentStatus !=='Paid' ) { %>
 
-                                            <% if (fee.paymentStatus !=='Paid' ) { %>
-
-                                                <!-- Mark Paid Button with SweetAlert Confirmation -->
-                                                <button
-                                                    class="text-white rounded-md py-2 px-3 bg-green-700 hover:bg-green-900 text-center delete-btn"
-                                                    data-id="<%= fee._id %>">
-                                                    Mark Paid
-                                                </button>
-                                                <% } else { %>
-                                                    <span
-                                                        class="text-gray-400 rounded-md sm:w-auto text-center ">Paid</span>
-                                                    <% } %>
+                                            <!-- Mark Paid Button with SweetAlert Confirmation -->
+                                            <button
+                                                class="text-white rounded-md py-2 px-3 bg-green-700 hover:bg-green-900 text-center paid-btn"
+                                                data-id="<%= fee._id %>">
+                                                Mark Paid
+                                            </button>
+                                            <% } else { %>
+                                                <span
+                                                    class="text-gray-400 rounded-md sm:w-auto text-center ">Paid</span>
+                                                <% } %>
                                     </td>
 
 
@@ -253,7 +253,7 @@
 
         <script>
             // SweetAlert2 script for "Mark Paid" confirmation
-            document.querySelectorAll('.delete-btn').forEach(button => {
+            document.querySelectorAll('.paid-btn').forEach(button => {
                 button.addEventListener('click', function (e) {
                     e.preventDefault();
                     const feeID = this.getAttribute('data-id'); // Get Fee ID
@@ -289,6 +289,62 @@
                                         Swal.fire({
                                             title: "Error",
                                             text: "Could not update the fee status. Please try again.",
+                                            icon: "error"
+                                        });
+                                    }
+                                })
+                                .catch(err => {
+                                    console.error(err);
+                                    Swal.fire({
+                                        title: "Error",
+                                        text: "An unexpected error occurred.",
+                                        icon: "error"
+                                    });
+                                });
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <script>
+            // SweetAlert2 script for "Mark Paid" confirmation
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const feeID = this.getAttribute('data-id'); // Get Fee ID
+
+                    Swal.fire({
+                        title: 'Are you sure to delete this fee?',
+                        text: "This will Delete the fee.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, Delete it!',
+                        cancelButtonText: 'No, cancel!',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Send a get request to delete the fee
+                            fetch(`/dashboard/fee/delete/${feeID}`, {
+                                method: 'get',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-Requested-With': 'XMLHttpRequest' // To differentiate AJAX requests
+                                }
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        Swal.fire({
+                                            title: "Success!",
+                                            text: "Fee has been Deletd.",
+                                            icon: "success"
+                                        }).then(() => {
+                                            window.location.reload(); // Reload the page to reflect changes
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            title: "Error",
+                                            text: "Could not delete the fee. Please try again.",
                                             icon: "error"
                                         });
                                     }

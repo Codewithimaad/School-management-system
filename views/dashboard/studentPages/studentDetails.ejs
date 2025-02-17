@@ -27,8 +27,9 @@
                             <h3 class="text-xl font-semibold">
                                 <%= student.name %>
                             </h3>
-                            <p class="mt-1 text-sm">Class: <%= student.stdClass ? student.stdClass[0].name : 'N/A' %>
+                            <p class="mt-1 text-sm">Class: <%= student.stdClass ? student.stdClass.name : 'N/A' %>
                             </p>
+
                         </div>
                     </div>
                     <div class="p-6">

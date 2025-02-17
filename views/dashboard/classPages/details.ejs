@@ -32,6 +32,7 @@
                             <th class="px-4 py-3 text-sm font-semibold text-gray-700">Name</th>
                             <th class="px-4 py-3 text-sm font-semibold text-gray-700">F Name</th>
                             <th class="px-4 py-3 text-sm font-semibold text-gray-700">Email</th>
+                            <th class="px-4 py-3 text-sm font-semibold text-gray-700">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,6 +49,10 @@
                                 </td>
                                 <td class="px-4 py-4 text-sm text-gray-700">
                                     <%= student.email %>
+                                </td>
+                                <td class="px-4 py-4 text-sm text-gray-700">
+                                    <a class="bg-green-600 px-3 py-2 text-white rounded hover:bg-green-900"
+                                        href="/dashboard/student/details/<%= student._id %>">Details</a>
                                 </td>
 
                             </tr>

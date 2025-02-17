@@ -15,8 +15,12 @@ const feeAmountSchema = new Schema({
     },
     category: {
         type: String,
-        enum: ['Tuition', 'Transport', 'Miscellaneous'], // You can add more categories
+        enum: ['Tuition', 'Transport', 'Exam fee', 'Library', 'Admission', 'Others'], // You can add more categories
         required: true
+    },
+    month: {
+        type: String,
+        required: true,
     },
     amount: {
         type: Number,

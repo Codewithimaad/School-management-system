@@ -77,6 +77,7 @@
                                 <th class="px-6 py-3 text-sm font-semibold text-gray-700">Phone</th>
                                 <th class="px-6 py-3 text-sm font-semibold text-gray-700">Date of Birth</th>
                                 <th class="px-6 py-3 text-sm font-semibold text-gray-700">Gender</th>
+                                <th class="px-6 py-3 text-sm font-semibold text-gray-700">Registration No</th>
                                 <!-- Added Gender Column -->
                                 <th class="px-6 py-3 text-sm font-semibold text-gray-700">Class</th>
                                 <th class="px-6 py-3 text-sm font-semibold text-gray-700">Enrollment Date
@@ -106,9 +107,12 @@
                                         <%= student.gender || 'N/A' %>
                                             <!-- Display gender or 'N/A' if not available -->
                                     </td>
+                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                        <%= student.resgistrationNo %>
+                                    </td>
 
                                     <td class="px-6 py-4 text-sm text-gray-700">
-                                        <%= student.stdClass.length> 0 ? student.stdClass[0].name : 'N/A' %>
+                                        <%= student.stdClass ? student.stdClass.name : 'N/A' %>
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-700">
                                         <%= new Date(student.enrollmentDate).toLocaleDateString() %>

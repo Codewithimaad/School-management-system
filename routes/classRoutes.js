@@ -11,7 +11,7 @@ router.use(express.urlencoded({ extended: true }));
 
 router.get('/dashboard/class/add', authenticateUser, checkRole('admin'), async (req, res) => {
     try {
-        const students = await studentModel.find({ class: { $exists: false } }); // Example: Students without classes
+        const students = await studentModel.find({ stdClass: { $exists: false } });
 
         res.render("dashboard/classPages/addClass", {
             students,
@@ -49,33 +49,8 @@ router.post('/dashboard/class/add', authenticateUser, checkRole('admin'), async 
 });
 
 
-router.get("/dashboard/class/reports", authenticateUser, checkRole('admin'), async (req, res) => {
-    try {
-        const page = parseInt(req.query.page) || 1; // Current page, default to 1
-        const limit = 8; // Items per page
-        const skip = (page - 1) * limit;
 
-        const classes = await classModel.find()
-            .populate('students')
-            .skip(skip) // Skip items for pagination
-            .limit(limit); // Limit the number of items
 
-        const totalClasses = await classModel.countDocuments(); // Total number of classes
-        const totalPages = Math.ceil(totalClasses / limit);
-
-        res.render("dashboard/classPages/classReports", {
-            classes,
-            currentPage: page,
-            totalPages,
-            totalClasses,
-            success_msg: req.flash('success_msg'),
-            error_msg: req.flash('error_msg')
-        });
-    } catch (error) {
-        req.flash('error_msg', 'Something went Wrong!');
-        res.redirect('dashboard/class/reports');
-    }
-});
 
 
 
@@ -122,30 +97,43 @@ router.get("/dashboard/class/details/:id", authenticateUser, checkRole('admin'),
 // Class Delete Route
 router.get("/dashboard/class/delete/:id", authenticateUser, checkRole('admin'), async (req, res) => {
     try {
-        let classes = await classModel.findOneAndDelete({ _id: req.params.id });
+        let classToDelete = await classModel.findById(req.params.id);
+        if (!classToDelete) {
+            req.flash('error_msg', 'Class not found.');
+            return res.redirect("/dashboard/class/reports");
+        }
 
+        // Remove reference from students
+        await studentModel.updateMany(
+            { stdClass: classToDelete._id },
+            { $unset: { stdClass: "" } } // Remove class reference from students
+        );
+
+        await classModel.findByIdAndDelete(req.params.id);
+
+        req.flash('success_msg', 'Class deleted successfully.');
         res.redirect("/dashboard/class/reports");
 
     } catch (error) {
         req.flash('error_msg', 'Error while Deleting class.');
-        res.redirect('dashboard/class/reports');
+        res.redirect("/dashboard/class/reports");
     }
 });
+
 
 // Edit Class Route (GET)
 router.get('/dashboard/class/edit/:id', authenticateUser, checkRole('admin'), async (req, res) => {
     try {
-        const classItem = await classModel.findById(req.params.id)
-            .populate('students'); // Populate students information
-
+        // Find class and populate students
+        const classItem = await classModel.findById(req.params.id).populate('students');
         if (!classItem) {
-            return req.flash('error_msg', 'Class not Found.');
+            req.flash('error_msg', 'Class not found.');
+            return res.redirect('/dashboard/class/reports');
         }
 
-        // Fetch available students for selection
-        const students = await studentModel.find({ class: { $exists: false } });
+        // Fetch all students (both assigned and unassigned)
+        const students = await studentModel.find();
 
-        // Render the edit class page with existing class data and options for teachers and students
         res.render('dashboard/classPages/editClass', {
             classItem,
             students,
@@ -153,41 +141,93 @@ router.get('/dashboard/class/edit/:id', authenticateUser, checkRole('admin'), as
             error_msg: req.flash('error_msg')
         });
     } catch (error) {
+        console.error(error);
         req.flash('error_msg', 'Error while rendering edit class page.');
-        res.redirect('dashboard/class/reports');
-
+        res.redirect('/dashboard/class/reports');
     }
 });
+
+
+
+
 
 // Edit Class Route (POST)
 router.post('/dashboard/class/edit/:id', authenticateUser, checkRole('admin'), async (req, res) => {
     const { name, section, students } = req.body;
 
     try {
-        // Find the class by ID and update the class information
         const classItem = await classModel.findById(req.params.id);
-
         if (!classItem) {
-            return req.flash('error_msg', 'Class not found.');
-
+            req.flash('error_msg', 'Class not found.');
+            return res.redirect("/dashboard/class/reports");
         }
 
-        // Update the class details
+        // Update class details
         classItem.name = name;
         classItem.section = section;
-        classItem.students = students; // Assuming students are passed as an array of student IDs
 
-        // Save the updated class
         await classItem.save();
 
-        req.flash('success_msg', 'Class updated successfully.');
-        res.redirect("/dashboard/class/reports");  // Redirect to the class reports page after updating
-    } catch (error) {
-        req.flash('error_msg', 'Error while updating class.');
-        res.redirect('dashboard/class/reports');
 
+
+        req.flash('success_msg', 'Class updated successfully.');
+        res.redirect("/dashboard/class/reports");
+
+    } catch (error) {
+        console.error("Error while updating class:", error);
+        req.flash('error_msg', 'Error while updating class.');
+        res.redirect("/dashboard/class/reports");
     }
 });
+
+
+// **Class Reports Route (GET)**
+router.get("/dashboard/class/reports", authenticateUser, checkRole('admin'), async (req, res) => {
+    try {
+        const page = parseInt(req.query.page) || 1; // Current page, default to 1
+        const limit = 8; // Items per page
+        const skip = (page - 1) * limit;
+
+        // Fetch classes and populate students along with their class details
+        const classes = await classModel.find()
+            .populate({
+                path: 'students',
+                select: 'name roll_number gender email phone', // Fetch only needed fields
+            })
+            .skip(skip)
+            .limit(limit);
+
+        const totalClasses = await classModel.countDocuments(); // Total number of classes
+        const totalPages = Math.ceil(totalClasses / limit);
+
+        // Log each class's students data
+        classes.forEach(classItem => {
+            console.log(classItem.students); // Log students for each class
+        });
+
+
+
+
+
+        res.render("dashboard/classPages/classReports", {
+            classes,
+            currentPage: page,
+            totalPages,
+            totalClasses,
+            success_msg: req.flash('success_msg'),
+            error_msg: req.flash('error_msg')
+        });
+
+    } catch (error) {
+        console.error("Error fetching class reports:", error);
+        req.flash('error_msg', 'Something went wrong!');
+        res.redirect('/dashboard/class/reports');
+    }
+});
+
+
+
+
 
 
 

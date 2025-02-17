@@ -1,0 +1,86 @@
+<%- include('../../partials/dashboard') %>
+
+    <!-- Button to open the modal -->
+    <button data-dialog-target="edit-class-dialog"
+        class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+        type="button">
+        Edit Class
+    </button>
+
+    <!-- Modal Backdrop and Content -->
+    <div data-dialog-backdrop="edit-class-dialog"
+        class="pointer-events-none fixed inset-0 z-[999] grid h-screen w-screen place-items-center bg-black bg-opacity-60 opacity-0 backdrop-blur-sm transition-opacity duration-300">
+        <div data-dialog="edit-class-dialog"
+            class="relative mx-auto w-full max-w-[24rem] rounded-lg overflow-hidden shadow-sm opacity-0 pointer-events-none transition-all duration-300">
+            <form method="POST" action="/dashboard/class/edit/<%= classItem._id %>"
+                class="relative flex flex-col bg-white">
+                <div class="relative m-2.5 items-center flex justify-center text-white h-24 rounded-md bg-slate-800">
+                    <h3 class="text-2xl">
+                        Update Class
+                    </h3>
+                </div>
+                <div class="flex flex-col gap-4 p-6">
+                    <!-- Class Name Input -->
+                    <div class="w-full max-w-sm min-w-[200px]">
+                        <label for="name" class="block mb-2 text-sm text-slate-600">
+                            Class Name
+                        </label>
+                        <input type="text" id="name" name="name" value="<%= classItem.name %>"
+                            class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                            required>
+                    </div>
+
+                    <!-- Section Select -->
+                    <div class="w-full max-w-sm min-w-[200px]">
+                        <label for="section" class="block mb-2 text-sm text-slate-600">
+                            Section
+                        </label>
+                        <select id="section" name="section"
+                            class="px-4 py-2 w-full border border-slate-200 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+                            required>
+                            <option value="A" <%=classItem.section==='A' ? 'selected' : '' %>>A</option>
+                            <option value="B" <%=classItem.section==='B' ? 'selected' : '' %>>B</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <!-- Submit Button -->
+                    <button type="submit"
+                        class="w-full rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                        Update Class
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const openButton = document.querySelector('[data-dialog-target="edit-class-dialog"]');
+                const modal = document.querySelector('[data-dialog="edit-class-dialog"]');
+                const backdrop = document.querySelector('[data-dialog-backdrop="edit-class-dialog"]');
+                const modalContent = modal.querySelector('form'); // The form inside the modal
+
+                // Open the modal
+                openButton.addEventListener("click", function () {
+                    modal.classList.remove("opacity-0", "pointer-events-none");
+                    modal.classList.add("opacity-100", "pointer-events-auto");
+                    backdrop.classList.remove("opacity-0", "pointer-events-none");
+                    backdrop.classList.add("opacity-100", "pointer-events-auto");
+                });
+
+                // Close the modal when backdrop is clicked
+                backdrop.addEventListener("click", function () {
+                    modal.classList.add("opacity-0", "pointer-events-none");
+                    modal.classList.remove("opacity-100", "pointer-events-auto");
+                    backdrop.classList.add("opacity-0", "pointer-events-none");
+                    backdrop.classList.remove("opacity-100", "pointer-events-auto");
+                });
+
+                // Stop closing the modal if the user clicks inside the form
+                modalContent.addEventListener("click", function (event) {
+                    event.stopPropagation();
+                });
+            });
+        </script>

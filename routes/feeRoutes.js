@@ -33,34 +33,41 @@ router.get('/dashboard/fee/students/:classId', authenticateUser, checkRole('admi
     }
 });
 
+// ✅ Route to add fee (Admin only)
 router.post('/dashboard/fee/add', authenticateUser, checkRole('admin'), async (req, res) => {
-    const { classId, studentId, category, amount, dueDate } = req.body;
+    const { classId, studentId, category, amount, dueDate, month } = req.body;
 
     try {
-        // Ensure the student exists before saving the fee
+        // Validate if class and student exist
         const student = await Student.findById(studentId);
-        if (!student) {
-            req.flash('error_msg', 'Student not found!');
+        const classData = await Class.findById(classId);
+
+        if (!student || !classData) {
+            req.flash('error_msg', 'Invalid student or class selected!');
             return res.redirect('/dashboard/fee/reports');
         }
 
-        // Create and save the fee
-        const fee = new Fee({ classId, studentId, category, amount, dueDate });
+        // Create and save fee
+        const fee = new Fee({ classId, studentId, category, amount, dueDate, month });
         await fee.save();
 
         req.flash('success_msg', 'Fee added successfully!');
         res.redirect('/dashboard/fee/reports');
     } catch (error) {
+        console.error("Error adding fee:", error);
         req.flash('error_msg', 'Error adding fee.');
         res.redirect('/dashboard/fee/reports');
     }
 });
 
-
+// ✅ Route to display fee reports
 router.get('/dashboard/fee/reports', authenticateUser, checkRole('admin'), async (req, res) => {
     const { classId, studentId, paymentStatus, startDate, endDate, page = 1 } = req.query;
 
-    const query = {};
+    const query = {
+        studentId: { $exists: true }, // Ensure fees are linked to a valid student
+    };
+
     if (classId) query.classId = classId;
     if (studentId) query.studentId = studentId;
     if (paymentStatus) query.paymentStatus = paymentStatus;
@@ -76,53 +83,37 @@ router.get('/dashboard/fee/reports', authenticateUser, checkRole('admin'), async
             ? await Student.find({ stdClass: classId }).select('name roll_number')
             : await Student.find().select('name roll_number');
 
-        // Pagination
+        // ✅ Optimized Pagination
         const limit = 15;
         const skip = (page - 1) * limit;
 
-        // Find the fees with the query
+        // ✅ Fetch fees with population
         const fees = await Fee.find(query)
-            .populate('classId', 'name')
-            .populate('studentId', 'name roll_number')
+            .populate('classId', 'name')  // Populate class name
+            .populate('studentId', 'name roll_number') // Populate student name & roll_number
             .sort({ dueDate: -1 })
             .skip(skip)
             .limit(limit);
 
-        // Check for and delete fees with missing students
-        for (let fee of fees) {
-            if (!fee.studentId) {
-                // If studentId is missing or invalid, delete the fee record
-                await Fee.findByIdAndDelete(fee._id);
-            }
-        }
-
-        // Re-fetch the fees after deletion of invalid ones
-        const validFees = await Fee.find(query)
-            .populate('classId', 'name')
-            .populate('studentId', 'name roll_number')
-            .sort({ dueDate: -1 })
-            .skip(skip)
-            .limit(limit);
-
-        // Get total count for pagination
-        const totalFees = await Fee.countDocuments(query); // Total number of records matching the query
-        const totalAmount = validFees.reduce((sum, fee) => sum + fee.amount, 0); // Total fee amount
-
+        // ✅ Get total fee count & sum
+        const totalFees = await Fee.countDocuments(query);
+        const totalAmount = fees.reduce((sum, fee) => sum + fee.amount, 0);
         const totalPages = Math.ceil(totalFees / limit);
 
         res.render('dashboard/fee/report', {
-            fees: validFees,        // Use the valid fees after deletion
+            fees,
             classes,
             students,
             filters: req.query,
             currentPage: parseInt(page),
-            totalFees,              // Total number of records
-            totalAmount,            // Total fee amount
-            totalPages,             // Total number of pages
+            totalFees,
+            totalAmount,
+            totalPages,
             success_msg: req.flash('success_msg'),
             error_msg: req.flash('error_msg')
         });
     } catch (error) {
+        console.error("Error loading fee reports:", error);
         req.flash('error_msg', 'Error loading fee reports.');
         res.redirect('/dashboard/fee/reports');
     }

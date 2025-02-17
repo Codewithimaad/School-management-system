@@ -7,6 +7,7 @@ const authenticateUser = require('../middlewares/authenticateUser');
 const checkRole = require('../middlewares/checkRole');
 const bcrypt = require('bcrypt');
 const { body, validationResult } = require('express-validator');
+const Fee = require('../models/feesSChema')
 
 
 
@@ -38,12 +39,20 @@ router.post(
 
     async (req, res) => {
 
-        let { name, fname, dob, phone, email, address, password, enrollmentDate, roll_number, stdClass, gender } = req.body;
+        let { name, fname, dob, phone, email, address, password, enrollmentDate, roll_number, stdClass, gender, resgistrationNo } = req.body;
 
         try {
             // Hash the password
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
+
+            const isExistRegsitrationNo = await studentModel.findOne({ resgistrationNo });
+
+            if (isExistRegsitrationNo) {
+                req.flash('error_msg', 'Student with the same registration number already Exist.')
+                return res.redirect('/dashboard/student/add');
+
+            }
 
             // Create the new student
             const newStudent = await studentModel.create({
@@ -58,6 +67,7 @@ router.post(
                 roll_number,
                 stdClass,
                 gender,
+                resgistrationNo,
                 role: 'student'
             });
 
@@ -163,37 +173,82 @@ router.get('/dashboard/student/edit/:id', authenticateUser, checkRole('admin', '
 
 // POST route to edit student details
 router.post('/dashboard/student/edit/:id', authenticateUser, checkRole('admin', 'teacher'), async (req, res) => {
-    let { name, fname, dob, phone, address, enrollmentDate, roll_number, stdClass, gender } = req.body;
+    let { name, fname, dob, phone, address, enrollmentDate, roll_number, stdClass, gender, resgistrationNo } = req.body;
+    const studentId = req.params.id; // ✅ Define studentId properly
+
+    // 🛑 Validate required fields
+    if (!resgistrationNo || resgistrationNo.trim() === '') {
+        req.flash('error_msg', 'Registration number is required.');
+        return res.redirect(`/dashboard/student/edit/${studentId}`);
+    }
 
     try {
-        // Update student details including the gender field
-        const updatedStudent = await studentModel.findOneAndUpdate(
-            { _id: req.params.id },
-            {
-                name,
-                fname,
-                dob,
-                phone,
-                address,
-                enrollmentDate,
-                roll_number,
-                stdClass,
-                gender  // Update gender here
-            },
-            { new: true } // Return the updated document
-        );
-
-        if (!updatedStudent) {
+        const student = await studentModel.findById(studentId);
+        if (!student) {
             req.flash('error_msg', 'Student not found.');
+            return res.redirect('/dashboard/student/reports');
         }
+
+        // 🛑 Check for duplicate registration number (excluding current student)
+        const isExistRegistrationNo = await studentModel.findOne({
+            resgistrationNo,
+            _id: { $ne: studentId }
+        });
+
+        if (isExistRegistrationNo) {
+            req.flash('error_msg', 'A student with the same registration number already exists.');
+            return res.redirect(`/dashboard/student/edit/${studentId}`);
+        }
+
+        // 🛑 Check for duplicate roll number (excluding current student)
+        const existRollNo = await studentModel.findOne({
+            roll_number,
+            _id: { $ne: studentId }
+        });
+
+        if (existRollNo) {
+            req.flash('error_msg', 'A student with the same roll number already exists.');
+            return res.redirect(`/dashboard/student/edit/${studentId}`);
+        }
+
+        // ✅ If class is changed, remove the student from the old class (if exists)
+        if (student.stdClass && student.stdClass.toString() !== stdClass) {
+            await classModel.findByIdAndUpdate(student.stdClass, { $pull: { students: student._id } });
+        }
+
+        // ✅ Update student details
+        student.name = name;
+        student.fname = fname;
+        student.dob = dob;
+        student.phone = phone;
+        student.address = address;
+        student.enrollmentDate = enrollmentDate;
+        student.roll_number = roll_number;
+        student.stdClass = stdClass;
+        student.resgistrationNo = resgistrationNo.trim();
+        student.gender = gender;
+
+        await student.save(); // Save updated student data
+
+        // ✅ Add the student to the new class
+        if (stdClass) {
+            await classModel.findByIdAndUpdate(stdClass, { $addToSet: { students: student._id } });
+        }
+
+        // ✅ Update fees to reflect the new class
+        await Fee.updateMany({ studentId: student._id }, { classId: stdClass });
 
         req.flash('success_msg', 'Student Updated successfully.');
         res.redirect('/dashboard/student/reports');
     } catch (error) {
+        console.error(error);
         req.flash('error_msg', 'Error updating student.');
         res.redirect('/dashboard/student/reports');
     }
 });
+
+
+
 
 
 
