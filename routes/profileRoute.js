@@ -6,6 +6,7 @@ const checkRole = require('../middlewares/checkRole');
 const Admin = require('../models/adminModel');
 const Teacher = require('../models/teacherModel');
 const Student = require('../models/studentModel');
+const changePassword = require('../controllers/changePassword')
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -55,6 +56,9 @@ router.get('/dashboard/profile', authenticateUser, checkRole('admin', 'teacher',
         });
     }
 });
+
+
+router.post('/dashboard/user/change-password', authenticateUser, checkRole('admin', 'teacher', 'student'), changePassword);
 
 
 module.exports = router;

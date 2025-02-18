@@ -7,94 +7,192 @@
 
             <!-- Header Section -->
             <header
-                class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg shadow-md px-8 py-10 mb-12 text-center">
-                <h1 class="text-4xl font-bold mb-2">Profile Overview</h1>
-                <p class="text-lg font-medium opacity-90">Welcome to your profile, <%= user.name %>!</p>
+                class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg shadow-md px-8 py-10 mb-12 text-center flex justify-between items-center">
+                <div>
+                    <h1 class="text-4xl font-extrabold mb-2">Profile Overview</h1>
+                    <p class="text-lg font-medium opacity-90">Welcome to your profile, <%= user.name %>!</p>
+                </div>
+                <!-- Button to Open Modal -->
+                <button id="changePasswordBtn"
+                    class="rounded-md bg-green-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-green-700 focus:shadow-none active:bg-green-700 hover:bg-green-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+                    type="button">
+                    Change Password
+                </button>
             </header>
 
-            <!-- Profile Card -->
-            <div
-                class="max-w-5xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden transform transition hover:scale-105 hover:shadow-2xl">
-                <div class="flex flex-wrap md:flex-nowrap items-center p-8">
-                    <!-- Profile Picture -->
-                    <div class="flex-shrink-0">
+
+            <section class="relative pt-40 pb-24">
+                <img src="https://pagedone.io/asset/uploads/1705473378.png" alt="cover-image"
+                    class="w-full absolute top-0 left-0 z-0 h-60 object-cover">
+                <div class="w-full max-w-7xl mx-auto px-6 md:px-8">
+                    <div class="flex items-center justify-center sm:justify-start relative z-10 mb-5">
                         <% if (user.imageUrl) { %>
-                            <img src="<%= user.imageUrl%>" alt="Profile Picture"
-                                class="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-blue-500 object-cover shadow-lg">
+                            <img src="<%= user.imageUrl %>" alt="Profile Picture"
+                                class="border-4 border-solid border-white rounded-full object-cover w-32 h-32 shadow-xl">
                             <% } else { %>
                                 <div
-                                    class="w-40 h-40 md:w-48 md:h-48 flex items-center justify-center bg-gray-200 rounded-full border-4 border-blue-500 shadow-lg">
+                                    class="w-32 h-32 flex items-center justify-center bg-gray-300 rounded-full border-4 border-indigo-600 shadow-xl">
                                     <span class="text-gray-500 font-semibold text-lg">No Image</span>
                                 </div>
                                 <% } %>
                     </div>
-
-                    <!-- Profile Information -->
-                    <div class="flex-grow pl-6">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-2">
-                            <%= user.name %>
-                        </h2>
-                        <p class="text-gray-600 mb-2"><strong>Role:</strong> <span class="capitalize">
-                                <%= user.role %>
-                            </span></p>
-                        <p class="text-gray-600 mb-2"><strong>Email:</strong>
-                            <%= user.email %>
-                        </p>
-                        <% if (user.phone) { %>
-                            <p class="text-gray-600 mb-2"><strong>Phone:</strong>
-                                <%= user.phone %>
+                    <div class="flex flex-col sm:flex-row max-sm:gap-5 items-center justify-between mb-5">
+                        <div class="block text-center sm:text-left">
+                            <h3 class="font-manrope font-extrabold text-4xl text-gray-900 mb-1">
+                                <%= user.name %>
+                            </h3>
+                            <p class="font-medium text-lg leading-7 text-gray-600">
+                                <%= user.address || 'N/A' %>
                             </p>
-                            <% } %>
-                                <% if (user.address) { %>
-                                    <p class="text-gray-600"><strong>Address:</strong>
-                                        <%= user.address %>
-                                    </p>
-                                    <% } %>
+                        </div>
                     </div>
-                </div>
+                    <!-- Role-Specific Details -->
+                    <h3 class="text-3xl font-semibold text-gray-900 mb-6">Additional Details</h3>
 
-                <!-- Role-Specific Details -->
-                <div class="bg-gradient-to-r from-gray-100 to-gray-200 p-6">
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Additional Details</h3>
-
+                    <p class="text-lg text-gray-700"><strong>Role:</strong> <span class="text-indigo-600">
+                            <%= user.role || 'N/A' %>
+                        </span></p>
                     <% if (user.role==='admin' ) { %>
-                        <p class="text-gray-700"><strong>Admin Since:</strong>
-                            <%= user.createdAt.toLocaleDateString() %>
-                        </p>
-                        <p class="text-gray-700"><strong>Description:</strong>
-                            <%= user.description || 'N/A' %>
-                        </p>
-                        <% } else if (user.role==='teacher' ) { %>
-                            <p class="text-gray-700"><strong>Subject:</strong>
-                                <%= user.subject || 'N/A' %>
-                            </p>
-                            <p class="text-gray-700"><strong>Qualification:</strong>
-                                <%= user.qualification || 'N/A' %>
-                            </p>
-                            <p class="text-gray-700"><strong>Salary:</strong> PKR <%= user.salary || 'N/A' %>
-                            </p>
-                            <p class="text-gray-700"><strong>Description:</strong>
+                        <p class="text-lg text-gray-700"><strong>Admin Since:</strong> <span class="text-indigo-600">
+                                <%= user.createdAt.toLocaleDateString() %>
+                            </span></p>
+                        <p class="text-lg text-gray-700"><strong>Description:</strong> <span class="text-indigo-600">
                                 <%= user.description || 'N/A' %>
-                            </p>
-                            <p class="text-gray-700"><strong>Classes:</strong>
-                                <%= user.classes.map(cls=> cls.name).join(', ') || 'N/A' %>
-                            </p>
+                            </span></p>
+                        <% } else if (user.role==='teacher' ) { %>
+                            <p class="text-lg text-gray-700"><strong>Subject:</strong> <span class="text-indigo-600">
+                                    <%= user.subject || 'N/A' %>
+                                </span></p>
+                            <p class="text-lg text-gray-700"><strong>Qualification:</strong> <span
+                                    class="text-indigo-600">
+                                    <%= user.qualification || 'N/A' %>
+                                </span></p>
+                            <p class="text-lg text-gray-700"><strong>Salary:</strong> <span class="text-indigo-600">PKR
+                                    <%= user.salary || 'N/A' %>
+                                </span></p>
+                            <p class="text-lg text-gray-700"><strong>Description:</strong> <span
+                                    class="text-indigo-600">
+                                    <%= user.description || 'N/A' %>
+                                </span></p>
+                            <p class="text-lg text-gray-700"><strong>Classes:</strong> <span class="text-indigo-600">
+                                    <%= user.classes.map(cls=> cls.name).join(', ') || 'N/A' %>
+                                </span></p>
                             <% } else if (user.role==='student' ) { %>
-                                <p class="text-gray-700"><strong>Roll Number:</strong>
-                                    <%= user.roll_number %>
-                                </p>
-                                <p class="text-gray-700"><strong>Class:</strong>
-                                    <%= user.stdClass.map(cls=> cls.name).join(', ') || 'N/A' %>
-                                </p>
-                                <p class="text-gray-700"><strong>Date of Birth:</strong>
-                                    <%= user.dob.toLocaleDateString() %>
-                                </p>
-                                <p class="text-gray-700"><strong>Enrollment Date:</strong>
-                                    <%= user.enrollmentDate.toLocaleDateString() %>
-                                </p>
+                                <p class="text-lg text-gray-700"><strong>Roll Number:</strong> <span
+                                        class="text-indigo-600">
+                                        <%= user.roll_number %>
+                                    </span></p>
+                                <p class="text-lg text-gray-700"><strong>Class:</strong> <span class="text-indigo-600">
+                                        <%= user.stdClass.map(cls=> cls.name).join(', ') || 'N/A' %>
+                                    </span></p>
+                                <p class="text-lg text-gray-700"><strong>Date of Birth:</strong> <span
+                                        class="text-indigo-600">
+                                        <%= user.dob.toLocaleDateString() %>
+                                    </span></p>
+                                <p class="text-lg text-gray-700"><strong>Enrollment Date:</strong> <span
+                                        class="text-indigo-600">
+                                        <%= user.enrollmentDate.toLocaleDateString() %>
+                                    </span></p>
                                 <% } %>
                 </div>
-            </div>
+            </section>
+
+
+
+
+
+
+            <!-- Modal Backdrop -->
+            <form method="POST" action="/dashboard/user/change-password" id="changePasswordBackdrop"
+                class="pointer-events-none fixed inset-0 z-[998] grid h-screen w-screen place-items-center bg-black bg-opacity-60 opacity-0 backdrop-blur-sm transition-opacity duration-300 hidden">
+                <!-- Modal Content -->
+                <div
+                    class="relative mx-auto w-full max-w-lg min-w-[350px] rounded-lg overflow-hidden shadow-lg bg-white z-[999] pointer-events-auto">
+                    <!-- Modal Header -->
+                    <div
+                        class="relative m-4 flex justify-center items-center text-white h-20 rounded-md bg-gradient-to-r from-blue-500 to-blue-400">
+                        <h3 class="text-3xl font-semibold">Change Password</h3>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="flex flex-col gap-8 p-8 bg-white rounded-lg shadow-lg">
+                        <!-- Old Password Input -->
+                        <div class="w-full max-w-md min-w-[300px]">
+                            <label for="oldPassword" class="block mb-2 text-sm font-medium text-gray-700">Old
+                                Password</label>
+                            <input type="password" name="oldPassword" id="oldPassword"
+                                class="w-full bg-gray-50 text-gray-900 text-sm border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300 ease-in-out"
+                                placeholder="Enter your old password" required />
+                        </div>
+
+                        <!-- New Password Input -->
+                        <div class="w-full max-w-md min-w-[300px]">
+                            <label for="newPassword" class="block mb-2 text-sm font-medium text-gray-700">New
+                                Password</label>
+                            <input type="password" name="newPassword" id="newPassword"
+                                class="w-full bg-gray-50 text-gray-900 text-sm border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300 ease-in-out"
+                                placeholder="Enter your new password" required minlength="6" />
+                        </div>
+
+                        <!-- Confirm New Password Input -->
+                        <div class="w-full max-w-md min-w-[300px]">
+                            <label for="confirmNewPassword" class="block mb-2 text-sm font-medium text-gray-700">Confirm
+                                New Password</label>
+                            <input type="password" name="confirmNewPassword" id="confirmNewPassword"
+                                class="w-full bg-gray-50 text-gray-900 text-sm border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300 ease-in-out"
+                                placeholder="Confirm your new password" required minlength="6" />
+                        </div>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="p-6 pt-4 flex justify-end">
+                        <button type="submit"
+                            class="w-full md:w-auto rounded-md bg-gradient-to-r from-blue-500 to-blue-400 py-3 px-8 text-white text-sm font-medium transition duration-300 ease-in-out transform hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:scale-105 shadow-md">
+                            Change Password
+                        </button>
+                    </div>
+
+                    <!-- Close Modal Button -->
+                    <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+
+
+            <!-- JavaScript to Open and Close Modal -->
+            <script>
+                // Get modal elements
+                const changePasswordBtn = document.getElementById('changePasswordBtn');
+                const changePasswordBackdrop = document.getElementById('changePasswordBackdrop');
+                const closeModalBtn = document.getElementById('closeModalBtn');
+
+                // Open modal
+                changePasswordBtn.addEventListener('click', () => {
+                    changePasswordBackdrop.classList.remove('hidden');
+                    changePasswordBackdrop.classList.add('opacity-100');
+                });
+
+                // Close modal
+                closeModalBtn.addEventListener('click', () => {
+                    changePasswordBackdrop.classList.add('hidden');
+                    changePasswordBackdrop.classList.remove('opacity-100');
+                });
+
+                // Close modal if clicked outside of the modal content
+                window.addEventListener('click', (event) => {
+                    if (event.target === changePasswordBackdrop) {
+                        changePasswordBackdrop.classList.add('hidden');
+                        changePasswordBackdrop.classList.remove('opacity-100');
+                    }
+                });
+            </script>
+
+
     </main>
 
     <%- include('../partials/dashboardfooter') %>
