@@ -8,7 +8,7 @@
                 class="flex items-center justify-between bg-blue-600 text-white rounded-lg shadow-md px-8 py-6 mb-8">
                 <div>
                     <h2 class="text-3xl font-semibold tracking-wide">Add Teacher</h2>
-                    <p class="text-sm lg:block hidden">Fill out the form below to add a new teacher.</ <p>
+                    <p class="text-sm lg:block hidden">Fill out the form below to add a new teacher.</p>
                 </div>
                 <a href="/dashboard/teacher/reports"
                     class="bg-white text-green-600 hover:bg-gray-100 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
@@ -16,111 +16,88 @@
                 </a>
             </header>
 
-            <!-- Teacher Form -->
+            <!-- Teacher Form (Full-width Card Style) -->
             <section id="teacher-form">
                 <form id="teacher-form" action="/dashboard/teacher/add" method="POST"
-                    class="bg-white p-8 shadow-md rounded-lg" enctype="multipart/form-data">
-                    <!-- Name Input -->
-                    <div class="mb-6">
-                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                        <input type="text" id="name" name="name"
-                            class="mt-1 block w-full py-3  p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter teacher's full name" />
-                        <p id="name-error" class="text-red-500 text-sm hidden">Please enter a valid name.</p>
+                    class="bg-white p-8 shadow-lg rounded-lg w-full gap-6" enctype="multipart/form-data">
+                    <div class="mb-6 md:flex gap-6 justify-between items-center">
+                        <!-- Name Input -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                            <input type="text" id="name" name="name"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="Enter teacher's full name" />
+                        </div>
+
+                        <!-- Subject Input -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
+                            <input type="text" id="subject" name="subject"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="e.g., Mathematics, Science" />
+                        </div>
+
+                        <!-- Qualification Input -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="qualification"
+                                class="block text-sm font-medium text-gray-700">Qualification</label>
+                            <input type="text" id="qualification" name="qualification"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="Qualification" />
+                        </div>
                     </div>
 
-                    <!-- Subject Input -->
-                    <div class="mb-6">
-                        <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
-                        <input type="text" id="subject" name="subject"
-                            class="mt-1 block w-full py-3  p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="e.g., Mathematics, Science" />
-                        <p id="subject-error" class="text-red-500 text-sm hidden">Please enter a subject.</p>
+                    <div class="mb-6 md:flex gap-6 justify-between items-center">
+                        <!-- Phone Input -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone No</label>
+                            <input type="number" id="phone" name="phone"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="Phone no" />
+                        </div>
+
+                        <!-- Email Input -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="email" name="email"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="Email" />
+                        </div>
+
+                        <!-- Password Input -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <input type="password" id="password" name="password"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="Enter New Password" />
+                        </div>
                     </div>
 
-                    <!-- Qualification Input -->
-                    <div class="mb-6">
-                        <label for="qualification" class="block text-sm font-medium text-gray-700">Qualification</label>
-                        <input type="text" id="qualification" name="qualification"
-                            class="mt-1 block w-full py-3  p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="qualification" />
-                        <p id="qualification-error" class="text-red-500 text-sm hidden">Please enter a valid
-                            qualification.</p>
+                    <div class="mb-6 md:flex gap-6 justify-between items-center">
+                        <!-- Salary Input -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="salary" class="block text-sm font-medium text-gray-700">Salary</label>
+                            <input type="number" id="salary" name="salary"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="Salary" />
+                        </div>
+
+                        <!-- Status Input -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                            <select id="status" name="status"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <!-- Phone No Input -->
-                    <div class="mb-6">
-                        <label for="phone" class="block text-sm font-medium text-gray-700">Phone No</label>
-                        <input type="number" id="phone" name="phone"
-                            class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Phone no" />
-                        <p id="phone-error" class="text-red-500 text-sm hidden">Please enter a valid phone number.</p>
-                    </div>
-
-                    <!-- Email Input -->
-                    <div class="mb-6">
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" id="email" name="email"
-                            class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Email" />
-                        <p id="email-error" class="text-red-500 text-sm hidden">Please enter a valid email address.</p>
-                    </div>
-
-                    <!-- Password Input -->
-                    <div class="mb-6">
-                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                        <input type="password" id="password" name="password"
-                            class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Password" />
-                        <p id="password-error" class="text-red-500 text-sm hidden">Password must be required.</p>
-                        <p id="password-strength" class="text-red-500 text-sm hidden">Password must be of Minimum eight
-                            characters, at least one uppercase letter, one lowercase letter and one number:.</p>
-                    </div>
-
-                    <!-- Salary Input -->
-                    <div class="mb-6">
-                        <label for="salary" class="block text-sm font-medium text-gray-700">Salary</label>
-                        <input type="number" id="salary" name="salary"
-                            class="mt-1 block w-full py-3  p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Salary" />
-                        <p id="salary-error" class="text-red-500 text-sm hidden">Please enter a salary.</p>
-                    </div>
-
-                    <!-- Status Input -->
-                    <div class="mb-6">
-                        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                        <select id="status" name="status"
-                            class="mt-1 block w-full p-2 py-3 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
-                            <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
-                        </select>
-                    </div>
-
-                    <!-- Description Input -->
-                    <div class="mb-6">
-                        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                        <textarea id="description" name="description" rows="4"
-                            class="mt-1 block w-full p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Provide a brief description or biography"></textarea>
-                        <p id="description-error" class="text-red-500 text-sm hidden">Please enter a description.</p>
-                    </div>
-
-                    <!-- Joining Date Input -->
-                    <div class="mb-6">
-                        <label for="joiningDate" class="block text-sm font-medium text-gray-700">Joining Date</label>
-                        <input type="date" id="joiningDate" name="joiningDate"
-                            class="mt-1 block w-full py-3  p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            value="<%= new Date().toISOString().split('T')[0] %>" />
-                    </div>
-
-
-                    <!-- ImageUrl Input -->
+                    <!-- Image Upload -->
                     <div class="mb-6">
                         <label for="image" class="block text-sm font-medium text-gray-700">Upload File</label>
                         <input type="file" id="image" name="image"
-                            class="mt-1 block w-full py-3 p-2 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Upload Image" />
-                        <p id="image-error" class="text-red-500 text-sm hidden">Please upload an image.</p>
+                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" />
                     </div>
 
                     <!-- Submit Button -->

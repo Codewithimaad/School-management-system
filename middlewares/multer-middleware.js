@@ -8,7 +8,6 @@ const tempDir = path.join(__dirname, './upload/temp');
 // Ensure the temp directory exists
 if (!fs.existsSync(tempDir)) {
     fs.mkdirSync(tempDir, { recursive: true }); // Creates the directory if missing
-    console.log(`Created temp directory: ${tempDir}`);
 }
 
 // File type validation

@@ -17,7 +17,7 @@
                 <h3 class="text-lg sm:text-xl font-semibold mb-4">Attendance Summary</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <p class="text-gray-700"><strong>Class:</strong>
-                        <%= student.stdClass.map(classItem=> classItem.name).join(', ') %>
+                        <%= student.stdClass.name %>
                     </p>
                     <p class="text-gray-700"><strong>Total Days:</strong>
                         <%= totalDays %>

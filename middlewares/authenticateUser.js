@@ -26,7 +26,6 @@ const authenticateUser = async (req, res, next) => {
         req.user = user;  // Attach user to the request object for further use
         next();  // Allow the next middleware or route handler
     } catch (err) {
-        console.error('Token verification failed:', err);
         return res.redirect('/login');  // If token is invalid, redirect to login
     }
 };

@@ -113,7 +113,6 @@ router.get('/dashboard/fee/reports', authenticateUser, checkRole('admin'), async
             error_msg: req.flash('error_msg')
         });
     } catch (error) {
-        console.error("Error loading fee reports:", error);
         req.flash('error_msg', 'Error loading fee reports.');
         res.redirect('/dashboard/fee/reports');
     }

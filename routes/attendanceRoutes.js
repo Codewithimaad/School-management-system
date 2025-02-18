@@ -207,6 +207,7 @@ router.get('/dashboard/attendance/view/:studentId', authenticateUser, checkRole(
         // Fetch the filtered attendance records
         const attendanceRecords = await attendanceModel.find(query).populate('classId');
 
+
         // Calculate summary stats
         const totalDays = attendanceRecords.length;
         const presentDays = attendanceRecords.filter(att => att.status === 'Present').length;

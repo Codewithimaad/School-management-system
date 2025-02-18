@@ -119,39 +119,47 @@
                                     <td class="px-6 py-4 text-sm">
                                         <%= new Date(fee.dueDate).toLocaleDateString() %>
                                     </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        <%= fee.paymentStatus %>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">
-                                        <%= fee.paymentDate ? new Date(fee.paymentDate).toLocaleDateString() : 'N/A' %>
-                                    </td>
+                                    <% if(fee.paymentStatus==='Paid' ){ %>
+                                        <td class="px-6 py-4">
+                                            <span class=" text-sm text-green-600 ">Paid</span>
+                                        </td>
+                                        <% } else{ %>
+                                            <td class="px-6 py-4">
+                                                <span class=" text-sm text-red-600">Unpaid</span>
+                                            </td>
+                                            <% } %>
 
-                                    <td
-                                        class="px-6 py-4 text-sm flex flex-col sm:flex-row sm:items-center sm:justify-start space-y-2 sm:space-y-0 sm:space-x-4">
-                                        <!-- View Button -->
-                                        <a href="/dashboard/fee/details/<%= fee._id %>"
-                                            class="text-white rounded-md px-4 py-2 bg-blue-500 hover:bg-blue-800 w-full sm:w-auto text-center sm:text-left">
-                                            View
-                                        </a>
+                                                <td class="px-6 py-4 text-sm">
+                                                    <%= fee.paymentDate ? new Date(fee.paymentDate).toLocaleDateString()
+                                                        : 'N/A' %>
+                                                </td>
 
-                                        <button
-                                            class="text-white rounded-md px-4 py-2 bg-red-500 hover:bg-red-800 w-full sm:w-auto text-center sm:text-left delete-btn"
-                                            data-id="<%= fee._id %>">
-                                            Delete </button>
+                                                <td
+                                                    class="px-6 py-4 text-sm flex flex-col sm:flex-row sm:items-center sm:justify-start space-y-2 sm:space-y-0 sm:space-x-4">
+                                                    <!-- View Button -->
+                                                    <a href="/dashboard/fee/details/<%= fee._id %>"
+                                                        class="text-white rounded-md px-4 py-2 bg-blue-500 hover:bg-blue-800 w-full sm:w-auto text-center sm:text-left">
+                                                        View
+                                                    </a>
 
-                                        <% if (fee.paymentStatus !=='Paid' ) { %>
+                                                    <button
+                                                        class="text-white rounded-md px-4 py-2 bg-red-500 hover:bg-red-800 w-full sm:w-auto text-center sm:text-left delete-btn"
+                                                        data-id="<%= fee._id %>">
+                                                        Delete </button>
 
-                                            <!-- Mark Paid Button with SweetAlert Confirmation -->
-                                            <button
-                                                class="text-white rounded-md py-2 px-3 bg-green-700 hover:bg-green-900 text-center paid-btn"
-                                                data-id="<%= fee._id %>">
-                                                Mark Paid
-                                            </button>
-                                            <% } else { %>
-                                                <span
-                                                    class="text-gray-400 rounded-md sm:w-auto text-center ">Paid</span>
-                                                <% } %>
-                                    </td>
+                                                    <% if (fee.paymentStatus !=='Paid' ) { %>
+
+                                                        <!-- Mark Paid Button with SweetAlert Confirmation -->
+                                                        <button
+                                                            class="text-white rounded-md py-2 px-3 bg-green-700 hover:bg-green-900 text-center paid-btn"
+                                                            data-id="<%= fee._id %>">
+                                                            Mark Paid
+                                                        </button>
+                                                        <% } else { %>
+                                                            <span
+                                                                class="text-gray-400 rounded-md sm:w-auto text-center ">Paid</span>
+                                                            <% } %>
+                                                </td>
 
 
                                 </tr>

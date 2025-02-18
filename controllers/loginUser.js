@@ -58,7 +58,6 @@ const loginUser = async (req, res) => {
             return res.redirect('/dashboard/profile'); // Redirect to student dashboard
         }
     } catch (error) {
-        console.error('Error during login:', error.message);
         req.flash('error_msg', 'Something went wrong. Please try again later.');
         return res.redirect('/login'); // Redirect to login page on error
     }
