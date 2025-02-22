@@ -78,12 +78,21 @@
                                     <%= user.classes.map(cls=> cls.name).join(', ') || 'N/A' %>
                                 </span></p>
                             <% } else if (user.role==='student' ) { %>
+
+                                <p class="text-lg text-gray-700"><strong>Father Name:</strong> <span
+                                        class="text-indigo-600">
+                                        <%= user.fname %>
+                                    </span></p>
                                 <p class="text-lg text-gray-700"><strong>Roll Number:</strong> <span
                                         class="text-indigo-600">
                                         <%= user.roll_number %>
                                     </span></p>
                                 <p class="text-lg text-gray-700"><strong>Class:</strong> <span class="text-indigo-600">
-                                        <%= user.stdClass.map(cls=> cls.name).join(', ') || 'N/A' %>
+                                        <%= user.stdClass.name || 'N/A' %>
+                                    </span></p>
+                                <p class="text-lg text-gray-700"><strong>Section:</strong> <span
+                                        class="text-indigo-600">
+                                        <%= user.stdClass.section || 'N/A' %>
                                     </span></p>
                                 <p class="text-lg text-gray-700"><strong>Date of Birth:</strong> <span
                                         class="text-indigo-600">

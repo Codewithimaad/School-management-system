@@ -263,7 +263,7 @@ router.get('/dashboard/attendance/checkattendance', authenticateUser, checkRole(
 
     try {
         // Fetch the student details based on the studentId from the logged-in user
-        const student = await studentModel.findById(studentId);
+        const student = await studentModel.findById(studentId).populate('stdClass');
 
         // Check if student exists
         if (!student) {
