@@ -40,6 +40,17 @@
                             required />
                     </div>
 
+                    <div>
+                        <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                        <select name="gender" required
+                            class="w-full mt-1 px-4 py-2 border rounded-lg text-gray-800 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="Male" <%=admin.gender==='Male' ? 'selected' : '' %>>Male
+                            </option>
+                            <option value="Female" <%=admin.gender==='Female' ? 'selected' : '' %>>Female
+                            </option>
+                        </select>
+                    </div>
+
                     <!-- Description -->
                     <div class="mb-6">
                         <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
@@ -80,30 +91,7 @@
             </section>
 
 
-            <form action="/dashboard/admin/change-password" method="POST"
-                class="max-w-lg mx-auto p-6 border rounded-md">
-                <div class="form-group mb-4">
-                    <label for="oldPassword" class="block text-sm font-medium text-gray-700">Old Password</label>
-                    <input type="password" id="oldPassword" name="oldPassword"
-                        class="form-control mt-1 block w-full p-2 border rounded-md" required>
-                </div>
 
-                <div class="form-group mb-4">
-                    <label for="newPassword" class="block text-sm font-medium text-gray-700">New Password</label>
-                    <input type="password" id="newPassword" name="newPassword"
-                        class="form-control mt-1 block w-full p-2 border rounded-md" required minlength="6">
-                </div>
-
-                <div class="form-group mb-4">
-                    <label for="confirmNewPassword" class="block text-sm font-medium text-gray-700">Confirm New
-                        Password</label>
-                    <input type="password" id="confirmNewPassword" name="confirmNewPassword"
-                        class="form-control mt-1 block w-full p-2 border rounded-md" required minlength="6">
-                </div>
-
-                <button type="submit" class="btn btn-primary w-full py-2 bg-blue-600 text-white rounded-md">Change
-                    Password</button>
-            </form>
 
     </main>
 

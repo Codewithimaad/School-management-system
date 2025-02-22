@@ -15,11 +15,12 @@ const feeAmountSchema = new Schema({
     },
     category: {
         type: String,
-        enum: ['Tuition', 'Transport', 'Exam fee', 'Library', 'Admission', 'Others'], // You can add more categories
+        enum: ['Tuition', 'Transport', 'Stationary', 'Exam Fee', 'Library', 'Admission', 'Others'], // You can add more categories
         required: true
     },
     month: {
         type: String,
+        enum: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         required: true,
     },
     amount: {

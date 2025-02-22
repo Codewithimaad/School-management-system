@@ -11,9 +11,13 @@ const teacherSchema = new mongoose.Schema({
         required: true,
         minlength: 8
     },
+    gender: {
+        type: String,
+        enum: ['Male', 'Female'],
+        required: true
+    },
     imageUrl: {
         type: String, // URL of the image uploaded to Cloudinary
-        required: true,
     },
     salary: { type: Number, required: true },
     status: { type: String, required: true },

@@ -35,19 +35,28 @@
                     <% teachers.forEach(teacher=> { %>
                         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                             <div class="card shadow border-0 rounded-3 d-flex flex-column">
-                                <img class="card-img-top rounded-circle w-50 mx-auto mt-4" src="<%= teacher.imageUrl %>"
-                                    alt="Teacher">
-                                <div class="card-body text-center d-flex flex-column">
-                                    <h4 class="card-title">
-                                        <%= teacher.name %>
-                                    </h4>
-                                    <p class="card-text text-muted">
-                                        <%= teacher.subject%>
-                                    </p>
-                                    <p class="teacher-description">
-                                        <%=teacher.description %>
-                                    </p>
-                                </div>
+
+                                <% if (teacher.imageUrl===null && teacher.gender==='Male' ){ %>
+                                    <img src="/images/Male logo.png" alt="Teacher Image"
+                                        class="card-img-top rounded-circle w-50 mx-auto mt-4">
+                                    <% } else if (teacher.imageUrl===null && teacher.gender==='Female' ){ %>
+                                        <img src="/images/Female logo.jpg" alt="Teacher Image"
+                                            class="card-img-top rounded-circle w-50 mx-auto mt-4">
+                                        <% } else { %>
+                                            <img src="<%= teacher.imageUrl %>" alt="Teacher Image"
+                                                class="card-img-top rounded-circle w-50 mx-auto mt-4">
+                                            <% } %>
+                                                <div class="card-body text-center d-flex flex-column">
+                                                    <h4 class="card-title">
+                                                        <%= teacher.name %>
+                                                    </h4>
+                                                    <p class="card-text text-muted">
+                                                        <%= teacher.subject%>
+                                                    </p>
+                                                    <p class="teacher-description">
+                                                        <%=teacher.description %>
+                                                    </p>
+                                                </div>
                             </div>
                         </div>
                         <%}) %>

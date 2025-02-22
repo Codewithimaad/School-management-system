@@ -27,16 +27,19 @@ router.get('/dashboard/admin/add', authenticateUser, checkRole('admin'), async (
 router.post('/dashboard/admin/add', authenticateUser, checkRole('admin'), upload.single('image'), async (req, res) => {
 
 
-    const { name, email, password, phone, description } = req.body;
-    const localFilePath = req.file.path;
+    const { name, email, password, gender, phone, description } = req.body;
+    let imageUrl = null; // Default to null if no image is uploaded
 
     try {
-        // Upload image to Cloudinary
-        const cloudinaryResponse = await uploadOnCloudinary(localFilePath);
-
-        if (!cloudinaryResponse) {
-            return req.flash('success_msg', 'Failed to upload image.');
-
+        // Check if an image is uploaded
+        if (req.file) {
+            const cloudinaryResponse = await uploadOnCloudinary(req.file.path); // Upload image
+            if (cloudinaryResponse) {
+                imageUrl = cloudinaryResponse.url; // Set uploaded image URL
+            } else {
+                req.flash('error_msg', 'Failed to upload image.');
+                return res.redirect('/dashboard/admin/add');
+            }
         }
 
         // Check if the admin already exists
@@ -54,10 +57,11 @@ router.post('/dashboard/admin/add', authenticateUser, checkRole('admin'), upload
         await adminModel.create({
             name,
             email,
+            gender,
             phone,
             description,
             password: hashedPassword,
-            imageUrl: cloudinaryResponse.url,
+            imageUrl,
             role: 'admin',
         });
 
@@ -67,7 +71,7 @@ router.post('/dashboard/admin/add', authenticateUser, checkRole('admin'), upload
     } catch (error) {
         req.flash('error_msg', 'Something went wrong.');
         // Render the error page with message
-        res.render('error', { message: 'Something went wrong while adding the admin.' });
+        res.redirect('/dashboard/admin/add');
     }
 }
 );
@@ -116,7 +120,7 @@ router.post('/dashboard/admin/edit/:id',
     checkRole('admin'),
     upload.single('image'),
     async (req, res) => {
-        const { name, email, phone, description } = req.body;
+        const { name, email, gender, phone, description } = req.body;
         let imageUrl = null;
 
         try {
@@ -140,6 +144,7 @@ router.post('/dashboard/admin/edit/:id',
                 name,
                 email,
                 phone,
+                gender,
                 description,
                 ...(imageUrl && { imageUrl }), // Include imageUrl only if it exists
             };

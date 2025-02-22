@@ -50,21 +50,23 @@ router.post(
     '/dashboard/teacher/add',
     authenticateUser,
     checkRole('admin'),
-    upload.single('image'),
+    upload.single('image'), // Multer middleware
 
     async (req, res) => {
+        const { name, subject, salary, qualification, gender, email, phone, password, status, description } = req.body;
 
-        const { name, subject, salary, qualification, email, phone, password, status, description } = req.body;
-        const localFilePath = req.file.path;
+        let imageUrl = null; // Default to null if no image is uploaded
 
         try {
-
-            // Upload image to Cloudinary
-            const cloudinaryResponse = await uploadOnCloudinary(localFilePath);
-
-            if (!cloudinaryResponse) {
-                return req.flash('success_msg', 'Failed to upload image.');
-
+            // Check if an image is uploaded
+            if (req.file) {
+                const cloudinaryResponse = await uploadOnCloudinary(req.file.path); // Upload image
+                if (cloudinaryResponse) {
+                    imageUrl = cloudinaryResponse.url; // Set uploaded image URL
+                } else {
+                    req.flash('error_msg', 'Failed to upload image.');
+                    return res.redirect('/dashboard/teacher/add');
+                }
             }
 
             // Hash the password
@@ -77,12 +79,13 @@ router.post(
                 subject,
                 email,
                 phone,
+                gender,
                 password: hashedPassword,
                 salary,
                 status,
                 qualification,
                 description,
-                imageUrl: cloudinaryResponse.url,
+                imageUrl, // Can be null if no image was uploaded
                 role: 'teacher', // Add role for role-based authorization
             });
 
@@ -90,14 +93,15 @@ router.post(
 
             // Flash success message
             req.flash('success_msg', 'Teacher added successfully!');
-            res.redirect('/dashboard/teacher/reports'); // Or the correct redirection URL
+            res.redirect('/dashboard/teacher/reports');
         } catch (error) {
-            // Flash error message
+            console.error(error);
             req.flash('error_msg', 'Something went wrong while adding the teacher.');
             res.redirect('/dashboard/teacher/add');
         }
     }
 );
+
 
 
 
@@ -195,7 +199,7 @@ router.post('/dashboard/teacher/edit/:id',
     checkRole('admin'),
     upload.single('image'),
     async (req, res) => {
-        const { name, subject, salary, email, qualification, phone, password, status, description } = req.body;
+        const { name, subject, salary, email, gender, qualification, phone, password, status, description } = req.body;
         let imageUrl = null;
 
         try {
@@ -222,6 +226,7 @@ router.post('/dashboard/teacher/edit/:id',
                 qualification,
                 phone,
                 password,
+                gender,
                 status,
                 salary,
                 description,

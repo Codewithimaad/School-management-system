@@ -22,7 +22,11 @@ const adminSchema = new mongoose.Schema({
     },
     imageUrl: {
         type: String, // URL of the image uploaded to Cloudinary
-        required: true,
+    },
+    gender: {
+        type: String,
+        enum: ['Male', 'Female'],
+        required: true
     },
     description: { type: String },
     phone: { type: String, required: true },

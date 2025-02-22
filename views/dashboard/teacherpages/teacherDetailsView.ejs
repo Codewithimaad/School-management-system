@@ -17,8 +17,17 @@
 
                 <!-- Teacher Image Section -->
                 <div class="flex justify-center md:justify-start mb-6 md:mb-0">
-                    <img src="<%= teacher.imageUrl %>" alt="Teacher Image"
-                        class="w-72 h-72 object-cover rounded-full border-4 border-indigo-600 shadow-lg">
+                    <% if (teacher.imageUrl===null && teacher.gender==='Male' ){ %>
+                        <img src="/images/Male logo.png" alt="Teacher Image"
+                            class="w-72 h-72 object-cover rounded-full border-4 border-indigo-600 shadow-lg">
+                        <% } else if (teacher.imageUrl===null && teacher.gender==='Female' ){ %>
+                            <img src="/images/Female logo.jpg" alt="Teacher Image"
+                                class="w-72 h-72 object-cover rounded-full border-4 border-indigo-600 shadow-lg">
+                            <% } else { %>
+                                <img src="<%= teacher.imageUrl %>" alt="Teacher Image"
+                                    class="w-72 h-72 object-cover rounded-full border-4 border-indigo-600 shadow-lg">
+                                <% } %>
+
                 </div>
 
                 <!-- Teacher Info Section -->
@@ -36,6 +45,9 @@
                             </span></div>
                         <div><strong>Phone:</strong> <span class="text-gray-600">
                                 <%= teacher.phone %>
+                            </span></div>
+                        <div><strong>Gender:</strong> <span class="text-gray-600">
+                                <%= teacher.gender %>
                             </span></div>
                         <div><strong>Status:</strong>
                             <span class="<%= teacher.status === 'Active' ? 'text-green-500' : 'text-red-500' %>">
