@@ -21,6 +21,7 @@ const academicsRoutes = require('./routes/academicsroutes');
 const galleryRoutes = require('./routes/galleryRoutes');
 const blogsRoutes = require('./routes/blogsRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
+const forgotPasswordRoutes = require('./routes/forgotPasswordRoutes')
 
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -96,6 +97,7 @@ app.use(academicsRoutes);
 app.use(galleryRoutes);
 app.use(blogsRoutes);
 app.use(feedbackRoutes);
+app.use(forgotPasswordRoutes);
 
 
 

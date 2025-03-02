@@ -30,7 +30,9 @@ const studentSchema = new mongoose.Schema({
         type: String,
         enum: ['Male', 'Female', 'Other'],
     },
-    role: { type: String, default: 'student', required: true }, // Default role as 'student'
+    role: { type: String, default: 'student', required: true }, // Default role as 'student',
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
 
 });
 

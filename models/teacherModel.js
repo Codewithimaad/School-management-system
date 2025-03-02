@@ -26,7 +26,9 @@ const teacherSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Class'
     }],
-    role: { type: String, default: 'teacher', required: true }, // Default role as 'teacher'
+    role: { type: String, default: 'teacher', required: true }, // Default role as 'teacher',
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
 
 });
 

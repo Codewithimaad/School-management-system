@@ -31,7 +31,9 @@ const adminSchema = new mongoose.Schema({
     description: { type: String },
     phone: { type: String, required: true },
     role: { type: String, default: 'admin', required: true }, // Default role as 'student'
-    lastLogin: { type: Date, default: null }, // Store last login date
+    lastLogin: { type: Date, default: null }, // Store last login date,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
 
 
 }, {
