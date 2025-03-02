@@ -16,12 +16,13 @@ const getForgotPassword = (req, res) => {
     });
 };
 
+
 // Forgot Password - Handle Form Submission
 const postForgotPassword = async (req, res) => {
     const { email, role } = req.body;
 
     try {
-        console.log("Received forgot password request for:", email, role); // Debug log
+        console.log("Received forgot password request for:", email, role);
 
         let user;
         switch (role) {
@@ -35,33 +36,36 @@ const postForgotPassword = async (req, res) => {
                 user = await Student.findOne({ email });
                 break;
             default:
-                req.flash('error_msg', 'Invalid role.');
-                return res.redirect('/forgot-password');
+                req.flash("error_msg", "Invalid role.");
+                return res.redirect("/forgot-password");
         }
 
         if (!user) {
-            console.log("No user found with email:", email); // Debug log
-            req.flash('error_msg', 'No account with that email exists.');
-            return res.redirect('/forgot-password');
+            console.log("No user found with email:", email);
+            req.flash("error_msg", "No account with that email exists.");
+            return res.redirect("/forgot-password");
         }
 
-        // Generate a token
+        // Generate Reset Token
         const token = crypto.randomBytes(20).toString("hex");
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
         await user.save();
 
-        console.log("Reset token generated for user:", user.email); // Debug log
+        console.log("Reset token generated for user:", user.email);
 
-        // Send email
+        // Setup Email Transporter
         const transporter = nodemailer.createTransport({
-            service: "gmail",
+            service: process.env.EMAIL_SERVICE || "gmail",
             auth: {
-                user: process.env.EMAIL_USER, // Your email
-                pass: process.env.EMAIL_PASS, // Your email password
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
             },
         });
 
+        const resetLink = `${process.env.FRONT_END_URL}/reset-password/${role}/${token}`;
+
+        // Email Content
         const mailOptions = {
             to: user.email,
             from: process.env.EMAIL_USER,
@@ -74,15 +78,13 @@ const postForgotPassword = async (req, res) => {
                     <div style="padding: 20px;">
                         <p>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>
                         <p>Please click the button below to reset your password:</p>
-                        <a href="${process.env.FRONT_END_URL}/reset-password/${role}/${token}" 
+                        <a href="${resetLink}" 
                            style="display: inline-block; background-color: #007BFF; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin: 20px 0;">
                             Reset Password
                         </a>
                         <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
                         <p style="word-break: break-all;">
-                            <a href="${process.env.FRONT_END_URL}/reset-password/${role}/${token}" style="color: #007BFF;">
-                                ${process.env.FRONT_END_URL}/reset-password/${role}/${token}
-                            </a>
+                            <a href="${resetLink}" style="color: #007BFF;">${resetLink}</a>
                         </p>
                         <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
                     </div>
@@ -93,24 +95,29 @@ const postForgotPassword = async (req, res) => {
             `,
         };
 
-        console.log("Sending email to:", user.email); // Debug log
+        console.log("Sending email to:", user.email);
 
-        await transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error("Error sending email:", error); // Debug log
-            } else {
-                console.log("Email sent successfully:", info.response); // Debug log
-            }
-        });
+        // Send Email and Handle Errors
+        try {
+            await transporter.sendMail(mailOptions);
+            console.log("Email sent successfully");
+        } catch (emailError) {
+            console.error("Error sending email:", emailError);
+            req.flash("error_msg", "Could not send email. Please try again later.");
+            return res.redirect("/forgot-password");
+        }
 
-        req.flash('success_msg', 'An email has been sent with further instructions.');
-        res.redirect('/forgot-password');
+        req.flash("success_msg", "An email has been sent with further instructions.");
+        res.redirect("/forgot-password");
+
     } catch (err) {
-        console.error("Error in postForgotPassword:", err); // Debug log
-        req.flash('error_msg', 'Something went wrong. Please try again.');
-        res.redirect('/forgot-password');
+        console.error("Error in postForgotPassword:", err);
+        req.flash("error_msg", "Something went wrong. Please try again.");
+        res.redirect("/forgot-password");
     }
 };
+
+
 
 // Reset Password - Render Form
 const getResetPassword = async (req, res) => {
