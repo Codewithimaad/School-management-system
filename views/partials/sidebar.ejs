@@ -1,232 +1,89 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<!-- Main -->
+<div class="mt-10 flex flex-col lg:flex-row items-start gap-6 px-2 md:px-10">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar menu With Sub-menus | Using HTML, CSS & JQuery</title>
-    <style media="screen">
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    <!-- Sidebar -->
+    <div class="border border-gray-200 shadow-lg rounded-xl p-5 w-full lg:w-1/5 xl:w-1/5 bg-white 
+    lg:sticky lg:top-5 lg:h-[90vh] lg:overflow-y-auto">
+        <h2 class="text-xl font-semibold pb-3 border-b text-gray-800">📊 Dashboard</h2>
+        <ul class="mt-4 space-y-2 text-gray-700">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
-        }
+            <li>
+                <a href="/users"
+                    class="flex items-center justify-between p-3 rounded-lg transition hover:bg-blue-100 hover:text-blue-600 border-l-4 border-transparent hover:border-blue-500">
+                    <div class="flex items-center gap-3">
+                        👤 <span>Users</span>
+                    </div>
+                    <span
+                        class="bg-blue-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                        <%=userCount %>
+                    </span>
+                </a>
+            </li>
 
-        body {
-            min-height: 100vh;
-            background: white;
-            color: white;
-            background-size: cover;
-            background-position: center;
-        }
+            <li>
+                <a href="/complaints"
+                    class="flex items-center justify-between p-3 rounded-lg transition hover:bg-red-100 hover:text-red-600 border-l-4 border-transparent hover:border-red-500">
+                    <div class="flex items-center gap-3">
+                        📝 <span>Complaints</span>
+                    </div>
+                    <span
+                        class="bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                        <%=complaintCount %>
+                    </span>
+                </a>
+            </li>
 
-        .side-bar {
-            background: #1b1a1b;
-            backdrop-filter: blur(15px);
-            width: 250px;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: -250px;
-            overflow-y: auto;
-            transition: 0.6s ease;
-            transition-property: left;
-        }
+            <li>
+                <a href="/cities"
+                    class="flex items-center justify-between p-3 rounded-lg transition hover:bg-green-100 hover:text-green-600 border-l-4 border-transparent hover:border-green-500">
+                    <div class="flex items-center gap-3">
+                        🌆 <span>Cities</span>
+                    </div>
+                    <span
+                        class="bg-green-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                        <%= cityCount %>
+                    </span>
+                </a>
+            </li>
 
-        .side-bar::-webkit-scrollbar {
-            width: 0px;
-        }
+            <li>
+                <a href="/categories"
+                    class="flex items-center justify-between p-3 rounded-lg transition hover:bg-purple-100 hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500">
+                    <div class="flex items-center gap-3">
+                        📋 <span>Categories</span>
+                    </div>
+                    <span
+                        class="bg-purple-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                        <%= categoryCount %>
+                    </span>
+                </a>
+            </li>
 
+            <li>
+                <a href="/products"
+                    class="flex items-center justify-between p-3 rounded-lg transition hover:bg-yellow-100 hover:text-yellow-600 border-l-4 border-transparent hover:border-yellow-500">
+                    <div class="flex items-center gap-3">
+                        📦 <span>Products</span>
+                    </div>
+                    <span
+                        class="bg-yellow-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                        <%=productCount %>
+                    </span>
+                </a>
+            </li>
 
+            <li>
+                <a href="/products/old-history"
+                    class="flex items-center justify-between p-3 rounded-lg transition hover:bg-gray-200 hover:text-gray-800 border-l-4 border-transparent hover:border-gray-500">
+                    <div class="flex items-center gap-3">
+                        📜 <span>Products History</span>
+                    </div>
+                    <span
+                        class="bg-gray-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                        <%=oldProductCount %>
+                    </span>
+                </a>
+            </li>
 
-        .side-bar.active {
-            left: 0;
-        }
-
-        h1 {
-
-            text-align: center;
-            font-weight: 500;
-            font-size: 25px;
-            padding-bottom: 13px;
-            font-family: sans-serif;
-            letter-spacing: 2px;
-        }
-
-        .side-bar .menu {
-            width: 100%;
-            margin-top: 30px;
-        }
-
-        .side-bar .menu .item {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .side-bar .menu .item a {
-            color: #fff;
-            font-size: 16px;
-            text-decoration: none;
-            display: block;
-            padding: 5px 30px;
-            line-height: 60px;
-        }
-
-        .side-bar .menu .item a:hover {
-            background: #33363a;
-            transition: 0.3s ease;
-        }
-
-        .side-bar .menu .item i {
-            margin-right: 15px;
-        }
-
-        .side-bar .menu .item a .dropdown {
-            position: absolute;
-            right: 0;
-            margin: 20px;
-            transition: 0.3s ease;
-        }
-
-        .side-bar .menu .item .sub-menu {
-            background: #262627;
-            display: none;
-        }
-
-        .side-bar .menu .item .sub-menu a {
-            padding-left: 80px;
-        }
-
-        .rotate {
-            transform: rotate(90deg);
-        }
-
-        .close-btn {
-            position: absolute;
-            color: #fff;
-
-            font-size: 23px;
-            right: 0px;
-            margin: 15px;
-            cursor: pointer;
-        }
-
-        .menu-btn {
-            position: absolute;
-            color: rgb(0, 0, 0);
-            font-size: 35px;
-            margin: 25px;
-            cursor: pointer;
-        }
-
-        .main {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 50px;
-        }
-
-        .main h1 {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 60px;
-            text-align: center;
-            line-height: 80px;
-        }
-
-        @media (max-width: 900px) {
-            .main h1 {
-                font-size: 40px;
-                line-height: 60px;
-            }
-        }
-
-        img {
-            width: 100px;
-            margin: 15px;
-            border-radius: 50%;
-            margin-left: 70px;
-            border: 3px solid #b4b8b9;
-        }
-
-        header {
-            background: #33363a;
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
-</head>
-
-<body>
-
-    <div class="menu-btn">
-        <i class="fas fa-bars"></i>
+        </ul>
     </div>
-
-
-    <div class="side-bar">
-
-        <header>
-
-
-
-            <div class="close-btn">
-
-                <i class="fas fa-times"></i>
-            </div>
-            <img src="https://lh3.googleusercontent.com/a-/AOh14Gj99VObFyE8W_h8RrcwZO_aYiIHu5AAa_XpnOym=s600-k-no-rp-mo"
-                alt="">
-            <h1>Mystery Code</h1>
-        </header>
-        <div class="menu">
-            <div class="item"><a href="#"><i class="fas fa-desktop"></i>Dashboard</a></div>
-            <div class="item">
-                <a class="sub-btn"><i class="fas fa-table"></i>Tables<i class="fas fa-angle-right dropdown"></i></a>
-                <div class="sub-menu">
-                    <a href="#" class="sub-item">Sub Item 01</a>
-                    <a href="#" class="sub-item">Sub Item 02</a>
-                    <a href="#" class="sub-item">Sub Item 03</a>
-                </div>
-            </div>
-            <div class="item"><a href="#"><i class="fas fa-th"></i>Forms</a></div>
-            <div class="item">
-                <a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
-                <div class="sub-menu">
-                    <a href="#" class="sub-item">Sub Item 01</a>
-                    <a href="#" class="sub-item">Sub Item 02</a>
-                </div>
-            </div>
-            <div class="item"><a href="#"><i class="fas fa-info-circle"></i>About</a></div>
-        </div>
-    </div>
-    <section class="main">
-        <h1>Sidebar Menu With<br>Sub-Menus</h1>
-    </section>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            //jquery for toggle sub menus
-            $('.sub-btn').click(function () {
-                $(this).next('.sub-menu').slideToggle();
-                $(this).find('.dropdown').toggleClass('rotate');
-            });
-
-            //jquery for expand and collapse the sidebar
-            $('.menu-btn').click(function () {
-                $('.side-bar').addClass('active');
-                $('.menu-btn').css("visibility", "hidden");
-            });
-
-            $('.close-btn').click(function () {
-                $('.side-bar').removeClass('active');
-                $('.menu-btn').css("visibility", "visible");
-            });
-        });
-    </script>
-
-</body>
-
-</html>
