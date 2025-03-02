@@ -410,6 +410,8 @@
         <div class="logo-details">
             <img src="/images/logo.png" alt="">
         </div>
+
+
         <ul class="nav-links">
 
             <% if (userRole==='admin' ){ %>
@@ -488,69 +490,75 @@
                                         </li>
                                         <% } %>
 
+
+                                            <li>
+                                                <div class="iocn-link">
+                                                    <a href="#">
+                                                        <i class="fa-solid fa-money-bill-wave"></i> <span
+                                                            class="link_name">Fees</span>
+                                                    </a>
+                                                    <i class='bx bxs-chevron-down arrow'></i>
+                                                </div>
+                                                <ul class="sub-menu">
+                                                    <li><a class="link_name" href="#">Fees</a>
+                                                    </li>
+                                                    <% if (userRole==='admin' ){ %>
+
+                                                        <li><a href="/dashboard/fee/add">Add Fee</a></li>
+                                                        <li><a href="/dashboard/fee/reports">Fee Reports</a></li>
+                                                        <% } %>
+
+                                                            <% if (userRole==='student' ){ %>
+
+                                                                <li><a href="/dashboard/check-fee">Check Fee</a></li>
+                                                                <% } %>
+
+                                                </ul>
+                                            </li>
+
+                                            <li>
+                                                <div class="iocn-link">
+                                                    <a href="#">
+                                                        <i class="fa-solid fa-clipboard-user"></i> <span
+                                                            class="link_name">Attendance</span>
+                                                    </a>
+                                                    <i class='bx bxs-chevron-down arrow'></i>
+                                                </div>
+                                                <ul class="sub-menu">
+                                                    <% if (userRole==='teacher' || userRole==='admin' ) { %>
+                                                        <li><a class="link_name" href="#">Attendance</a>
+                                                        </li>
+                                                        <li><a href="/dashboard/attendance/mark">Take
+                                                                Attendance</a>
+                                                        </li>
+                                                        <li><a href="/dashboard/attendance/reports">Attendance
+                                                                Reports</a></li>
+                                                        <% } %>
+
+                                                            <% if (userRole==='student' ) { %>
+                                                                <li><a href="/dashboard/attendance/checkattendance">Check
+                                                                        Attendance</a></li>
+                                                                <% } %>
+                                                </ul>
+                                            </li>
+
                                             <% if (userRole==='admin' ){ %>
 
                                                 <li>
                                                     <div class="iocn-link">
-                                                        <a href="#">
-                                                            <i class="fa-solid fa-money-bill-wave"></i> <span
-                                                                class="link_name">Fees</span>
+                                                        <a href="">
+                                                            <i class="fa-solid fa-user-tie"></i> <span
+                                                                class="link_name">Admin</span>
                                                         </a>
                                                         <i class='bx bxs-chevron-down arrow'></i>
                                                     </div>
                                                     <ul class="sub-menu">
-                                                        <li><a class="link_name" href="#">Fees</a>
+                                                        <li><a class="link_name"
+                                                                href="/dashboard/admin/reports">Admin</a></li>
+                                                        <li><a href="/dashboard/admin/add">Add Admin</a></li>
+                                                        <li><a href="/dashboard/admin/reports">Admin Reports</a>
                                                         </li>
-                                                        <li><a href="/dashboard/fee/add">Add Fee</a></li>
-                                                        <li><a href="/dashboard/fee/reports">Fee Reports</a></li>
-                                                    </ul>
                                                 </li>
-                                                <% } %>
-
-                                                    <li>
-                                                        <div class="iocn-link">
-                                                            <a href="#">
-                                                                <i class="fa-solid fa-clipboard-user"></i> <span
-                                                                    class="link_name">Attendance</span>
-                                                            </a>
-                                                            <i class='bx bxs-chevron-down arrow'></i>
-                                                        </div>
-                                                        <ul class="sub-menu">
-                                                            <% if (userRole==='teacher' || userRole==='admin' ) { %>
-                                                                <li><a class="link_name" href="#">Attendance</a>
-                                                                </li>
-                                                                <li><a href="/dashboard/attendance/mark">Take
-                                                                        Attendance</a>
-                                                                </li>
-                                                                <li><a href="/dashboard/attendance/reports">Attendance
-                                                                        Reports</a></li>
-                                                                <% } %>
-
-                                                                    <% if (userRole==='student' ) { %>
-                                                                        <li><a
-                                                                                href="/dashboard/attendance/checkattendance">Check
-                                                                                Attendance</a></li>
-                                                                        <% } %>
-                                                        </ul>
-                                                    </li>
-
-                                                    <% if (userRole==='admin' ){ %>
-
-                                                        <li>
-                                                            <div class="iocn-link">
-                                                                <a href="">
-                                                                    <i class="fa-solid fa-user-tie"></i> <span
-                                                                        class="link_name">Admin</span>
-                                                                </a>
-                                                                <i class='bx bxs-chevron-down arrow'></i>
-                                                            </div>
-                                                            <ul class="sub-menu">
-                                                                <li><a class="link_name"
-                                                                        href="/dashboard/admin/reports">Admin</a></li>
-                                                                <li><a href="/dashboard/admin/add">Add Admin</a></li>
-                                                                <li><a href="/dashboard/admin/reports">Admin Reports</a>
-                                                                </li>
-                                                        </li>
         </ul>
         </li>
         <% } %>
@@ -618,13 +626,6 @@
                     </ul>
                 </li>
                 <% } %>
-
-
-
-
-
-
-
                     <li>
                         <a href="/dashboard/logout">
                             <i class='bx bx-log-out'></i> <span class="link_name">Logout</span>
@@ -634,10 +635,6 @@
                             </li>
                         </ul>
                     </li>
-
-
-
-
                     </ul>
     </div>
 

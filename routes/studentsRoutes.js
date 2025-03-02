@@ -7,7 +7,8 @@ const authenticateUser = require('../middlewares/authenticateUser');
 const checkRole = require('../middlewares/checkRole');
 const bcrypt = require('bcrypt');
 const { body, validationResult } = require('express-validator');
-const Fee = require('../models/feesSChema')
+const Fee = require('../models/feesSChema');
+const { getStudentFee, printFee } = require('../controllers/studentCheckFeeController');
 
 
 
@@ -30,6 +31,12 @@ router.get('/dashboard/student/add', authenticateUser, checkRole('admin', 'teach
         res.redirect('/dashboard/student/reports'); // Redirect on error
     }
 });
+
+
+// Route for Student to check there fee details
+router.get('/dashboard/check-fee', authenticateUser, checkRole('student'), getStudentFee);
+
+router.get('/dashboard/print-fee/:id', authenticateUser, checkRole("student"), printFee);
 
 // Route to Create Students
 router.post(

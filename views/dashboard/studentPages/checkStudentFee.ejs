@@ -1,0 +1,90 @@
+<%- include('../../partials/dashboard') %>
+
+    <main class="flex-grow p-4 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200 min-h-screen">
+        <!-- Header Section -->
+        <header
+            class="flex flex-col md:flex-row items-center justify-between bg-blue-600 text-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="text-center md:text-left">
+                <h2 class="text-3xl font-bold tracking-wide">Fee Reports</h2>
+                <p class="text-sm hidden md:block opacity-90">An overview of <%= student %> fee reports.</p>
+            </div>
+
+            <!-- Date Filter Form -->
+            <form action="/dashboard/check-fee" method="GET"
+                class="flex flex-wrap items-center mt-5 md:mt-2 space-y-2 md:space-y-0 md:space-x-4 bg-white p-3 rounded-lg shadow-md">
+                <div class="flex flex-col">
+                    <label class="text-sm font-medium text-gray-600">Start Date:</label>
+                    <input type="date" name="startDate" value="<%= startDate || '' %>"
+                        class="border rounded-md px-3 py-2 text-gray-600 focus:ring focus:ring-blue-300">
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-sm font-medium text-gray-600">End Date:</label>
+                    <input type="date" name="endDate" value="<%= endDate || '' %>"
+                        class="border rounded-md px-3 py-2 text-gray-600 focus:ring focus:ring-blue-300">
+                </div>
+                <button type="submit"
+                    class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition w-full md:w-auto">
+                    Filter
+                </button>
+            </form>
+        </header>
+
+        <!-- Fee Report Table -->
+        <div class="max-w-full overflow-x-auto bg-white shadow-xl rounded-lg p-4 md:p-8">
+            <table class="w-full border border-gray-200 shadow-md rounded-lg min-w-max">
+                <thead class="bg-gray-800 text-white text-xs md:text-sm uppercase">
+                    <tr>
+                        <th class="py-3 px-4 text-left">Category</th>
+                        <th class="py-3 px-4 text-left">Amount</th>
+                        <th class="py-3 px-4 text-left">Month</th>
+                        <th class="py-3 px-4 text-left">Due Date</th>
+                        <th class="py-3 px-4 text-left">Status</th>
+                        <th class="py-3 px-4 text-left">Payment Date</th>
+                        <th class="py-3 px-4 text-left">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700 text-xs md:text-sm">
+                    <% if (fees.length> 0) { %>
+                        <% fees.forEach(fee=> { %>
+                            <tr class="border-b hover:bg-gray-50 transition duration-300">
+
+                                <td class="py-4 px-4">
+                                    <%= fee.category %>
+                                </td>
+                                <td class="py-4 px-4 font-medium text-green-600">Rs. <%= fee.amount %>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <%= fee.month %>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <%= new Date(fee.dueDate).toLocaleDateString() %>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <% if (fee.paymentStatus==='Paid' ) { %>
+                                        <span
+                                            class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs font-semibold">Paid</span>
+                                        <% } else { %>
+                                            <span
+                                                class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-semibold">Unpaid</span>
+                                            <% } %>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <%= fee.paymentDate ? new Date(fee.paymentDate).toLocaleDateString() : "N/A" %>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <a href="/dashboard/print-fee/<%= fee._id %>"
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-md transition">View</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="8" class="text-center py-6 text-gray-500">No records found</td>
+                                    </tr>
+                                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <%- include('../../partials/dashboardfooter') %>

@@ -105,8 +105,9 @@
                                         <%= fee.classId.name %>
                                     </td>
                                     <td class="px-6 py-4 text-sm">
-                                        <%= fee.studentId.name %>
+                                        <%= fee.studentId ? fee.studentId.name : 'N/A' %>
                                     </td>
+
                                     <td class="px-6 py-4 text-sm">
                                         <%= fee.category %>
                                     </td>
