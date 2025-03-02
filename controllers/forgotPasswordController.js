@@ -107,7 +107,7 @@ const postForgotPassword = async (req, res) => {
             return res.redirect("/forgot-password");
         }
 
-        req.flash("success_msg", "An email has been sent with further instructions.");
+        req.flash("success_msg", "An email has been sent successfully.");
         res.redirect("/forgot-password");
 
     } catch (err) {
