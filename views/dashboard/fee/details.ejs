@@ -1,43 +1,19 @@
 <%- include('../../partials/dashboard') %>
 
-    <style>
-        @media print {
-            body * {
-                visibility: hidden;
-                /* Hide everything outside the voucher */
-            }
-
-            .print-area,
-            .print-area * {
-                visibility: visible;
-                /* Show only the voucher container */
-            }
-
-            .print-area {
-                position: absolute;
-                /* Ensure proper layout */
-                top: 0;
-                left: 0;
-                right: 0;
-                margin: 0 auto;
-                width: 100%;
-            }
-        }
-    </style>
 
 
-    <main class="p-8 bg-gradient-to-r from-blue-50 to-blue-200">
+    <main class="p-8">
         <!-- Print Button -->
         <div class="text-right mb-6">
-            <button onclick="window.print()"
+            <button onclick="printVoucher()"
                 class="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
                 Print Voucher
             </button>
         </div>
 
         <!-- Fee Voucher Container with Conditional Background Color -->
-        <!-- Fee Voucher Container with Conditional Background Color -->
-        <div class="print-area p-8 shadow-md rounded-md max-w-3xl mx-auto border border-gray-200 bg-white">
+        <div id="feeVoucher"
+            class="print-area p-8 shadow-md rounded-md max-w-3xl mx-auto border border-gray-200 bg-white">
             <!-- School Info Section -->
             <div class="text-center mb-6">
                 <img src="/images/logo.png" alt="School Logo" class="h-20 mx-auto">
@@ -130,11 +106,11 @@
 
         <script>
             function printVoucher() {
+                const printContent = document.getElementById('feeVoucher').innerHTML;
                 const originalContent = document.body.innerHTML;
-                const printContent = document.querySelector('.print-area').innerHTML;
 
-                document.body.innerHTML = printContent; // Replace content with voucher for printing
-                window.print(); // Trigger print dialog
-                document.body.innerHTML = originalContent; // Restore original content
+                document.body.innerHTML = `<div>${printContent}</div>`; // Isolate voucher for printing
+                window.print();
+                location.reload(); // Reload to restore original content
             }
         </script>

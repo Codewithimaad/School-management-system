@@ -8,15 +8,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="/images/logo.png">
-
 </head>
 
-<body class="bg-gradient-to-r from-blue-200 to-blue-500 min-h-screen flex items-center justify-center">
+<body class="bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center min-h-screen">
 
     <!-- Back to Home Button -->
     <div class="absolute top-4 left-4 sm:top-6 sm:left-6">
         <a href="/"
-            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:outline-none transition-all transform hover:scale-105">
+            class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium rounded-lg shadow-xl hover:shadow-lg transition-all transform hover:scale-105">
             ⬅ Back to Home
         </a>
     </div>
@@ -25,61 +24,64 @@
 
         <!-- Login Form Container -->
         <div
-            class="w-full max-w-md p-8 sm:p-8 bg-white rounded-xl shadow-2xl border border-gray-100 bg-opacity-80 backdrop-blur-lg">
+            class="w-full max-w-sm p-6 bg-white rounded-2xl shadow-2xl border border-gray-100 bg-opacity-90 backdrop-blur-lg">
 
             <!-- Logo Section -->
             <div class="flex justify-center mb-4">
                 <a href="/">
-                    <img src="/images/logo.png" alt="Luminous School" class="w-28 sm:w-36 h-auto">
+                    <img src="/images/logo.png" alt="Luminous School" class="w-20 h-auto">
                 </a>
             </div>
 
             <!-- Portal Login Title -->
-            <h1 class="text-3xl font-semibold text-gray-800 text-center mb-6">Portal Login</h1>
+            <h1
+                class="text-2xl font-bold text-gray-900 text-center mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Portal Login
+            </h1>
 
             <!-- Login Form -->
-            <form id="login-form" method="POST" action="/login" class="space-y-6">
+            <form id="login-form" method="POST" action="/login" class="space-y-4">
 
                 <!-- Email Input -->
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Email"
-                        class="mt-1 block w-full px-3 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-all focus:outline-none text-gray-900">
-                    <p id="email-error" class="text-red-500 text-sm hidden">Please enter a valid email address.</p>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email"
+                        class="mt-1 bg-gray-100 block w-full px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-blue-300  transition-all focus:outline-none text-gray-900">
+                    <p id="email-error" class="text-red-500 text-sm mt-1 hidden">Please enter a valid email address.</p>
                 </div>
 
                 <!-- Password Input with Eye Icon -->
                 <div class="relative">
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                    <input id="password" name="password" placeholder="Password" type="password"
-                        class="mt-1 block w-full px-3 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-all focus:outline-none text-gray-900">
-                    <p id="password-error" class="text-red-500 text-sm hidden">Password must be at least 8 characters.
-                    </p>
-                    <i id="eye-icon" class="fa fa-eye absolute right-4 top-9 text-gray-500 cursor-pointer"
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input id="password" name="password" placeholder="Enter your password" type="password"
+                        class="mt-1 block bg-gray-100 w-full px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-blue-300 transition-all focus:outline-none text-gray-900">
+                    <p id="password-error" class="text-red-500 text-sm mt-1 hidden">Password must be at least 8
+                        characters.</p>
+                    <i id="eye-icon" class="fa fa-eye absolute right-3 top-8 text-gray-500 cursor-pointer"
                         onclick="togglePassword()"></i>
                 </div>
 
                 <!-- Role Selection Dropdown -->
-                <div class="mb-4">
-                    <label for="role" class="block text-sm font-medium text-gray-700">Select Role</label>
+                <div>
+                    <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Select Role</label>
                     <select id="role" name="role"
-                        class="mt-1 block w-full px-3 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-all focus:outline-none text-gray-900">
-                        <option value="" disabled selected>Select Role</option>
-                        <option value="admin">Admin</option>
-                        <option value="teacher">Teacher</option>
-                        <option value="student">Student</option>
+                        class="mt-1 block bg-gray-100 w-full px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-blue-300 transition-all focus:outline-none text-gray-900">
+                        <option class="bg-gray-200 p-3 " value="" disabled selected>Select Role</option>
+                        <option class="bg-gray-200 p-3 " value="admin">Admin</option>
+                        <option class="bg-gray-200 p-3 " value="teacher">Teacher</option>
+                        <option class="bg-gray-200 p-3 " value="student">Student</option>
                     </select>
-                    <p id="role-error" class="text-red-500 text-sm hidden">Please select a role.</p>
+                    <p id="role-error" class="text-red-500 text-sm mt-1 hidden">Please select a role.</p>
                 </div>
 
                 <!-- Submit Button -->
                 <button type="submit"
-                    class="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:outline-none transition-all transform hover:scale-105">
+                    class="w-full py-2.5 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all transform hover:scale-105">
                     Login
                 </button>
 
                 <!-- Forgot Password Link -->
-                <div class="text-center mt-4">
+                <div class="text-center mt-3">
                     <a href="/forgot-password" class="text-blue-600 hover:text-blue-800 text-sm">Forgot Password?</a>
                 </div>
             </form>
@@ -87,6 +89,19 @@
 
         <script src="/javascripts/loginFormValidation.js"></script>
 
+        <script>
+            function togglePassword() {
+                const passwordInput = document.getElementById('password');
+                const eyeIcon = document.getElementById('eye-icon');
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            }
+        </script>
 </body>
 
 </html>

@@ -1,100 +1,111 @@
 <%- include('../../partials/dashboard') %>
 
-    <main class="flex-grow p-4 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
-
-
+    <main class="flex-grow p-4 md:p-8 lg:p-12">
+        <!-- Flash Messages -->
         <%- include('../../partials/flashMessage') %>
-
 
             <!-- Header Section -->
             <header
-                class="flex items-center justify-between bg-blue-600 text-white rounded-lg shadow-md px-8 py-6 mb-8">
+                class="flex flex-wrap gap-5 items-center justify-between bg-white rounded-xl shadow-2xl px-8 py-6 mb-8">
                 <div>
-                    <h2 class="text-3xl font-semibold tracking-wide">Fee Reports</h2>
-                    <p class="text-sm lg:block hidden">An overview of all student fee reports.
-                    <p>
+                    <h2
+                        class="text-2xl md:text-3xl font-bold text-gray-900 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        Fee Reports
+                    </h2>
+                    <p class="text-sm text-gray-600">An overview of all student fee reports.</p>
                 </div>
                 <a href="/dashboard/fee/add"
-                    class="bg-white text-green-600 hover:bg-gray-100 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
-                    Add new Fee
+                    class="bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm md:text-lg font-semibold px-6 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:scale-105">
+                    Add New Fee
                 </a>
             </header>
 
-
             <!-- Filter Form -->
-            <form action="/dashboard/fee/reports" method="GET" class="mb-8 flex flex-wrap gap-4">
-                <div class="flex items-center gap-2">
-                    <label for="classDropdown" class="text-lg">Class:</label>
-                    <select name="classId" id="classDropdown"
-                        class="px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 w-full sm:w-auto">
-                        <option value="">All Classes</option>
-                        <% classes.forEach(cls=> { %>
-                            <option value="<%= cls._id %>" <%=filters.classId===cls._id.toString() ? 'selected' : '' %>>
-                                <%= cls.name %>
+            <form action="/dashboard/fee/reports" method="GET" class="mb-8 bg-white p-6 rounded-xl shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Class Dropdown -->
+                    <div>
+                        <label for="classDropdown" class="block text-sm font-medium text-gray-700 mb-2">Class</label>
+                        <select name="classId" id="classDropdown"
+                            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                            <option value="">All Classes</option>
+                            <% classes.forEach(cls=> { %>
+                                <option value="<%= cls._id %>" <%=filters.classId===cls._id.toString() ? 'selected' : ''
+                                    %>>
+                                    <%= cls.name %>
+                                </option>
+                                <% }); %>
+                        </select>
+                    </div>
+
+                    <!-- Student Dropdown -->
+                    <div>
+                        <label for="studentDropdown"
+                            class="block text-sm font-medium text-gray-700 mb-2">Student</label>
+                        <select name="studentId" id="studentDropdown"
+                            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                            <option value="">All Students</option>
+                            <% students.forEach(student=> { %>
+                                <option value="<%= student._id %>" <%=filters.studentId===student._id.toString()
+                                    ? 'selected' : '' %>>
+                                    <%= student.name %>
+                                </option>
+                                <% }); %>
+                        </select>
+                    </div>
+
+                    <!-- Payment Status Dropdown -->
+                    <div>
+                        <label for="paymentStatus" class="block text-sm font-medium text-gray-700 mb-2">Payment
+                            Status</label>
+                        <select name="paymentStatus" id="paymentStatus"
+                            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                            <option value="">All</option>
+                            <option value="Paid" <%=filters.paymentStatus==='Paid' ? 'selected' : '' %>>Paid</option>
+                            <option value="Unpaid" <%=filters.paymentStatus==='Unpaid' ? 'selected' : '' %>>Unpaid
                             </option>
-                            <% }); %>
-                    </select>
+                        </select>
+                    </div>
+
+                    <!-- Date Range Inputs -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="startDate" class="block text-sm font-medium text-gray-700 mb-2">Start
+                                Date</label>
+                            <input type="date" name="startDate" value="<%= filters.startDate || '' %>" id="startDate"
+                                class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                        </div>
+                        <div>
+                            <label for="endDate" class="block text-sm font-medium text-gray-700 mb-2">End Date</label>
+                            <input type="date" name="endDate" value="<%= filters.endDate || '' %>" id="endDate"
+                                class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="flex items-center gap-2">
-                    <label for="studentDropdown" class="text-lg">Student:</label>
-                    <select name="studentId" id="studentDropdown"
-                        class="px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 w-full sm:w-auto">
-                        <option value="">All Students</option>
-                        <% students.forEach(student=> { %>
-                            <option value="<%= student._id %>" <%=filters.studentId===student._id.toString()
-                                ? 'selected' : '' %>> <%= student.name %>
-                            </option>
-                            <% }); %>
-                    </select>
-                </div>
-
-                <div class="flex items-center gap-2">
-                    <label for="paymentStatus" class="text-lg">Payment Status:</label>
-                    <select name="paymentStatus" id="paymentStatus"
-                        class="px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 w-full sm:w-auto">
-                        <option value="">All</option>
-                        <option value="Paid" <%=filters.paymentStatus==='Paid' ? 'selected' : '' %>>Paid
-                        </option>
-                        <option value="Unpaid" <%=filters.paymentStatus==='Unpaid' ? 'selected' : '' %>
-                            >Unpaid</option>
-                    </select>
-                </div>
-
-                <div class="flex items-center gap-2">
-                    <label for="startDate" class="text-lg">Start Date:</label>
-                    <input type="date" name="startDate" value="<%= filters.startDate || '' %>" id="startDate"
-                        class="px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 w-full sm:w-auto">
-                </div>
-
-                <div class="flex items-center gap-2">
-                    <label for="endDate" class="text-lg">End Date:</label>
-                    <input type="date" name="endDate" value="<%= filters.endDate || '' %>" id="endDate"
-                        class="px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 w-full sm:w-auto">
-                </div>
-
-                <div class="flex items-center gap-2">
+                <!-- Filter Button -->
+                <div class="mt-6 flex justify-end">
                     <button type="submit"
-                        class="px-6 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
+                        class="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all transform hover:scale-105">
                         Filter
                     </button>
                 </div>
             </form>
 
             <!-- Fee Report Table -->
-            <div class="overflow-x-auto">
-                <table class="table-auto w-full bg-white shadow-lg rounded-lg">
-                    <thead class="bg-gray-100 text-gray-700">
+            <div class="overflow-x-auto bg-white rounded-xl shadow-2xl">
+                <table class="min-w-full">
+                    <thead class="bg-gray-100">
                         <tr class="border-b">
-                            <th class="px-6 py-3 text-left font-semibold text-sm">Class</th>
-                            <th class="px-6 py-3 text-left font-semibold text-sm">Student</th>
-                            <th class="px-6 py-3 text-left font-semibold text-sm">Category</th>
-                            <th class="px-6 py-3 text-left font-semibold text-sm">Amount</th>
-                            <th class="px-6 py-3 text-left font-semibold text-sm">Month</th>
-                            <th class="px-6 py-3 text-left font-semibold text-sm">Due Date</th>
-                            <th class="px-6 py-3 text-left font-semibold text-sm">Payment Status</th>
-                            <th class="px-6 py-3 text-left font-semibold text-sm">Payment Date</th>
-                            <th class="px-6 py-3 text-left font-semibold text-sm">Actions</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Class</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Student</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Category</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Amount</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Month</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Due Date</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Payment Status</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Payment Date</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600">
@@ -107,7 +118,6 @@
                                     <td class="px-6 py-4 text-sm">
                                         <%= fee.studentId ? fee.studentId.name : 'N/A' %>
                                     </td>
-
                                     <td class="px-6 py-4 text-sm">
                                         <%= fee.category %>
                                     </td>
@@ -120,54 +130,47 @@
                                     <td class="px-6 py-4 text-sm">
                                         <%= new Date(fee.dueDate).toLocaleDateString() %>
                                     </td>
-                                    <% if(fee.paymentStatus==='Paid' ){ %>
-                                        <td class="px-6 py-4">
-                                            <span class=" text-sm text-green-600 ">Paid</span>
-                                        </td>
-                                        <% } else{ %>
-                                            <td class="px-6 py-4">
-                                                <span class=" text-sm text-red-600">Unpaid</span>
-                                            </td>
-                                            <% } %>
+                                    <td class="px-6 py-4 text-sm">
+                                        <% if(fee.paymentStatus==='Paid' ){ %>
+                                            <span class="text-green-600">Paid</span>
+                                            <% } else { %>
+                                                <span class="text-red-600">Unpaid</span>
+                                                <% } %>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm">
+                                        <%= fee.paymentDate ? new Date(fee.paymentDate).toLocaleDateString() : 'N/A' %>
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 text-sm flex flex-col sm:flex-row sm:items-center sm:justify-start space-y-2 sm:space-y-0 sm:space-x-4">
+                                        <!-- View Button -->
+                                        <a href="/dashboard/fee/details/<%= fee._id %>"
+                                            class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition-all">
+                                            View
+                                        </a>
 
-                                                <td class="px-6 py-4 text-sm">
-                                                    <%= fee.paymentDate ? new Date(fee.paymentDate).toLocaleDateString()
-                                                        : 'N/A' %>
-                                                </td>
+                                        <!-- Delete Button -->
+                                        <button
+                                            class="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 transition-all delete-btn"
+                                            data-id="<%= fee._id %>">
+                                            Delete
+                                        </button>
 
-                                                <td
-                                                    class="px-6 py-4 text-sm flex flex-col sm:flex-row sm:items-center sm:justify-start space-y-2 sm:space-y-0 sm:space-x-4">
-                                                    <!-- View Button -->
-                                                    <a href="/dashboard/fee/details/<%= fee._id %>"
-                                                        class="text-white rounded-md px-4 py-2 bg-blue-500 hover:bg-blue-800 w-full sm:w-auto text-center sm:text-left">
-                                                        View
-                                                    </a>
-
-                                                    <button
-                                                        class="text-white rounded-md px-4 py-2 bg-red-500 hover:bg-red-800 w-full sm:w-auto text-center sm:text-left delete-btn"
-                                                        data-id="<%= fee._id %>">
-                                                        Delete </button>
-
-                                                    <% if (fee.paymentStatus !=='Paid' ) { %>
-
-                                                        <!-- Mark Paid Button with SweetAlert Confirmation -->
-                                                        <button
-                                                            class="text-white rounded-md py-2 px-3 bg-green-700 hover:bg-green-900 text-center paid-btn"
-                                                            data-id="<%= fee._id %>">
-                                                            Mark Paid
-                                                        </button>
-                                                        <% } else { %>
-                                                            <span
-                                                                class="text-gray-400 rounded-md sm:w-auto text-center ">Paid</span>
-                                                            <% } %>
-                                                </td>
-
-
+                                        <!-- Mark Paid Button -->
+                                        <% if (fee.paymentStatus !=='Paid' ) { %>
+                                            <button
+                                                class="px-4 py-2 text-sm bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all paid-btn"
+                                                data-id="<%= fee._id %>">
+                                                Mark Paid
+                                            </button>
+                                            <% } else { %>
+                                                <span class="text-gray-400">Paid</span>
+                                                <% } %>
+                                    </td>
                                 </tr>
                                 <% }); %>
                                     <% } else { %>
                                         <tr>
-                                            <td colspan="8" class="text-center py-4">No records found</td>
+                                            <td colspan="9" class="text-center py-4 text-gray-600">No records found</td>
                                         </tr>
                                         <% } %>
                     </tbody>
@@ -175,62 +178,51 @@
             </div>
 
             <!-- Pagination -->
-            <div class="mt-6 flex items-center justify-between">
-                <div class="text-sm text-gray-600">
+            <div class="mt-6 flex flex-col sm:flex-row items-center justify-between bg-white p-4 rounded-xl shadow-2xl">
+                <div class="text-sm text-gray-600 mb-4 sm:mb-0">
                     <% let startIndex=(currentPage - 1) * 15 + 1; %>
                         <% let endIndex=startIndex + fees.length - 1; %>
-                            Showing <%= startIndex %> - <%= endIndex %> of <%= totalFees %> students
+                            Showing <%= startIndex %> - <%= endIndex %> of <%= totalFees %> fees
                 </div>
 
-                <div>
-                    <nav class="flex items-center space-x-4">
-                        <!-- Previous Button -->
-                        <% if (currentPage> 1) { %>
-                            <a href="/dashboard/fee/reports?page=<%= currentPage - 1 %>&classId=<%= filters.classId %>&studentId=<%= filters.studentId %>&paymentStatus=<%= filters.paymentStatus %>&startDate=<%= filters.startDate %>&endDate=<%= filters.endDate %>"
-                                class="px-3 py-1 text-sm font-medium border rounded-md text-gray-600 hover:text-blue-800">
+                <nav class="flex items-center space-x-2">
+                    <!-- Previous Button -->
+                    <% if (currentPage> 1) { %>
+                        <a href="/dashboard/fee/reports?page=<%= currentPage - 1 %>&classId=<%= filters.classId %>&studentId=<%= filters.studentId %>&paymentStatus=<%= filters.paymentStatus %>&startDate=<%= filters.startDate %>&endDate=<%= filters.endDate %>"
+                            class="px-3 py-1 text-sm font-medium border rounded-lg text-gray-600 hover:bg-gray-100 transition-all">
+                            Previous
+                        </a>
+                        <% } else { %>
+                            <span class="px-3 py-1 text-sm font-medium border rounded-lg text-gray-400">
                                 Previous
-                            </a>
-                            <% } else { %>
-                                <span class="px-3 py-1 text-sm font-medium border rounded-md text-gray-400">
-                                    Previous
-                                </span>
-                                <% } %>
+                            </span>
+                            <% } %>
 
-                                    <!-- Page Numbers -->
-                                    <% for (let page=1; page <=totalPages; page++) { %>
-                                        <a href="/dashboard/fee/reports?page=<%= page %>&classId=<%= filters.classId %>&studentId=<%= filters.studentId %>&paymentStatus=<%= filters.paymentStatus %>&startDate=<%= filters.startDate %>&endDate=<%= filters.endDate %>"
-                                            class="px-3 py-1 text-sm font-medium border rounded-md <%= currentPage === page ? 'bg-blue-600 text-white' : 'bg-white text-gray-600' %>">
-                                            <%= page %>
-                                        </a>
-                                        <% } %>
+                                <!-- Page Numbers -->
+                                <% for (let page=1; page <=totalPages; page++) { %>
+                                    <a href="/dashboard/fee/reports?page=<%= page %>&classId=<%= filters.classId %>&studentId=<%= filters.studentId %>&paymentStatus=<%= filters.paymentStatus %>&startDate=<%= filters.startDate %>&endDate=<%= filters.endDate %>"
+                                        class="px-3 py-1 text-sm font-medium border rounded-lg <%= currentPage === page ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-100' %> transition-all">
+                                        <%= page %>
+                                    </a>
+                                    <% } %>
 
-                                            <!-- Next Button -->
-                                            <% if (currentPage < totalPages) { %>
-                                                <a href="/dashboard/fee/reports?page=<%= currentPage + 1 %>&classId=<%= filters.classId %>&studentId=<%= filters.studentId %>&paymentStatus=<%= filters.paymentStatus %>&startDate=<%= filters.startDate %>&endDate=<%= filters.endDate %>"
-                                                    class="px-3 py-1 text-sm font-medium border rounded-md text-gray-600 hover:text-blue-800">
+                                        <!-- Next Button -->
+                                        <% if (currentPage < totalPages) { %>
+                                            <a href="/dashboard/fee/reports?page=<%= currentPage + 1 %>&classId=<%= filters.classId %>&studentId=<%= filters.studentId %>&paymentStatus=<%= filters.paymentStatus %>&startDate=<%= filters.startDate %>&endDate=<%= filters.endDate %>"
+                                                class="px-3 py-1 text-sm font-medium border rounded-lg text-gray-600 hover:bg-gray-100 transition-all">
+                                                Next
+                                            </a>
+                                            <% } else { %>
+                                                <span
+                                                    class="px-3 py-1 text-sm font-medium border rounded-lg text-gray-400">
                                                     Next
-                                                </a>
-                                                <% } else { %>
-                                                    <span
-                                                        class="px-3 py-1 text-sm font-medium border rounded-md text-gray-400">
-                                                        Next
-                                                    </span>
-                                                    <% } %>
-                    </nav>
-                </div>
+                                                </span>
+                                                <% } %>
+                </nav>
             </div>
-
     </main>
 
-
-
-
     <%- include('../../partials/dashboardfooter') %>
-
-
-
-
-
 
         <script>
             const classDropdown = document.getElementById('classDropdown');
@@ -258,7 +250,6 @@
                 }
             });
         </script>
-
 
         <script>
             // SweetAlert2 script for "Mark Paid" confirmation
@@ -317,7 +308,7 @@
         </script>
 
         <script>
-            // SweetAlert2 script for "Mark Paid" confirmation
+            // SweetAlert2 script for "Delete" confirmation
             document.querySelectorAll('.delete-btn').forEach(button => {
                 button.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -325,17 +316,17 @@
 
                     Swal.fire({
                         title: 'Are you sure to delete this fee?',
-                        text: "This will Delete the fee.",
+                        text: "This will delete the fee.",
                         icon: 'warning',
                         showCancelButton: true,
-                        confirmButtonText: 'Yes, Delete it!',
+                        confirmButtonText: 'Yes, delete it!',
                         cancelButtonText: 'No, cancel!',
                         reverseButtons: true
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // Send a get request to delete the fee
+                            // Send a GET request to delete the fee
                             fetch(`/dashboard/fee/delete/${feeID}`, {
-                                method: 'get',
+                                method: 'GET',
                                 headers: {
                                     'Content-Type': 'application/json',
                                     'X-Requested-With': 'XMLHttpRequest' // To differentiate AJAX requests
@@ -345,7 +336,7 @@
                                     if (response.ok) {
                                         Swal.fire({
                                             title: "Success!",
-                                            text: "Fee has been Deletd.",
+                                            text: "Fee has been deleted.",
                                             icon: "success"
                                         }).then(() => {
                                             window.location.reload(); // Reload the page to reflect changes
