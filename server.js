@@ -34,6 +34,7 @@ const methodOverride = require('method-override');
 const setUserDetails = require('./middlewares/checkUserDetails');
 
 const authMiddleware = require('./middlewares/authMiddleWare');  // Import JWT auth middleware
+const themeMiddleware = require("./middlewares/themeMiddleware"); // Import the middleware
 
 
 
@@ -80,6 +81,9 @@ app.use(session({
 // Use JWT authentication before setting user details
 app.use(authMiddleware);
 app.use(setUserDetails);
+
+// Use the theme middleware globally
+app.use(themeMiddleware);
 
 
 

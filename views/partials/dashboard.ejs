@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -19,6 +19,13 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/images/logo.png">
 
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        };
+    </script>
+
+
     <!-- Hide scrollbar -->
     <style>
         #sidebar::-webkit-scrollbar {
@@ -32,7 +39,7 @@
     </style>
 </head>
 
-<body class=" bg-gradient-to-r from-blue-50 to-purple-50">
+<body class=" bg-white dark:bg-gray-700">
     <div class="flex h-screen"> <!-- Make this a flex container -->
 
         <!--Sidebar-->
@@ -64,6 +71,65 @@
 
                                 closeButton.addEventListener("click", function () {
                                     sidebar.classList.add("-translate-x-full");
+                                });
+                            });
+                        </script>
+
+
+                        <!-- JavaScript for Dropdown and Dark Mode Toggle -->
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                // Dropdown functionality
+                                const dropdownBtn = document.getElementById("userDropdownBtn");
+                                const dropdownMenu = document.getElementById("userDropdown");
+
+                                dropdownBtn.addEventListener("click", function (event) {
+                                    dropdownMenu.classList.toggle("hidden");
+                                });
+
+                                // Close dropdown if clicked outside
+                                document.addEventListener("click", function (event) {
+                                    if (!dropdownBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                                        dropdownMenu.classList.add("hidden");
+                                    }
+                                });
+
+                                // Dark Mode Toggle functionality
+                                const darkModeToggle = document.getElementById("darkModeToggle");
+                                const darkModeIcon = document.getElementById("darkModeIcon");
+                                const htmlElement = document.documentElement;
+
+                                // Function to set dark mode
+                                const enableDarkMode = () => {
+                                    htmlElement.classList.add("dark");
+                                    localStorage.setItem("theme", "dark");
+                                    darkModeIcon.classList.replace("fa-moon", "fa-sun");
+                                };
+
+                                // Function to set light mode
+                                const enableLightMode = () => {
+                                    htmlElement.classList.remove("dark");
+                                    localStorage.setItem("theme", "light");
+                                    darkModeIcon.classList.replace("fa-sun", "fa-moon");
+                                };
+
+                                // Check for saved theme preference
+                                const savedTheme = localStorage.getItem("theme");
+                                const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+                                if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
+                                    enableDarkMode();
+                                } else {
+                                    enableLightMode();
+                                }
+
+                                // Toggle dark mode
+                                darkModeToggle.addEventListener("click", function () {
+                                    if (htmlElement.classList.contains("dark")) {
+                                        enableLightMode();
+                                    } else {
+                                        enableDarkMode();
+                                    }
                                 });
                             });
                         </script>

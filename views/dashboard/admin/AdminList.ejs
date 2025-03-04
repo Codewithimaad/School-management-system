@@ -1,24 +1,25 @@
 <%- include('../../partials/dashboard') %>
 
-    <main class="flex-grow p-4 md:p-8 lg:p-12 ">
+    <main class="flex-grow p-4 md:p-8 lg:p-12">
 
         <%- include('../../partials/flashMessage') %>
 
             <!-- Header -->
             <header
-                class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b pb-6 mb-8 text-white rounded-lg bg-gradient-to-r from-blue-500 to-blue-900 shadow-lg px-6 md:px-8 py-6">
+                class="flex flex-wrap gap-5 items-start sm:items-center justify-between border-b pb-6 mb-8 text-gray-800 rounded-lg bg-white shadow-2xl px-6 md:px-8 py-6">
                 <div>
-                    <h2 class="text-2xl md:text-3xl font-semibold tracking-wide">All Admins</h2>
-                    <p class="text-sm hidden sm:block text-gray-200">List of all registered admins.</p>
+                    <h2 class="text-base md:text-lg font-bold tracking-wide">All Admins</h2>
+                    <p class="text-sm text-gray-500">List of all registered admins.</p>
                 </div>
                 <div class="mt-4 sm:mt-0">
                     <a href="/dashboard/admin/add"
-                        class="inline-block bg-white text-blue-600 font-semibold py-2 px-4 md:px-6 rounded-lg shadow-md hover:bg-blue-100 hover:shadow-lg transition-all duration-300">
+                        class="inline-block bg-gray-100 text-blue-600 font-semibold py-2 px-4 md:px-6 rounded-lg shadow-md hover:bg-gray-200 hover:shadow-lg transition-all duration-300">
                         Add new Admin
                     </a>
                 </div>
             </header>
 
+            <!-- Admin Cards Grid -->
             <section id="admin-cards" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <% admins.forEach(admin=> { %>
                     <div
@@ -37,6 +38,7 @@
                                             class="w-full h-72 object-cover rounded-t-xl">
                                         <% } %>
 
+                                            <!-- Gradient Overlay -->
                                             <div
                                                 class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
                                                 <h3 class="text-xl font-semibold text-white text-shadow-md mb-2">
@@ -50,7 +52,7 @@
 
                         <!-- Admin Info Section -->
                         <div class="px-6 py-4 space-y-4">
-                            <!-- Display the Description -->
+                            <!-- Description -->
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-500 text-sm">Description</span>
                                 <p class="text-sm font-semibold text-gray-700 line-clamp-2">
@@ -60,15 +62,27 @@
                         </div>
 
                         <!-- Admin Actions Section -->
-                        <div class="bg-gray-100 p-4 flex justify-between items-center">
+                        <div class="bg-gray-50 p-4 flex justify-between items-center border-t border-gray-100">
                             <a href="/dashboard/admin/edit/<%= admin._id %>"
-                                class="text-indigo-600 hover:text-indigo-800 font-semibold transition duration-300">
+                                class="text-indigo-600 hover:text-indigo-800 font-semibold transition duration-300 flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                    </path>
+                                </svg>
                                 Edit
                             </a>
                             <!-- Delete Button with SweetAlert confirmation -->
                             <button
-                                class="text-red-600 hover:text-red-800 font-semibold transition duration-300 delete-btn"
+                                class="text-red-600 hover:text-red-800 font-semibold transition duration-300 flex items-center delete-btn"
                                 data-id="<%= admin._id %>">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                    </path>
+                                </svg>
                                 Delete
                             </button>
                         </div>

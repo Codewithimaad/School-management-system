@@ -6,6 +6,7 @@ const Student = require('../models/studentModel');
 const authMiddleware = async (req, res, next) => {
     const token = req.cookies.token; // Read JWT from cookies
 
+
     if (!token) {
         req.user = null;  // Ensure user is null if no token is found
         return next();
@@ -36,7 +37,7 @@ const authMiddleware = async (req, res, next) => {
             email: user.email,
             role: user.role,
             gender: user.gender,
-            imageUrl: user.imageUrl || '/images/Male logo.png'
+            imageUrl: user.imageUrl || '/images/Male logo.png',
         };
 
         next();
