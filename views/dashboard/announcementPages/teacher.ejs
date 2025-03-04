@@ -8,10 +8,10 @@
 
             <!-- Header Section -->
             <header
-                class="flex items-center justify-between bg-white shadow-lg rounded-xl p-6 mb-8 border border-gray-200">
+                class="flex items-center justify-between bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 mb-8 text-gray-700 dark:text-white">
                 <div>
-                    <h2 class="text-3xl font-bold text-gray-800">📢 Teacher Announcements</h2>
-                    <p class="text-sm text-gray-500">Stay updated with the latest announcements.</p>
+                    <h2 class="text-3xl font-bold">📢 Teacher Announcements</h2>
+                    <p class="text-sm">Stay updated with the latest announcements.</p>
                 </div>
             </header>
 
@@ -20,21 +20,20 @@
                 <% if (announcements.length> 0) { %>
                     <% announcements.forEach(announcement=> { %>
                         <div
-                            class="bg-white shadow-md rounded-xl p-6 border border-gray-200 hover:shadow-lg transition duration-300">
-                            <h3 class="text-xl font-semibold text-gray-900">
+                            class="bg-white dark:bg-gray-800 shadow-md rounded-xl p-6 hover:shadow-lg transition duration-300 text-gray-700 dark:text-white">
+                            <h3 class="text-xl font-semibold ">
                                 <%= announcement.title %>
                             </h3>
-                            <p class="text-gray-700 mt-2 leading-relaxed">
+                            <p class=" mt-2 leading-relaxed">
                                 <%= announcement.content %>
                             </p>
-                            <p class="text-gray-500 text-sm mt-4">📅 Posted on: <%=
-                                    announcement.createdAt.toLocaleDateString() %>
+                            <p class=" text-sm mt-4">📅 Posted on: <%= announcement.createdAt.toLocaleDateString() %>
                             </p>
                         </div>
                         <% }); %>
                             <% } else { %>
                                 <div class="bg-white p-6 rounded-xl shadow-md text-center border border-gray-200">
-                                    <p class="text-gray-600">🚫 No announcements available at the moment.</p>
+                                    <p class="">🚫 No announcements available at the moment.</p>
                                 </div>
                                 <% } %>
             </section>

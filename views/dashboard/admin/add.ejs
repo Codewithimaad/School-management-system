@@ -5,14 +5,15 @@
 
             <!-- Header -->
             <header
-                class="flex flex-wrap gap-5 items-start sm:items-center justify-between border-b pb-6 mb-8 text-gray-800 rounded-lg bg-white shadow-2xl px-6 md:px-8 py-6">
+                class="flex flex-wrap gap-5 items-start sm:items-center justify-between pb-6 mb-8 text-gray-800 dark:text-white rounded-lg bg-white dark:bg-gray-800 shadow-2xl px-6 md:px-8 py-6">
                 <div>
-                    <h2 class="text-base md:text-3xl text-gray-800 font-bold tracking-wide">Add Admin</h2>
-                    <p class="text-sm text-gray-400">Please fill in the admin details below.</p>
+                    <h2 class="text-base md:text-3xl text-gray-800 dark:text-white font-bold tracking-wide">Add Admin
+                    </h2>
+                    <p class="text-sm text-gray-400 dark:text-gray-300">Please fill in the admin details below.</p>
                 </div>
                 <div class="mt-4 sm:mt-0">
                     <a href="/dashboard/admin/reports"
-                        class="inline-block bg-gray-100 text-blue-600 font-semibold py-2 px-4 md:px-6 rounded-lg shadow-md text-sm md:text-base hover:bg-gray-200 hover:shadow-lg transition-all duration-300">
+                        class="inline-block bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-blue-400 font-semibold py-2 px-4 md:px-6 rounded-lg shadow-md text-sm md:text-base hover:bg-gray-200 dark:hover:bg-gray-600 hover:shadow-lg transition-all duration-300">
                         Show All Admins
                     </a>
                 </div>
@@ -21,21 +22,23 @@
             <!-- Admin Form (Card Style) -->
             <section id="admin-form">
                 <form id="add-admin-form" action="/dashboard/admin/add" method="POST"
-                    class="bg-white p-8 shadow-2xl rounded-lg w-full" enctype="multipart/form-data">
+                    class="bg-white dark:bg-gray-800 p-8 shadow-2xl rounded-lg w-full" enctype="multipart/form-data">
 
                     <!-- Name and Email Inputs in One Row -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700">Admin's Name</label>
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Admin's
+                                Name</label>
                             <input type="text" name="name" id="name"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-md shadow-sm "
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 rounded-md shadow-sm dark:text-white"
                                 placeholder="Enter admin's full name" />
                             <p id="name-error" class="text-red-500 text-sm hidden">Please enter the admin's name.</p>
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Admin's Email</label>
+                            <label for="email"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">Admin's Email</label>
                             <input type="email" name="email" id="email"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-md shadow-sm"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 rounded-md shadow-sm dark:text-white"
                                 placeholder="Enter admin's email address" />
                             <p id="email-error" class="text-red-500 text-sm hidden">Please enter a valid email address.
                             </p>
@@ -45,17 +48,19 @@
                     <!-- Phone No and Password Inputs in One Row -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone No</label>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone
+                                No</label>
                             <input type="number" name="phone" id="phone"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-md shadow-sm"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 rounded-md shadow-sm dark:text-white"
                                 placeholder="Phone no" />
                             <p id="phone-error" class="text-red-500 text-sm hidden">Please enter a valid phone number.
                             </p>
                         </div>
                         <div>
-                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <label for="password"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
                             <input type="password" name="password" id="password"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-md shadow-sm"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 rounded-md shadow-sm dark:text-white"
                                 placeholder="Enter password" />
                             <p id="password-error" class="text-red-500 text-sm hidden">Password must be required.</p>
                             <p id="password-strength" class="text-red-500 text-sm hidden">Password must be of Minimum
@@ -66,26 +71,29 @@
 
                     <!-- Description Input -->
                     <div class="mb-6">
-                        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                        <label for="description"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
                         <textarea name="description" id="description" rows="4"
-                            class="mt-1 block w-full p-2 bg-gray-100 rounded-md shadow-sm"
+                            class="mt-1 block w-full p-2 bg-gray-100 dark:bg-gray-700 rounded-md shadow-sm dark:text-white"
                             placeholder="Provide a brief description or biography"></textarea>
                         <p id="description-error" class="text-red-500 text-sm hidden">Please enter a description.</p>
                     </div>
 
                     <!-- Image Upload Input -->
                     <div class="mb-6">
-                        <label for="image" class="block text-sm font-medium text-gray-700">Upload File</label>
+                        <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Upload
+                            File</label>
                         <input type="file" name="image" id="image"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-md shadow-sm"
+                            class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 rounded-md shadow-sm dark:text-white"
                             placeholder="Upload Image" />
                     </div>
 
                     <!-- Gender Input -->
                     <div class="mb-6">
-                        <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                        <label for="gender"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300">Gender</label>
                         <select id="gender" name="gender"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-md shadow-sm">
+                            class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 rounded-md shadow-sm dark:text-white">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>

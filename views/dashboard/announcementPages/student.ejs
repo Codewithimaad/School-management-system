@@ -6,10 +6,11 @@
 
             <!-- Page Header -->
             <header
-                class="flex items-center justify-between border-b pb-6 mb-8 bg-white text-gray-700 rounded-lg shadow-xl px-8 py-6">
+                class="flex items-center justify-between pb-6 mb-8 bg-white dark:bg-gray-800 text-gray-700 dark:text-white rounded-lg shadow-xl px-8 py-6">
                 <div class="max-w-full">
                     <h2 class="text-2xl md:text-4xl font-extrabold tracking-wide break-words">Student Announcements</h2>
-                    <p class="text-sm md:text-md text-gray-600 mt-2">Stay updated with the latest announcements for
+                    <p class="text-sm md:text-md text-gray-600 dark:text-gray-300 mt-2">Stay updated with the latest
+                        announcements for
                         students.</p>
                 </div>
             </header>
@@ -19,23 +20,24 @@
                 <% if (announcements.length> 0) { %>
                     <% announcements.forEach(announcement=> { %>
                         <div
-                            class="bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                             <h3
-                                class="text-2xl font-semibold text-gray-800 mb-3 hover:text-green-600 transition-colors duration-200">
+                                class="text-2xl font-semibold text-gray-800 dark:text-white mb-3 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200">
                                 <%= announcement.title %>
                             </h3>
-                            <p class="text-sm text-gray-600 mb-3">
+                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">
                                 <%= announcement.content %>
                             </p>
-                            <p class="text-gray-500 text-sm">
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">
                                 <strong>Posted on:</strong>
                                 <%= announcement.createdAt.toLocaleDateString() %>
                             </p>
                         </div>
                         <% }); %>
                             <% } else { %>
-                                <div class="bg-white p-6 rounded-lg shadow-xl text-center">
-                                    <p class="text-gray-600">No announcements available for students at the moment.</p>
+                                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl text-center">
+                                    <p class="text-gray-600 dark:text-gray-300">No announcements available for students
+                                        at the moment.</p>
                                 </div>
                                 <% } %>
             </section>

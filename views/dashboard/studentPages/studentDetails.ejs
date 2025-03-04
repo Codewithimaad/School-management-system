@@ -1,12 +1,14 @@
 <%- include('../../partials/dashboard') %>
 
-    <main class="flex-grow p-6 bg-gray-50">
+    <main class="flex-grow p-6 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
         <!-- Page Header -->
         <header class="mb-10">
-            <div class="flex justify-between items-center p-8 bg-white rounded-xl shadow-lg border border-gray-100">
+            <div
+                class="flex justify-between items-center p-8 bg-white dark:bg-gray-700 rounded-xl shadow-lg border border-gray-100 dark:border-gray-600">
                 <div>
-                    <h2 class="text-3xl font-bold text-gray-800">Student Details</h2>
-                    <p class="text-sm text-gray-500 mt-1">Comprehensive information for the selected student.</p>
+                    <h2 class="text-3xl font-bold text-gray-800 dark:text-white">Student Details</h2>
+                    <p class="text-sm text-gray-500 dark:text-gray-300 mt-1">Comprehensive information for the selected
+                        student.</p>
                 </div>
                 <a href="/dashboard/student/reports"
                     class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">
@@ -20,14 +22,15 @@
             <!-- Student Details -->
             <section class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Profile Card -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                <div
+                    class="bg-white dark:bg-gray-700 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-600">
                     <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white p-8 flex items-center">
                         <div
                             class="w-20 h-20 bg-white text-blue-600 font-bold rounded-full flex items-center justify-center text-4xl shadow-lg">
                             <%= student.name[0] %>
                         </div>
                         <div class="ml-6">
-                            <h3 class="text-2xl font-semibold">
+                            <h3 class="text-2xl font-semibold dark:text-white">
                                 <%= student.name %>
                             </h3>
                             <p class="mt-1 text-sm text-blue-100">
@@ -37,14 +40,14 @@
                     </div>
                     <div class="p-6">
                         <div class="mb-6">
-                            <p class="text-sm font-medium text-gray-500">Email</p>
-                            <p class="text-base text-gray-800 mt-1">
+                            <p class="text-sm font-medium text-gray-500 dark:text-gray-300">Email</p>
+                            <p class="text-base text-gray-800 dark:text-white mt-1">
                                 <%= student.email || 'N/A' %>
                             </p>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Phone</p>
-                            <p class="text-base text-gray-800 mt-1">
+                            <p class="text-sm font-medium text-gray-500 dark:text-gray-300">Phone</p>
+                            <p class="text-base text-gray-800 dark:text-white mt-1">
                                 <%= student.phone || 'N/A' %>
                             </p>
                         </div>
@@ -52,7 +55,8 @@
                 </div>
 
                 <!-- Details Section -->
-                <div class="bg-white rounded-xl shadow-lg lg:col-span-2 border border-gray-100">
+                <div
+                    class="bg-white dark:bg-gray-700 rounded-xl shadow-lg lg:col-span-2 border border-gray-100 dark:border-gray-600">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-8">
                         <% const details=[ { label: "Father's Name" , value: student.fname }, { label: "Roll Number" ,
                             value: student.roll_number }, { label: "Date of Birth" , value: new
@@ -60,11 +64,11 @@
                             }, { label: "Address" , value: student.address || 'N/A' }, { label: "Enrollment Date" ,
                             value: new Date(student.enrollmentDate).toLocaleDateString() } ]; %>
                             <% details.forEach(detail=> { %>
-                                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
-                                    <p class="text-sm font-medium text-gray-500">
+                                <div class="bg-gray-50 dark:bg-gray-600 p-4 rounded-lg shadow-sm">
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-300">
                                         <%= detail.label %>
                                     </p>
-                                    <p class="text-base text-gray-800 mt-1">
+                                    <p class="text-base text-gray-800 dark:text-white mt-1">
                                         <%= detail.value %>
                                     </p>
                                 </div>

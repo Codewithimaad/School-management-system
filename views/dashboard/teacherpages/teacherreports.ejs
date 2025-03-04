@@ -5,13 +5,13 @@
 
             <!-- Header Section -->
             <header
-                class="flex flex-wrap items-center justify-between bg-white text-gray-800 rounded-lg shadow-lg p-6 mb-8">
+                class="flex flex-wrap items-center justify-between bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-lg shadow-lg p-6 mb-8">
                 <div>
                     <h2 class="text-base md:text-3xl font-bold">All Teachers</h2>
                     <p class="text-sm opacity-80">List of all registered teachers.</p>
                 </div>
                 <a href="/dashboard/teacher/add"
-                    class="bg-gray=100 text-gray-600 hover:bg-gray-200 font-semibold px-5 py-2 rounded-lg shadow-md transition duration-300">
+                    class="bg-gray=100 dark:bg-gray-700 text-gray-600 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 font-semibold px-5 py-2 rounded-lg shadow-md transition duration-300">
                     + Add Teacher
                 </a>
             </header>
@@ -19,20 +19,20 @@
             <!-- Teacher Reports Overview -->
             <section class="mb-8">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-blue-500">
-                        <h3 class="font-medium text-gray-600">Total Teachers</h3>
+                    <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-l-4 border-blue-500">
+                        <h3 class="font-medium text-gray-600 dark:text-white">Total Teachers</h3>
                         <p class="text-3xl font-bold text-blue-600">
                             <%= totalTeachers %>
                         </p>
                     </div>
-                    <div class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-green-500">
-                        <h3 class="font-medium text-gray-600">Active Teachers</h3>
+                    <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-l-4 border-green-500">
+                        <h3 class="font-medium text-gray-600 dark:text-white">Active Teachers</h3>
                         <p class="text-3xl font-bold text-green-600">
                             <%= activeTeachers %>
                         </p>
                     </div>
-                    <div class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-yellow-500">
-                        <h3 class="font-medium text-gray-600">Teachers on Leave</h3>
+                    <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-l-4 border-yellow-500">
+                        <h3 class="font-medium text-gray-600 dark:text-white">Teachers on Leave</h3>
                         <p class="text-3xl font-bold text-yellow-500">
                             <%= teachersOnLeave %>
                         </p>
@@ -41,11 +41,11 @@
             </section>
 
             <!-- Teacher List -->
-            <section class="bg-white rounded-lg shadow-lg">
+            <section class="bg-white dark:bg-gray-800 rounded-lg shadow-lg">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-gray-200 text-gray-700">
+                            <tr class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white">
                                 <th class="p-4">Name</th>
                                 <th class="p-4">Subject</th>
                                 <th class="p-4">Qualification</th>
@@ -57,24 +57,24 @@
                         </thead>
                         <tbody>
                             <% teachers.forEach(teacher=> { %>
-                                <tr class="border-b hover:bg-gray-100 transition">
-                                    <td class="p-4 font-medium text-gray-800">
+                                <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                    <td class="p-4 font-medium text-gray-800 dark:text-white">
                                         <%= teacher.name %>
                                     </td>
-                                    <td class="p-4 text-gray-600">
+                                    <td class="p-4 text-gray-600 dark:text-white">
                                         <%= teacher.subject %>
                                     </td>
-                                    <td class="p-4 text-gray-600">
+                                    <td class="p-4 text-gray-600 dark:text-white">
                                         <%= teacher.qualification %>
                                     </td>
                                     <td
                                         class="p-4 font-semibold <%= teacher.status === 'Active' ? 'text-green-600' : 'text-red-600' %>">
                                         <%= teacher.status %>
                                     </td>
-                                    <td class="p-4 text-gray-600">
+                                    <td class="p-4 text-gray-600 dark:text-white">
                                         <%= teacher.email %>
                                     </td>
-                                    <td class="p-4 text-gray-600">
+                                    <td class="p-4 text-gray-600 dark:text-white">
                                         <%= teacher.phone %>
                                     </td>
                                     <td class="p-4 flex space-x-2">

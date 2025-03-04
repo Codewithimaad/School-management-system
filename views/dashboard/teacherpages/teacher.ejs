@@ -1,17 +1,17 @@
 <%- include('../../partials/dashboard') %>
 
-    <main class="flex-grow flex-wrap p-2 md:p-8 lg:p-12 ">
+    <main class="flex-grow flex-wrap p-2 md:p-8 lg:p-12">
         <%- include('../../partials/flashMessage') %>
 
             <!-- Header Section -->
             <header
-                class="flex items-center justify-between bg-white text-gray-900 rounded-lg shadow-xl px-8 py-6 mb-8">
+                class="flex items-center justify-between bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg shadow-xl px-8 py-6 mb-8">
                 <div>
                     <h2 class="text-3xl font-bold tracking-wide">Add Teacher</h2>
                     <p class="text-sm lg:block hidden">Fill out the form below to add a new teacher.</p>
                 </div>
                 <a href="/dashboard/teacher/reports"
-                    class="bg-gray-100 text-gray-800 hover:bg-gray-200 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
+                    class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
                     All Teacher Reports
                 </a>
             </header>
@@ -19,30 +19,33 @@
             <!-- Teacher Form (Full-width Card Style) -->
             <section id="teacher-form">
                 <form id="teacher-form" action="/dashboard/teacher/add" method="POST"
-                    class="bg-white p-8 shadow-2xl rounded-lg w-full gap-6" enctype="multipart/form-data">
+                    class="bg-white dark:bg-gray-800 p-8 shadow-2xl rounded-lg w-full gap-6"
+                    enctype="multipart/form-data">
                     <div class="mb-6 md:flex gap-6 justify-between items-center">
                         <!-- Name Input -->
                         <div class="flex-1 mb-5 md:mb-0">
-                            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                            <label for="name"
+                                class="block text-sm font-medium text-gray-700 dark:text-white">Name</label>
                             <input type="text" id="name" name="name"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Enter teacher's full name" />
                         </div>
 
                         <!-- Subject Input -->
                         <div class="flex-1 mb-5 md:mb-0">
-                            <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
+                            <label for="subject"
+                                class="block text-sm font-medium text-gray-700 dark:text-white">Subject</label>
                             <input type="text" id="subject" name="subject"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="e.g., Mathematics, Science" />
                         </div>
 
                         <!-- Qualification Input -->
                         <div class="flex-1 mb-5 md:mb-0">
                             <label for="qualification"
-                                class="block text-sm font-medium text-gray-700">Qualification</label>
+                                class="block text-sm font-medium text-gray-700 dark:text-white">Qualification</label>
                             <input type="text" id="qualification" name="qualification"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Qualification" />
                         </div>
                     </div>
@@ -50,25 +53,28 @@
                     <div class="mb-6 md:flex gap-6 justify-between items-center">
                         <!-- Phone Input -->
                         <div class="flex-1 mb-5 md:mb-0">
-                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone No</label>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-white">Phone
+                                No</label>
                             <input type="number" id="phone" name="phone"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Phone no" />
                         </div>
 
                         <!-- Email Input -->
                         <div class="flex-1 mb-5 md:mb-0">
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <label for="email"
+                                class="block text-sm font-medium text-gray-700 dark:text-white">Email</label>
                             <input type="email" id="email" name="email"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Email" />
                         </div>
 
                         <!-- Password Input -->
                         <div class="flex-1 mb-5 md:mb-0">
-                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <label for="password"
+                                class="block text-sm font-medium text-gray-700 dark:text-white">Password</label>
                             <input type="password" id="password" name="password"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Enter New Password" />
                         </div>
                     </div>
@@ -76,49 +82,18 @@
                     <div class="mb-6 md:flex gap-6 justify-between items-center">
                         <!-- Salary Input -->
                         <div class="flex-1 mb-5 md:mb-0">
-                            <label for="salary" class="block text-sm font-medium text-gray-700">Salary</label>
+                            <label for="salary"
+                                class="block text-sm font-medium text-gray-700 dark:text-white">Salary</label>
                             <input type="number" id="salary" name="salary"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Salary" />
                         </div>
-
-                        <!-- Status Input -->
-                        <div class="flex-1 mb-5 md:mb-0">
-                            <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                            <select id="status" name="status"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
-                            </select>
-                        </div>
-
-                        <div class="flex-1 mb-5 md:mb-0">
-                            <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
-                            <select id="gender" name="gender"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="mt-6">
-                        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                        <textarea name="description" rows="5" required
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"></textarea>
-                    </div>
-
-                    <!-- Image Upload -->
-                    <div class="mb-6">
-                        <label for="image" class="block text-sm font-medium text-gray-700">Upload File</label>
-                        <input type="file" id="image" name="image"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" />
                     </div>
 
                     <!-- Submit Button -->
                     <div class="flex justify-end">
                         <button type="submit"
-                            class="px-6 py-2 bg-blue-800 text-white text-sm font-semibold rounded-lg shadow hover:bg-blue-700 focus:ring focus:ring-blue-200 focus:outline-none">
+                            class="px-6 py-2 bg-blue-800 text-white text-sm font-semibold rounded-lg shadow hover:bg-blue-700 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400 focus:outline-none">
                             Add Teacher
                         </button>
                     </div>

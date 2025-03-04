@@ -6,14 +6,14 @@
 
             <!-- Header -->
             <header
-                class="flex flex-wrap gap-5 items-start sm:items-center justify-between border-b pb-6 mb-8 text-gray-800 rounded-lg bg-white shadow-2xl px-6 md:px-8 py-6">
+                class="flex flex-wrap gap-5 items-start sm:items-center justify-between pb-6 mb-8 text-gray-800 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-white shadow-2xl px-6 md:px-8 py-6">
                 <div>
                     <h2 class="text-base md:text-lg font-bold tracking-wide">All Admins</h2>
-                    <p class="text-sm text-gray-500">List of all registered admins.</p>
+                    <p class="text-sm ">List of all registered admins.</p>
                 </div>
                 <div class="mt-4 sm:mt-0">
                     <a href="/dashboard/admin/add"
-                        class="inline-block bg-gray-100 text-blue-600 font-semibold py-2 px-4 md:px-6 rounded-lg shadow-md hover:bg-gray-200 hover:shadow-lg transition-all duration-300">
+                        class="inline-block bg-gray-100 dark:bg-gray-600 hover:dark:bg-gray-900 font-semibold py-2 px-4 md:px-6 rounded-lg shadow-md hover:bg-gray-200 hover:shadow-lg transition-all duration-300">
                         Add new Admin
                     </a>
                 </div>
@@ -23,7 +23,7 @@
             <section id="admin-cards" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <% admins.forEach(admin=> { %>
                     <div
-                        class="bg-white shadow-lg rounded-xl overflow-hidden transform transition-all hover:scale-105 duration-300 hover:shadow-2xl">
+                        class="bg-white dark:bg-gray-800 text-gray-700 dark:text-white shadow-lg rounded-xl overflow-hidden transform transition-all hover:scale-105 duration-300 hover:shadow-2xl">
 
                         <!-- Admin Image Section -->
                         <div class="relative">
@@ -54,15 +54,15 @@
                         <div class="px-6 py-4 space-y-4">
                             <!-- Description -->
                             <div class="flex justify-between items-center">
-                                <span class="text-gray-500 text-sm">Description</span>
-                                <p class="text-sm font-semibold text-gray-700 line-clamp-2">
+                                <span class=" text-sm">Description</span>
+                                <p class="text-sm font-semibold line-clamp-2">
                                     <%= admin.description || 'No description provided.' %>
                                 </p>
                             </div>
                         </div>
 
                         <!-- Admin Actions Section -->
-                        <div class="bg-gray-50 p-4 flex justify-between items-center border-t border-gray-100">
+                        <div class="bg-gray-50 dark:bg-gray-800 p-4 flex justify-between items-center ">
                             <a href="/dashboard/admin/edit/<%= admin._id %>"
                                 class="text-indigo-600 hover:text-indigo-800 font-semibold transition duration-300 flex items-center">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"

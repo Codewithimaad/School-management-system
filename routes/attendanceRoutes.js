@@ -10,7 +10,7 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 // GET route to render the attendance page
-router.get('/dashboard/attendance/mark', authenticateUser, checkRole('admin', 'teacher'), async (req, res) => {
+router.get('/dashboard/attendance/mark', authenticateUser, checkRole('teacher', 'admin'), async (req, res) => {
     const { date, stdClass } = req.query;
     const searchQuery = {};
 
@@ -43,7 +43,7 @@ router.get('/dashboard/attendance/mark', authenticateUser, checkRole('admin', 't
 
 
 // POST route to save attendance
-router.post('/dashboard/attendance/save', authenticateUser, checkRole('admin', 'teacher'), async (req, res) => {
+router.post('/dashboard/attendance/save', authenticateUser, checkRole('teacher'), async (req, res) => {
     const { attendance, classId, date } = req.body;
 
     try {

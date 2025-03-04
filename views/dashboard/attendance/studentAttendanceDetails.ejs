@@ -6,55 +6,57 @@
 
             <!-- Header Section -->
             <header
-                class="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-100">
-                <h2 class="text-2xl sm:text-3xl font-semibold tracking-wide text-gray-800 text-center sm:text-left">
+                class="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 border border-gray-100 dark:border-gray-700">
+                <h2
+                    class="text-2xl sm:text-3xl font-semibold tracking-wide text-gray-800 dark:text-white text-center sm:text-left">
                     Attendance Details for <%= student.name %>
                 </h2>
             </header>
 
             <!-- Attendance Summary -->
-            <div class="bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-100">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">Attendance Summary</h3>
+            <div
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 border border-gray-100 dark:border-gray-700">
+                <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Attendance Summary</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
-                        <p class="text-sm text-gray-500">Class</p>
-                        <p class="text-lg font-medium text-gray-800">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Class</p>
+                        <p class="text-lg font-medium text-gray-800 dark:text-white">
                             <%= student.stdClass.name %>
                         </p>
                     </div>
-                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
-                        <p class="text-sm text-gray-500">Total Days</p>
-                        <p class="text-lg font-medium text-gray-800">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Total Days</p>
+                        <p class="text-lg font-medium text-gray-800 dark:text-white">
                             <%= totalDays %>
                         </p>
                     </div>
-                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
-                        <p class="text-sm text-gray-500">Present Days</p>
-                        <p class="text-lg font-medium text-gray-800">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Present Days</p>
+                        <p class="text-lg font-medium text-gray-800 dark:text-white">
                             <%= presentDays %>
                         </p>
                     </div>
-                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
-                        <p class="text-sm text-gray-500">Absent Days</p>
-                        <p class="text-lg font-medium text-gray-800">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Absent Days</p>
+                        <p class="text-lg font-medium text-gray-800 dark:text-white">
                             <%= absentDays %>
                         </p>
                     </div>
-                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
-                        <p class="text-sm text-gray-500">Leave Days</p>
-                        <p class="text-lg font-medium text-gray-800">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Leave Days</p>
+                        <p class="text-lg font-medium text-gray-800 dark:text-white">
                             <%= leaveDays %>
                         </p>
                     </div>
-                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
-                        <p class="text-sm text-gray-500">Late Days</p>
-                        <p class="text-lg font-medium text-gray-800">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Late Days</p>
+                        <p class="text-lg font-medium text-gray-800 dark:text-white">
                             <%= lateDays %>
                         </p>
                     </div>
-                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
-                        <p class="text-sm text-gray-500">Attendance Percentage</p>
-                        <p class="text-lg font-medium text-gray-800">
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Attendance Percentage</p>
+                        <p class="text-lg font-medium text-gray-800 dark:text-white">
                             <%= attendancePercentage %>%
                         </p>
                     </div>
@@ -62,18 +64,20 @@
             </div>
 
             <!-- Date Range Filter -->
-            <div class="bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-100">
+            <div
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8 border border-gray-100 dark:border-gray-700">
                 <form action="/dashboard/attendance/view/<%= student._id %>" method="GET"
                     class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div class="flex flex-col">
-                        <label for="fromDate" class="text-sm font-medium text-gray-600">From Date</label>
+                        <label for="fromDate" class="text-sm font-medium text-gray-600 dark:text-gray-400">From
+                            Date</label>
                         <input type="date" name="fromDate" value="<%= searchQuery.fromDate %>"
-                            class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     </div>
                     <div class="flex flex-col">
-                        <label for="toDate" class="text-sm font-medium text-gray-600">To Date</label>
+                        <label for="toDate" class="text-sm font-medium text-gray-600 dark:text-gray-400">To Date</label>
                         <input type="date" name="toDate" value="<%= searchQuery.toDate %>"
-                            class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     </div>
                     <button type="submit"
                         class="self-end px-6 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -83,21 +87,25 @@
             </div>
 
             <!-- Daily Attendance Table -->
-            <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">Daily Attendance</h3>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
+                <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Daily Attendance</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full table-auto border-collapse">
-                        <thead class="bg-gray-50">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
                             <tr>
-                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-600">Date</th>
-                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-600">Class</th>
-                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-600">Status</th>
-                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-600">Remarks</th>
+                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+                                    Date</th>
+                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+                                    Class</th>
+                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+                                    Status</th>
+                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-600 dark:text-gray-300">
+                                    Remarks</th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-700">
+                        <tbody class="text-gray-700 dark:text-gray-300">
                             <% attendanceRecords.forEach(attendance=> { %>
-                                <tr class="border-b hover:bg-gray-50 transition duration-300">
+                                <tr class="border-b hover:bg-gray-50 dark:hover:bg-gray-700 transition duration-300">
                                     <td class="py-4 px-4">
                                         <%= attendance.date.toLocaleDateString() %>
                                     </td>
@@ -106,10 +114,10 @@
                                     </td>
                                     <td class="py-4 px-4">
                                         <span class="px-2 py-1 rounded-full text-sm font-medium
-                                    <%= attendance.status === 'Present' ? 'bg-green-100 text-green-600' :
-                                        attendance.status === 'Absent' ? 'bg-red-100 text-red-600' :
-                                        attendance.status === 'Late' ? 'bg-yellow-100 text-yellow-600' :
-                                        'bg-blue-100 text-blue-600' %>">
+                                    <%= attendance.status === 'Present' ? 'bg-green-100 text-green-600 dark:bg-green-700 dark:text-green-200' :
+                                        attendance.status === 'Absent' ? 'bg-red-100 text-red-600 dark:bg-red-700 dark:text-red-200' :
+                                        attendance.status === 'Late' ? 'bg-yellow-100 text-yellow-600 dark:bg-yellow-700 dark:text-yellow-200' :
+                                        'bg-blue-100 text-blue-600 dark:bg-blue-700 dark:text-blue-200' %>">
                                             <%= attendance.status %>
                                         </span>
                                     </td>
@@ -127,27 +135,26 @@
                     <nav class="inline-flex rounded-md shadow-sm">
                         <% if (currentPage> 1) { %>
                             <a href="/dashboard/attendance/view/<%= student._id %>?page=<%= currentPage - 1 %>&fromDate=<%= searchQuery.fromDate %>&toDate=<%= searchQuery.toDate %>"
-                                class="px-4 py-2 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
+                                class="px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-l-md hover:bg-gray-50 dark:hover:bg-gray-600">
                                 Previous
                             </a>
                             <% } %>
 
                                 <% for (let i=1; i <=totalPages; i++) { %>
                                     <a href="/dashboard/attendance/view/<%= student._id %>?page=<%= i %>&fromDate=<%= searchQuery.fromDate %>&toDate=<%= searchQuery.toDate %>"
-                                        class="px-4 py-2 border border-gray-300 <%= i === currentPage ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-50' %>">
+                                        class="px-4 py-2 border border-gray-300 dark:border-gray-600 <%= i === currentPage ? 'bg-blue-500 text-white' : 'bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600' %>">
                                         <%= i %>
                                     </a>
                                     <% } %>
 
                                         <% if (currentPage < totalPages) { %>
                                             <a href="/dashboard/attendance/view/<%= student._id %>?page=<%= currentPage + 1 %>&fromDate=<%= searchQuery.fromDate %>&toDate=<%= searchQuery.toDate %>"
-                                                class="px-4 py-2 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
+                                                class="px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-r-md hover:bg-gray-50 dark:hover:bg-gray-600">
                                                 Next
                                             </a>
                                             <% } %>
                     </nav>
                 </div>
-
             </div>
 
             <!-- Back Button -->

@@ -6,15 +6,13 @@
 
             <!-- Dashboard Header -->
             <header
-                class="flex flex-col md:flex-row justify-between md:items-center bg-white/80 backdrop-blur-md shadow-lg rounded-xl gap-6 p-6 mb-8">
+                class="flex flex-col md:flex-row justify-between md:items-center bg-white/80 dark:bg-gray-800 backdrop-blur-md text-gray-800 dark:text-white shadow-lg rounded-xl gap-6 p-6 mb-8">
                 <div>
-                    <h2 class="text-xl md:text-3xl font-bold text-gray-900">Dashboard</h2>
-                    <p class="text-gray-600 text-sm md:text-base sm:mt-4 md:mt-0">Welcome back! Here's an overview of
-                        your school management system.
+                    <h2 class="text-xl md:text-3xl font-bold">Dashboard</h2>
+                    <p class="text-sm md:text-base sm:mt-4 md:mt-0">
+                        Welcome back! Here's an overview of your school management system.
                     </p>
                 </div>
-
-
             </header>
 
             <!-- Stats Overview -->
@@ -27,15 +25,18 @@
 
                     <% stats.forEach(stat=> { %>
                         <div
-                            class="bg-white/90 backdrop-blur-md p-6 rounded-xl shadow-lg flex items-center gap-4 hover:shadow-2xl transition-all duration-300">
-                            <div class="bg-<%= stat.color %>-200 p-4 rounded-full animate-pulse">
-                                <i class="fas <%= stat.icon %> text-2xl text-<%= stat.color %>-700"></i>
+                            class="bg-white/90 dark:bg-gray-800 backdrop-blur-md p-6 rounded-xl shadow-lg flex items-center gap-4 hover:shadow-2xl transition-all duration-300">
+                            <div
+                                class="bg-<%= stat.color %>-200 dark:bg-<%= stat.color %>-600 p-4 rounded-full animate-pulse">
+                                <i
+                                    class="fas <%= stat.icon %> text-2xl text-<%= stat.color %>-700 dark:text-<%= stat.color %>-300"></i>
                             </div>
                             <div>
-                                <h3 class="text-xl font-semibold text-gray-800">
+                                <h3 class="text-xl font-semibold dark:text-white">
                                     <%= stat.title %>
                                 </h3>
-                                <p class="text-2xl font-bold text-<%= stat.color %>-800">
+                                <p
+                                    class="text-2xl font-bold text-<%= stat.color %>-800 dark:text-<%= stat.color %>-300">
                                     <%= stat.count %>
                                 </p>
                             </div>
@@ -50,15 +51,15 @@
                     link: '/dashboard/class/reports' , label: '🏫 View Classes' , color: 'yellow' }, {
                     link: '/dashboard/fee/reports' , label: '💰 View Fees' , color: 'purple' }, {
                     link: '/dashboard/blogs/add' , label: '➕ Add Blog' , color: 'red' }, {
-                    link: '/dashboard/blogs/display' , label: '📄 View Blogs' , color: 'gray' },{
-                    link: '/dashboard/academics/add' , label: '📄 Add Academic' , color: 'red' },{
+                    link: '/dashboard/blogs/display' , label: '📄 View Blogs' , color: 'gray' }, {
+                    link: '/dashboard/academics/add' , label: '📄 Add Academic' , color: 'red' }, {
                     link: '/dashboard/academics/reports' , label: '📄 View Academics' , color: 'purple' }, {
                     link: '/dashboard/gallery/add' , label: '📄 Add Gallery' , color: 'yellow' }, {
                     link: '/dashboard/gallery/report' , label: '📄 View Gallery' , color: 'green' } ]; %>
 
                     <% actions.forEach(action=> { %>
                         <a href="<%= action.link %>"
-                            class="bg-gradient-to-r from-<%= action.color %>-500 to-purple-700 text-white p-6 rounded-xl shadow-lg text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out">
+                            class="bg-gradient-to-r from-<%= action.color %>-500 to-purple-700 dark:from-<%= action.color %>-700 dark:to-purple-900 text-white p-6 rounded-xl shadow-lg text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out">
                             <%= action.label %>
                         </a>
                         <% }); %>

@@ -3,14 +3,14 @@
     <main class="flex-grow p-1 md:p-10 lg:p-14">
         <!-- Header Section -->
         <header
-            class="flex flex-wrap items-center justify-between bg-white text-gray-700 rounded-2xl shadow-xl px-8 py-6 mb-8">
+            class="flex flex-wrap items-center justify-between bg-white dark:bg-gray-800 text-gray-700 dark:text-white rounded-2xl shadow-xl px-8 py-6 mb-8">
             <div>
                 <h2 class="text-lg lg:text-3xl font-extrabold tracking-wide">Class Reports</h2>
-                <p class="text-sm opacity-80 lg:block ">Overview of all classes with student details.
+                <p class="text-sm opacity-80 lg:block dark:text-gray-300">Overview of all classes with student details.
                 </p>
             </div>
             <a href="/dashboard/class/add"
-                class="bg-white text-blue-700 hover:bg-gray-100 font-semibold px-4 lg:px-6 py-2 lg:py-3 rounded-lg shadow-md transition-all duration-300 mt-4">
+                class="bg-white dark:bg-gray-700 text-blue-700 dark:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-600 font-semibold px-4 lg:px-6 py-2 lg:py-3 rounded-lg shadow-md transition-all duration-300 mt-4">
                 + Add Class
             </a>
         </header>
@@ -18,11 +18,11 @@
         <%- include('../../partials/flashMessage') %>
 
             <!-- Class Table -->
-            <section class="bg-white shadow-xl rounded-2xl p-6 overflow-hidden">
+            <section class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-6 overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full table-auto border-collapse">
                         <thead>
-                            <tr class="bg-gray-100 text-left text-gray-700">
+                            <tr class="bg-gray-100 dark:bg-gray-700 text-left text-gray-700 dark:text-gray-300">
                                 <th class="px-6 py-4 text-sm font-semibold">Class Name</th>
                                 <th class="px-6 py-4 text-sm font-semibold">Section</th>
                                 <th class="px-6 py-4 text-sm font-semibold">Students</th>
@@ -31,14 +31,14 @@
                         </thead>
                         <tbody>
                             <% classes.forEach(classItem=> { %>
-                                <tr class="border-b hover:bg-gray-50 transition-all">
-                                    <td class="px-6 py-4 text-sm font-medium text-gray-800">
+                                <tr class="border-b hover:bg-gray-50 dark:hover:bg-gray-700 transition-all">
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-800 dark:text-gray-200">
                                         <%= classItem.name %>
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                    <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
                                         <%= classItem.section %>
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                    <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
                                         <%= classItem.students ? classItem.students.length : 0 %>
                                     </td>
                                     <td class="px-6 py-4 flex items-center space-x-3 text-sm">
@@ -65,7 +65,7 @@
 
             <!-- Pagination -->
             <section class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 p-6 gap-4">
-                <div class="text-sm text-gray-500">
+                <div class="text-sm text-gray-500 dark:text-gray-400">
                     Showing <%= (currentPage - 1) * 8 + 1 %> to <%= Math.min(currentPage * 8, totalClasses) %> of <%=
                                 totalClasses %> classes
                 </div>
@@ -78,7 +78,7 @@
                         <% } %>
                             <% for (let i=1; i <=totalPages; i++) { %>
                                 <a href="/dashboard/class/reports?page=<%= i %>"
-                                    class="px-4 py-2 text-sm rounded-lg shadow-md transition-all <%= currentPage === i ? 'bg-blue-700 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300' %>">
+                                    class="px-4 py-2 text-sm rounded-lg shadow-md transition-all <%= currentPage === i ? 'bg-blue-700 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600' %>">
                                     <%= i %>
                                 </a>
                                 <% } %>

@@ -4,7 +4,14 @@ const Admin = require('../models/adminModel');
 const Teacher = require('../models/teacherModel');
 const Student = require('../models/studentModel');
 
-const changePassword = async (req, res) => {
+const getChangePassword = async (req, res) => {
+    res.render('dashboard/changePassword', {
+        success_msg: req.flash('success_msg'), // Pass success flash message
+        error_msg: req.flash('error_msg')     // Pass error flash message
+    })
+}
+
+const postchangePassword = async (req, res) => {
     try {
         const { oldPassword, newPassword, confirmNewPassword } = req.body;
         const userId = req.user._id; // Extracted from JWT authentication middleware
@@ -63,4 +70,4 @@ const changePassword = async (req, res) => {
     }
 };
 
-module.exports = changePassword;
+module.exports = { postchangePassword, getChangePassword };
