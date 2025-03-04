@@ -99,68 +99,35 @@
                                     </li>
                                     <%} %>
 
-
-                                        <!-- Fee Dropdown -->
-                                        <li class="relative">
-                                            <button onclick="toggleDropdown('feeDropdown', 'feeIcon')"
-                                                class="flex items-center justify-between w-full text-blue-700 p-3 rounded-2xl hover:bg-blue-100 transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">
-                                                <div class="flex items-center">
-                                                    <i class="fas fa-money-bill-wave text-lg hover-scale"></i>
-                                                    <span class="ml-5 font-semibold text-base">Fees</span>
-                                                </div>
-                                                <i id="feeIcon"
-                                                    class='fas fa-chevron-down ml-auto transition-transform'></i>
-                                            </button>
-
-                                            <ul id="feeDropdown"
-                                                class="hidden bg-blue-50 rounded-xl mt-3 shadow-lg p-3 transition-all duration-300">
-                                                <% if(userRole==='admin' ){ %>
-                                                    <li><a href="/dashboard/fee/add"
-                                                            class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Add
-                                                            Fee</a></li>
-                                                    <li><a href="/dashboard/fee/reports"
-                                                            class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Fee
-                                                            Reports</a></li>
-                                                    <%} %>
-
-                                                        <% if(userRole==='student' ){ %>
-
-                                                            <li><a href="/dashboard/check-fee"
-                                                                    class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Check
-                                                                    Fee</a></li>
-                                                            <%} %>
-
-                                            </ul>
-                                        </li>
-
-                                        <% if(userRole==='teacher' || userRole==='student' ){ %>
-                                            <!-- Attendance Dropdown -->
+                                        <% if(userRole==='admin' || userRole==='student' ){ %>
+                                            <!-- Fee Dropdown -->
                                             <li class="relative">
-                                                <button onclick="toggleDropdown('attendanceDropdown', 'attendanceIcon')"
+                                                <button onclick="toggleDropdown('feeDropdown', 'feeIcon')"
                                                     class="flex items-center justify-between w-full text-blue-700 p-3 rounded-2xl hover:bg-blue-100 transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">
                                                     <div class="flex items-center">
-                                                        <i class="fas fa-clipboard-check text-lg hover-scale"></i>
-                                                        <span class="ml-5 font-semibold text-base">Attendance</span>
+                                                        <i class="fas fa-money-bill-wave text-lg hover-scale"></i>
+                                                        <span class="ml-5 font-semibold text-base">Fees</span>
                                                     </div>
-                                                    <i id="attendanceIcon"
+                                                    <i id="feeIcon"
                                                         class='fas fa-chevron-down ml-auto transition-transform'></i>
                                                 </button>
 
-                                                <ul id="attendanceDropdown"
+                                                <ul id="feeDropdown"
                                                     class="hidden bg-blue-50 rounded-xl mt-3 shadow-lg p-3 transition-all duration-300">
-                                                    <% if(userRole==='teacher' ){ %>
-                                                        <li><a href="/dashboard/attendance/mark"
-                                                                class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Take
-                                                                Attendance</a></li>
-                                                        <li><a href="/dashboard/attendance/reports"
-                                                                class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Attendance
+                                                    <% if(userRole==='admin' ){ %>
+                                                        <li><a href="/dashboard/fee/add"
+                                                                class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Add
+                                                                Fee</a></li>
+                                                        <li><a href="/dashboard/fee/reports"
+                                                                class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Fee
                                                                 Reports</a></li>
                                                         <%} %>
+
                                                             <% if(userRole==='student' ){ %>
 
-                                                                <li><a href="/dashboard/attendance/checkattendance"
+                                                                <li><a href="/dashboard/check-fee"
                                                                         class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Check
-                                                                        Attendance</a></li>
+                                                                        Fee</a></li>
                                                                 <%} %>
 
                                                 </ul>
@@ -168,88 +135,130 @@
                                             <%} %>
 
 
-                                                <!-- Announcements Dropdown -->
-                                                <li class="relative">
-                                                    <button
-                                                        onclick="toggleDropdown('announcementsDropdown', 'announcementsIcon')"
-                                                        class="flex items-center justify-between w-full text-blue-700 p-3 rounded-2xl hover:bg-blue-100 transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">
-                                                        <div class="flex items-center">
-                                                            <i class="fas fa-bullhorn text-lg hover-scale"></i>
-                                                            <span
-                                                                class="ml-5 font-semibold text-base">Announcements</span>
-                                                        </div>
-                                                        <i id="announcementsIcon"
-                                                            class='fas fa-chevron-down ml-auto transition-transform'></i>
-                                                    </button>
-
-                                                    <ul id="announcementsDropdown"
-                                                        class="hidden bg-blue-50 rounded-xl mt-3 shadow-lg p-3 transition-all duration-300">
-                                                        <% if(userRole==='admin' ){ %>
-                                                            <li><a href="/dashboard/announcement/add"
-                                                                    class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Add
-                                                                    Announcement</a></li>
-                                                            <li><a href="/dashboard/announcements"
-                                                                    class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">All
-                                                                    Announcements</a></li>
-                                                            <% } %>
-
-                                                                <% if(userRole==='student' ){ %>
-                                                                    <li><a href="/dashboard/announcement/class"
-                                                                            class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">For
-                                                                            Class</a></li>
-                                                                    <li><a href="/dashboard/announcement/student"
-                                                                            class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">For
-                                                                            Students</a></li>
-                                                                    <% } %>
-
-                                                                        <% if(userRole==='teacher' ){ %>
-                                                                            <li><a href="/dashboard/announcement/teacher"
-                                                                                    class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">For
-                                                                                    Teacher</a></li>
-                                                                            <% } %>
-
-
-
-
-                                                    </ul>
-                                                </li>
-
-
-
-                                                <% if(userRole==='admin' ){ %>
-                                                    <!-- Teachers Dropdown -->
+                                                <% if(userRole==='teacher' || userRole==='student' ){ %>
+                                                    <!-- Attendance Dropdown -->
                                                     <li class="relative">
-                                                        <button onclick="toggleDropdown('adminDropdown', 'adminsIcon')"
+                                                        <button
+                                                            onclick="toggleDropdown('attendanceDropdown', 'attendanceIcon')"
                                                             class="flex items-center justify-between w-full text-blue-700 p-3 rounded-2xl hover:bg-blue-100 transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">
                                                             <div class="flex items-center">
                                                                 <i
-                                                                    class="fas fa-chalkboard-teacher text-lg hover-scale"></i>
-                                                                <span class="ml-5 font-semibold text-base">Admin</span>
+                                                                    class="fas fa-clipboard-check text-lg hover-scale"></i>
+                                                                <span
+                                                                    class="ml-5 font-semibold text-base">Attendance</span>
                                                             </div>
-                                                            <i id="adminsIcon"
+                                                            <i id="attendanceIcon"
                                                                 class='fas fa-chevron-down ml-auto transition-transform'></i>
                                                         </button>
 
-                                                        <ul id="adminDropdown"
+                                                        <ul id="attendanceDropdown"
                                                             class="hidden bg-blue-50 rounded-xl mt-3 shadow-lg p-3 transition-all duration-300">
-                                                            <li><a href="/dashboard/admin/add"
-                                                                    class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Add
-                                                                    Admin</a></li>
-                                                            <li><a href="/dashboard/admin/reports"
-                                                                    class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Admin
-                                                                    Reports</a></li>
+                                                            <% if(userRole==='teacher' ){ %>
+                                                                <li><a href="/dashboard/attendance/mark"
+                                                                        class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Take
+                                                                        Attendance</a></li>
+                                                                <li><a href="/dashboard/attendance/reports"
+                                                                        class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Attendance
+                                                                        Reports</a></li>
+                                                                <%} %>
+                                                                    <% if(userRole==='student' ){ %>
+
+                                                                        <li><a href="/dashboard/attendance/checkattendance"
+                                                                                class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Check
+                                                                                Attendance</a></li>
+                                                                        <%} %>
+
                                                         </ul>
                                                     </li>
                                                     <%} %>
 
-                                                        <!-- Logout -->
-                                                        <li>
-                                                            <a href="/dashboard/logout"
-                                                                class="flex items-center text-red-600 p-3 rounded-2xl hover:bg-red-100 transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">
-                                                                <i class='fas fa-sign-out-alt text-3xl hover-scale'></i>
-                                                                <span class="ml-5 font-semibold text-base">Logout</span>
-                                                            </a>
+
+                                                        <!-- Announcements Dropdown -->
+                                                        <li class="relative">
+                                                            <button
+                                                                onclick="toggleDropdown('announcementsDropdown', 'announcementsIcon')"
+                                                                class="flex items-center justify-between w-full text-blue-700 p-3 rounded-2xl hover:bg-blue-100 transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                                                                <div class="flex items-center">
+                                                                    <i class="fas fa-bullhorn text-lg hover-scale"></i>
+                                                                    <span
+                                                                        class="ml-5 font-semibold text-base">Announcements</span>
+                                                                </div>
+                                                                <i id="announcementsIcon"
+                                                                    class='fas fa-chevron-down ml-auto transition-transform'></i>
+                                                            </button>
+
+                                                            <ul id="announcementsDropdown"
+                                                                class="hidden bg-blue-50 rounded-xl mt-3 shadow-lg p-3 transition-all duration-300">
+                                                                <% if(userRole==='admin' ){ %>
+                                                                    <li><a href="/dashboard/announcement/add"
+                                                                            class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Add
+                                                                            Announcement</a></li>
+                                                                    <li><a href="/dashboard/announcements"
+                                                                            class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">All
+                                                                            Announcements</a></li>
+                                                                    <% } %>
+
+                                                                        <% if(userRole==='student' ){ %>
+                                                                            <li><a href="/dashboard/announcement/class"
+                                                                                    class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">For
+                                                                                    Class</a></li>
+                                                                            <li><a href="/dashboard/announcement/student"
+                                                                                    class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">For
+                                                                                    Students</a></li>
+                                                                            <% } %>
+
+                                                                                <% if(userRole==='teacher' ){ %>
+                                                                                    <li><a href="/dashboard/announcement/teacher"
+                                                                                            class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">For
+                                                                                            Teacher</a></li>
+                                                                                    <% } %>
+
+
+
+
+                                                            </ul>
                                                         </li>
+
+
+
+                                                        <% if(userRole==='admin' ){ %>
+                                                            <!-- Teachers Dropdown -->
+                                                            <li class="relative">
+                                                                <button
+                                                                    onclick="toggleDropdown('adminDropdown', 'adminsIcon')"
+                                                                    class="flex items-center justify-between w-full text-blue-700 p-3 rounded-2xl hover:bg-blue-100 transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                                                                    <div class="flex items-center">
+                                                                        <i
+                                                                            class="fas fa-chalkboard-teacher text-lg hover-scale"></i>
+                                                                        <span
+                                                                            class="ml-5 font-semibold text-base">Admin</span>
+                                                                    </div>
+                                                                    <i id="adminsIcon"
+                                                                        class='fas fa-chevron-down ml-auto transition-transform'></i>
+                                                                </button>
+
+                                                                <ul id="adminDropdown"
+                                                                    class="hidden bg-blue-50 rounded-xl mt-3 shadow-lg p-3 transition-all duration-300">
+                                                                    <li><a href="/dashboard/admin/add"
+                                                                            class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Add
+                                                                            Admin</a></li>
+                                                                    <li><a href="/dashboard/admin/reports"
+                                                                            class="block px-6 py-3 text-blue-700 hover:bg-blue-200 rounded-lg transition-all duration-300">Admin
+                                                                            Reports</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <%} %>
+
+                                                                <!-- Logout -->
+                                                                <li>
+                                                                    <a href="/dashboard/logout"
+                                                                        class="flex items-center text-red-600 p-3 rounded-2xl hover:bg-red-100 transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                                                                        <i
+                                                                            class='fas fa-sign-out-alt text-3xl hover-scale'></i>
+                                                                        <span
+                                                                            class="ml-5 font-semibold text-base">Logout</span>
+                                                                    </a>
+                                                                </li>
     </ul>
 </div>
 

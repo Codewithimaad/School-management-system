@@ -1,123 +1,133 @@
 <%- include('../../partials/dashboard') %>
 
-    <main class="flex-grow flex-wrap p-2 md:p-8 lg:p-12">
-        <header
-            class="flex items-center justify-between border-b pb-6 mb-8 bg-gradient-to-r from-blue-500 to-blue-900 text-white rounded-lg shadow-lg px-8 py-6">
-            <h2 class="text-3xl font-bold text-white">Update Student</h2>
-            <p class="text-sm sm:hidden lg:block text-white">Fill out the form below to update student information.
-            </p>
-        </header>
-
+    <main class="flex-grow p-2 md:p-8 lg:p-12 bg-gray-100 min-h-screen">
+        <!-- Flash Messages -->
         <%- include('../../partials/flashMessage') %>
 
+            <!-- Header Section -->
+            <header
+                class="flex flex-wrap gap-5 items-center justify-between bg-white text-gray-800 rounded-xl shadow-lg px-8 py-6 mb-8">
+                <div>
+                    <h2 class="text-xl md:text-3xl font-bold tracking-wide">Update Student</h2>
+                    <p class="text-sm text-gray-800">Fill out the form below to update student information.</p>
+                </div>
+                <a href="/dashboard/student/reports"
+                    class="bg-gray-100 text-blue-600 hover:bg-gray-200 font-semibold px-5 py-2 rounded-lg shadow-md transition duration-300">
+                    All Students Reports
+                </a>
+            </header>
 
             <!-- Student Form -->
             <section id="student-form">
                 <form action="/dashboard/student/edit/<%= students._id %>" method="POST"
-                    class="bg-white p-8 shadow-md rounded-lg">
+                    class="bg-white p-8 shadow-2xl rounded-2xl w-full mx-auto">
 
-                    <!-- Name Input -->
-                    <div class="mb-6">
-                        <label for="name" class="block text-sm font-medium text-gray-700">Student's Name</label>
-                        <input type="text" name="name" value="<%= students.name %>"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter student's full name" required />
-                    </div>
+                    <!-- Grid for Input Fields -->
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                        <!-- Name Input -->
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Student's Name</label>
+                            <input type="text" name="name" value="<%= students.name %>"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="Enter student's full name" required />
+                        </div>
 
-                    <!-- Father's Name Input -->
-                    <div class="mb-6">
-                        <label for="fname" class="block text-sm font-medium text-gray-700">Father's Name</label>
-                        <input type="text" name="fname" value="<%= students.fname %>"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter father's full name" required />
-                    </div>
+                        <!-- Father's Name Input -->
+                        <div>
+                            <label for="fname" class="block text-sm font-medium text-gray-700">Father's Name</label>
+                            <input type="text" name="fname" value="<%= students.fname %>"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="Enter father's full name" required />
+                        </div>
 
-                    <!-- Roll Number Input -->
-                    <div class="mb-6">
-                        <label for="roll_number" class="block text-sm font-medium text-gray-700">Roll Number</label>
-                        <input type="number" name="roll_number" value="<%= students.roll_number %>"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter roll number" required />
-                    </div>
+                        <!-- Roll Number Input -->
+                        <div>
+                            <label for="roll_number" class="block text-sm font-medium text-gray-700">Roll Number</label>
+                            <input type="number" name="roll_number" value="<%= students.roll_number %>"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="Enter roll number" required />
+                        </div>
 
-                    <!-- Resgistration Input -->
-                    <div class="mb-6">
-                        <label for="resgistrationNo" class="block text-sm font-medium text-gray-700">Registration
-                            No</label>
-                        <input type="text" id="resgistrationNo" name="resgistrationNo"
-                            value="<%= students.resgistrationNo %>"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Registration no" />
-                        <p id="roll_number-error" class="text-red-500 text-sm hidden">Please enter Registration No.
-                        </p>
-                    </div>
+                        <!-- Registration Input -->
+                        <div>
+                            <label for="resgistrationNo" class="block text-sm font-medium text-gray-700">Registration
+                                No</label>
+                            <input type="text" id="resgistrationNo" name="resgistrationNo"
+                                value="<%= students.resgistrationNo %>"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="Registration no" />
+                            <p id="roll_number-error" class="text-red-500 text-sm hidden">Please enter Registration No.
+                            </p>
+                        </div>
 
-                    <!-- Phone Input -->
-                    <div class="mb-6">
-                        <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                        <input type="text" name="phone" value="<%= students.phone %>"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter student's phone number" required />
-                    </div>
+                        <!-- Phone Input -->
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                            <input type="text" name="phone" value="<%= students.phone %>"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="Enter student's phone number" required />
+                        </div>
 
-                    <!-- Date of Birth Input -->
-                    <div class="mb-6">
-                        <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
-                        <input type="date" name="dob" value="<%= students.dob.toISOString().split('T')[0] %>"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            required />
-                    </div>
+                        <!-- Date of Birth Input -->
+                        <div>
+                            <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                            <input type="date" name="dob" value="<%= students.dob.toISOString().split('T')[0] %>"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                required />
+                        </div>
 
-                    <!-- Gender Selection -->
-                    <div class="mb-6">
-                        <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
-                        <select name="gender" id="gender"
-                            class="px-4 py-2 w-full sm:w-2/5 md:w-3/5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 text-sm">
-                            <option value="" disabled>Select Gender</option>
-                            <option value="Male" <%=students.gender==='Male' ? 'selected' : '' %>>Male</option>
-                            <option value="Female" <%=students.gender==='Female' ? 'selected' : '' %>>Female</option>
-                            <option value="Other" <%=students.gender==='Other' ? 'selected' : '' %>>Other</option>
-                        </select>
-                    </div>
+                        <!-- Gender Selection -->
+                        <div>
+                            <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                            <select name="gender" id="gender"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
+                                <option value="" disabled>Select Gender</option>
+                                <option value="Male" <%=students.gender==='Male' ? 'selected' : '' %>>Male</option>
+                                <option value="Female" <%=students.gender==='Female' ? 'selected' : '' %>>Female
+                                </option>
+                                <option value="Other" <%=students.gender==='Other' ? 'selected' : '' %>>Other</option>
+                            </select>
+                        </div>
 
-                    <!-- Class Selection -->
-                    <div class="mb-4">
-                        <label for="class" class="block text-sm font-semibold text-gray-700">Select Class</label>
-                        <select id="class" name="stdClass"
-                            class="px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-                            required>
-                            <option value="" disabled selected>
-                                <%= classes._id %>
-                            </option>
-                            <% classes.forEach(classItem=> { %>
-                                <option value="<%= classItem._id %>" <%=students.stdClass &&
-                                    students.stdClass.toString()===classItem._id.toString() ? 'selected' : '' %>>
-                                    <%= classItem.name %>
-                                        <% }) %>
-                        </select>
-                    </div>
+                        <!-- Class Selection -->
+                        <div>
+                            <label for="class" class="block text-sm font-semibold text-gray-700">Select Class</label>
+                            <select id="class" name="stdClass"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                required>
+                                <option value="" disabled selected>Select Class</option>
+                                <% classes.forEach(classItem=> { %>
+                                    <option value="<%= classItem._id %>" <%=students.stdClass && students.stdClass._id
+                                        && students.stdClass._id.toString()===classItem._id.toString() ? 'selected' : ''
+                                        %>>
+                                        <%= classItem.name %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                        </div>
 
-                    <!-- Address Input -->
-                    <div class="mb-6">
-                        <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-                        <input type="text" name="address" value="<%= students.address %>"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter student's address" />
-                    </div>
+                        <!-- Address Input -->
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                            <input type="text" name="address" value="<%= students.address %>"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                placeholder="Enter student's address" />
+                        </div>
 
-                    <!-- Enrollment Date Input -->
-                    <div class="mb-6">
-                        <label for="enrollmentDate" class="block text-sm font-medium text-gray-700">Enrollment
-                            Date</label>
-                        <input type="date" name="enrollmentDate"
-                            value="<%= students.enrollmentDate ? students.enrollmentDate.toISOString().split('T')[0] : '' %>"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" />
+                        <!-- Enrollment Date Input -->
+                        <div>
+                            <label for="enrollmentDate" class="block text-sm font-medium text-gray-700">Enrollment
+                                Date</label>
+                            <input type="date" name="enrollmentDate"
+                                value="<%= students.enrollmentDate ? students.enrollmentDate.toISOString().split('T')[0] : '' %>"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" />
+                        </div>
                     </div>
 
                     <!-- Submit Button -->
                     <div class="flex justify-end">
                         <button type="submit"
-                            class="px-6 py-2 bg-blue-800 text-white text-sm font-semibold rounded-lg shadow hover:bg-blue-700 focus:ring focus:ring-blue-200 focus:outline-none">
+                            class="px-6 py-3 bg-blue-600 text-white text-sm font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition">
                             Update Student
                         </button>
                     </div>
@@ -126,3 +136,5 @@
     </main>
 
     <%- include('../../partials/dashboardfooter') %>
+
+        <script src="/javascripts/studentFormValidation.js"></script>

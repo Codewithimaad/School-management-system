@@ -181,42 +181,40 @@ router.get('/dashboard/attendance/reports', authenticateUser, checkRole('admin',
 
 // Route for admins and teachers to view a student's attendance and filter by date
 router.get('/dashboard/attendance/view/:studentId', authenticateUser, checkRole('admin', 'teacher'), async (req, res) => {
-    const { studentId } = req.params;  // Student ID from URL parameter
-    const { fromDate, toDate } = req.query;  // Date range filter from query params
+    const { studentId } = req.params;
+    const { fromDate, toDate, page = 1, limit = 30 } = req.query;  // Default page 1, limit 30 records per page
 
     try {
-        // Fetch the student details
         const student = await studentModel.findById(studentId).populate('stdClass');
-
         if (!student) {
             req.flash('error_msg', 'Student not found');
             return res.redirect('/dashboard/attendance/reports');
         }
 
-        // Build the attendance query with optional date filters
-        let query = { studentId: studentId };
+        let query = { studentId };
+        if (fromDate) query.date = { $gte: new Date(fromDate) };
+        if (toDate) query.date = { ...query.date, $lte: new Date(toDate) };
 
-        // Apply date filters only if provided
-        if (fromDate) {
-            query.date = { $gte: new Date(fromDate) };  // Filter from the start date
-        }
-        if (toDate) {
-            query.date = { ...query.date, $lte: new Date(toDate) };  // Filter up to the end date
-        }
+        // Convert page and limit to numbers
+        const pageNumber = parseInt(page, 30);
+        const limitNumber = parseInt(limit, 30);
 
-        // Fetch the filtered attendance records
-        const attendanceRecords = await attendanceModel.find(query).populate('classId');
+        // Fetch paginated attendance records
+        const attendanceRecords = await attendanceModel.find(query)
+            .populate('classId')
+            .skip((pageNumber - 1) * limitNumber)  // Skip previous records
+            .limit(limitNumber);  // Limit the results per page
 
+        // Get total count of records for pagination
+        const totalRecords = await attendanceModel.countDocuments(query);
+        const totalPages = Math.ceil(totalRecords / limitNumber);
 
-        // Calculate summary stats
-        const totalDays = attendanceRecords.length;
         const presentDays = attendanceRecords.filter(att => att.status === 'Present').length;
         const absentDays = attendanceRecords.filter(att => att.status === 'Absent').length;
         const lateDays = attendanceRecords.filter(att => att.status === 'Late').length;
         const leaveDays = attendanceRecords.filter(att => att.status === 'Leave').length;
-        const attendancePercentage = totalDays ? ((presentDays / totalDays) * 100).toFixed(2) : 0;
+        const attendancePercentage = totalRecords ? ((presentDays / totalRecords) * 100).toFixed(2) : 0;
 
-        // Send data to the view
         res.render('dashboard/attendance/studentAttendanceDetails', {
             student,
             attendanceRecords,
@@ -224,9 +222,11 @@ router.get('/dashboard/attendance/view/:studentId', authenticateUser, checkRole(
             absentDays,
             lateDays,
             leaveDays,
-            totalDays,
+            totalDays: totalRecords,
             attendancePercentage,
             searchQuery: { fromDate, toDate },
+            currentPage: pageNumber,
+            totalPages,
             success_msg: req.flash('success_msg'),
             error_msg: req.flash('error_msg')
         });
@@ -236,6 +236,7 @@ router.get('/dashboard/attendance/view/:studentId', authenticateUser, checkRole(
         res.redirect('/dashboard/attendance/reports');
     }
 });
+
 
 
 

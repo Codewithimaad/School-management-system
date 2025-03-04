@@ -2,47 +2,48 @@
 
 <%- include('../../partials/dashboard') %>
 
-    <main class="flex-grow p-4 md:p-8 lg:p-12">
+    <main class="flex-grow p-2 md:p-8 lg:p-12">
         <%- include('../../partials/flashMessage') %>
 
 
             <!-- Header Section -->
             <header
-                class="flex items-center justify-between bg-blue-600 text-white rounded-lg shadow-md px-8 py-6 mb-8">
+                class="flex flex-wrap  gap-5  items-center justify-between bg-white text-gray-700 rounded-lg shadow-md px-8 py-6 mb-8">
                 <div>
                     <h2 class="text-3xl font-semibold tracking-wide">Add Announcement</h2>
                     <p class="text-sm lg:block hidden">Create a new announcement
                     <p>
                 </div>
                 <a href="/dashboard/announcements"
-                    class="bg-white text-green-600 hover:bg-gray-100 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
+                    class="bg-gray-100 text-gray-600 hover:bg-gray-200 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
                     Show all Announcement
                 </a>
             </header>
 
 
-            <form action="/dashboard/announcement/add" method="POST" class="space-y-4 bg-white p-6 rounded-lg shadow">
+            <form action="/dashboard/announcement/add" method="POST"
+                class="space-y-4 bg-white p-2 md:p-12 rounded-lg shadow-2xl">
                 <h2 class="text-xl font-semibold text-gray-800">Announcement Details</h2>
 
                 <!-- Title Field -->
                 <div>
                     <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
                     <input type="text" id="title" name="title" required
-                        class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-blue-500">
+                        class="mt-1 w-full px-4 py-2 bg-gray-100 rounded-lg">
                 </div>
 
                 <!-- Content Field -->
                 <div>
                     <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
                     <textarea id="content" name="content" required rows="4"
-                        class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-blue-500"></textarea>
+                        class="mt-1 w-full px-4 py-2 bg-gray-100 rounded-lg"></textarea>
                 </div>
 
                 <!-- Audience Selection -->
                 <div>
                     <label for="audience" class="block text-sm font-medium text-gray-700">Audience</label>
                     <select id="audience" name="audience" required onchange="toggleClassField(this)"
-                        class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-blue-500">
+                        class="mt-1 w-full px-4 py-2 bg-gray-100 rounded-lg">
                         <option value="teachers">Teachers</option>
                         <option value="students">Students</option>
                         <option value="class">Specific Class</option>

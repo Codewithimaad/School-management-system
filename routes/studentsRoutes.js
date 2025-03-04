@@ -155,6 +155,8 @@ router.get('/dashboard/student/edit/:id', authenticateUser, checkRole('admin', '
             .findOne({ _id: req.params.id }).populate("stdClass"); // This should ensure the student's class is populated
         const classes = await classModel.find();
 
+        console.log(students);
+
         if (!students) {
             req.flash('error_msg', 'Student not found.');
             return res.redirect('/dashboard/students');
