@@ -1,106 +1,91 @@
 <%- include('../../partials/dashboard') %>
 
-    <main class="flex-grow p-2 md:p-8 lg:p-12 bg-gradient-to-r from-blue-50 to-blue-200">
-        <!-- Flash Messages -->
+    <main class="flex-grow p-2 md:p-6 lg:p-10">
         <%- include('../../partials/flashMessage') %>
-
-
-
 
             <!-- Header Section -->
             <header
-                class="flex items-center justify-between bg-blue-600 text-white rounded-lg shadow-md px-8 py-6 mb-8">
+                class="flex flex-wrap items-center justify-between bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-lg p-6 mb-8">
                 <div>
-                    <h2 class="text-3xl font-semibold tracking-wide">All Teacher</h2>
-                    <p class="text-sm lg:block hidden">List of all registered Teachers.</ <p>
+                    <h2 class="text-3xl font-semibold">All Teachers</h2>
+                    <p class="text-sm opacity-80">List of all registered teachers.</p>
                 </div>
                 <a href="/dashboard/teacher/add"
-                    class="bg-white text-green-600 hover:bg-gray-100 font-semibold px-4 py-2 rounded-md shadow-md transition duration-300">
-                    Add Teacher
+                    class="bg-white text-blue-600 hover:bg-gray-200 font-semibold px-5 py-2 rounded-lg shadow-md transition duration-300">
+                    + Add Teacher
                 </a>
             </header>
 
-            <!-- Teacher Reports Overview Section -->
+            <!-- Teacher Reports Overview -->
             <section class="mb-8">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200 flex flex-col justify-between">
-                        <h3 class="font-medium text-lg text-gray-700">Total Teachers</h3>
-                        <p class="text-4xl font-bold text-blue-600">
+                    <div class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-blue-500">
+                        <h3 class="font-medium text-gray-600">Total Teachers</h3>
+                        <p class="text-3xl font-bold text-blue-600">
                             <%= totalTeachers %>
                         </p>
                     </div>
-                    <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200 flex flex-col justify-between">
-                        <h3 class="font-medium text-lg text-gray-700">Active Teachers</h3>
-                        <p class="text-4xl font-bold text-green-600">
+                    <div class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-green-500">
+                        <h3 class="font-medium text-gray-600">Active Teachers</h3>
+                        <p class="text-3xl font-bold text-green-600">
                             <%= activeTeachers %>
                         </p>
                     </div>
-                    <div class="p-6 bg-white rounded-lg shadow-lg border border-gray-200 flex flex-col justify-between">
-                        <h3 class="font-medium text-lg text-gray-700">Teachers on Leave</h3>
-                        <p class="text-4xl font-bold text-yellow-500">
+                    <div class="p-6 bg-white rounded-xl shadow-lg border-l-4 border-yellow-500">
+                        <h3 class="font-medium text-gray-600">Teachers on Leave</h3>
+                        <p class="text-3xl font-bold text-yellow-500">
                             <%= teachersOnLeave %>
                         </p>
                     </div>
                 </div>
             </section>
 
-            <!-- Teacher List Section -->
-            <section>
-                <div class="overflow-x-auto bg-white shadow-lg rounded-lg">
-                    <table class="min-w-full table-auto text-sm">
+            <!-- Teacher List -->
+            <section class="bg-white rounded-lg shadow-lg">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-gray-100 text-left">
-                                <th class="p-4 text-gray-700 font-medium">Name</th>
-                                <th class="p-4 text-gray-700 font-medium">Subject</th>
-                                <th class="p-4 text-gray-700 font-medium">Qualification</th>
-                                <th class="p-4 text-gray-700 font-medium">Status</th>
-                                <th class="p-4 text-gray-700 font-medium">Email</th>
-                                <th class="p-4 text-gray-700 font-medium">Phone No</th>
-                                <th class="p-4 text-gray-700 font-medium">Actions</th>
+                            <tr class="bg-gray-200 text-gray-700">
+                                <th class="p-4">Name</th>
+                                <th class="p-4">Subject</th>
+                                <th class="p-4">Qualification</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4">Email</th>
+                                <th class="p-4">Phone No</th>
+                                <th class="p-4">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% teachers.forEach(teacher=> { %>
-                                <tr class="border-b hover:bg-gray-50">
-                                    <td class="p-4">
+                                <tr class="border-b hover:bg-gray-100 transition">
+                                    <td class="p-4 font-medium text-gray-800">
                                         <%= teacher.name %>
                                     </td>
-                                    <td class="p-4">
+                                    <td class="p-4 text-gray-600">
                                         <%= teacher.subject %>
                                     </td>
-                                    <td class="p-4">
+                                    <td class="p-4 text-gray-600">
                                         <%= teacher.qualification %>
                                     </td>
                                     <td
-                                        class="p-4 <%= teacher.status === 'Active' ? 'text-green-500' : 'text-red-500' %>">
+                                        class="p-4 font-semibold <%= teacher.status === 'Active' ? 'text-green-600' : 'text-red-600' %>">
                                         <%= teacher.status %>
                                     </td>
-                                    <td class="p-4">
+                                    <td class="p-4 text-gray-600">
                                         <%= teacher.email %>
                                     </td>
-                                    <td class="p-4">
+                                    <td class="p-4 text-gray-600">
                                         <%= teacher.phone %>
                                     </td>
-                                    <td class="p-4">
-                                        <div class="flex flex-wrap gap-2 justify-start">
-                                            <a href="/dashboard/teacher/<%= teacher._id %>"
-                                                class="text-white rounded-sm py-2 px-3 bg-blue-700 hover:bg-blue-900 text-center">
-                                                Details
-                                            </a>
-                                            <!-- Delete Button with SweetAlert Confirmation -->
-                                            <button
-                                                class="text-white rounded-sm py-2 px-3 bg-red-700 hover:bg-red-900 text-center delete-btn"
-                                                data-id="<%= teacher._id %>">
-                                                Delete
-                                            </button>
-                                            <a href="/dashboard/teacher/edit/<%= teacher._id %>"
-                                                class="text-black rounded-sm py-2 px-3 bg-yellow-500 hover:bg-yellow-900 text-center">
-                                                Edit
-                                            </a>
-                                        </div>
+                                    <td class="p-4 flex space-x-2">
+                                        <a href="/dashboard/teacher/<%= teacher._id %>"
+                                            class="text-white px-3 py-2 bg-blue-600 rounded-md shadow hover:bg-blue-800">Details</a>
+                                        <a href="/dashboard/teacher/edit/<%= teacher._id %>"
+                                            class="text-white px-3 py-2 bg-yellow-500 rounded-md shadow hover:bg-yellow-700">Edit</a>
+                                        <button
+                                            class="text-white px-3 py-2 bg-red-600 rounded-md shadow hover:bg-red-800 delete-btn"
+                                            data-id="<%= teacher._id %>">Delete</button>
                                     </td>
-
-
                                 </tr>
                                 <% }) %>
                         </tbody>
@@ -110,57 +95,27 @@
     </main>
 
     <script>
-        // SweetAlert2 script for delete confirmation
         document.querySelectorAll('.delete-btn').forEach(button => {
             button.addEventListener('click', function (e) {
                 e.preventDefault();
-                const deleteID = this.getAttribute('data-id'); // Get teacher ID
-
+                const deleteID = this.getAttribute('data-id');
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    text: "This action cannot be undone!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'No, keep it',
+                    confirmButtonText: 'Yes, delete',
+                    cancelButtonText: 'Cancel',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Send the DELETE request to delete the teacher
-                        fetch(`/dashboard/teacher/delete/${deleteID}`, {
-                            method: 'GET',  // Use GET method (or POST if you want to follow REST principles)
-                        })
-                            .then(response => {
-                                if (response.ok) {
-                                    Swal.fire({
-                                        title: "Deleted!",
-                                        text: "The teacher has been deleted.",
-                                        icon: "success"
-                                    }).then(() => {
-                                        window.location.href = '/dashboard/teacher/reports';  // Redirect after deletion
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        title: "Error",
-                                        text: "There was an issue deleting the teacher.",
-                                        icon: "error"
-                                    });
-                                }
-                            })
-                            .catch(err => {
-                                console.error(err);
-                                Swal.fire({
-                                    title: "Error",
-                                    text: "Failed to delete the teacher.",
-                                    icon: "error"
-                                });
-                            });
+                        fetch(`/dashboard/teacher/delete/${deleteID}`, { method: 'GET' })
+                            .then(response => response.ok ? Swal.fire('Deleted!', 'The teacher has been removed.', 'success') : Swal.fire('Error', 'Failed to delete teacher.', 'error'))
+                            .then(() => location.reload());
                     }
                 });
             });
         });
     </script>
-
-
 
     <%- include('../../partials/dashboardfooter') %>

@@ -31,6 +31,16 @@ const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 
 
+const setUserDetails = require('./middlewares/checkUserDetails');
+
+const authMiddleware = require('./middlewares/authMiddleWare');  // Import JWT auth middleware
+
+
+
+
+
+
+
 
 
 // Initialize Express App
@@ -67,6 +77,11 @@ app.use(session({
     }
 }));
 
+// Use JWT authentication before setting user details
+app.use(authMiddleware);
+app.use(setUserDetails);
+
+
 
 
 // Use flash middleware
@@ -82,6 +97,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Use routes
+app.use(setUserDetails);
+
+
+
 app.use(homeRoutes);
 app.use(dashboardHomeRoute);
 app.use(teachersRoutes);
@@ -98,6 +117,8 @@ app.use(galleryRoutes);
 app.use(blogsRoutes);
 app.use(feedbackRoutes);
 app.use(forgotPasswordRoutes);
+
+
 
 
 

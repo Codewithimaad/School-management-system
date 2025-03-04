@@ -1,136 +1,68 @@
-<!-- Main Content -->
 <%- include('../partials/dashboard') %>
 
-    <!-- Main Content Area -->
-    <main class="flex-grow p-6 md:p-10">
+    <main class="flex-grow sm:mt-10 md:mt-0 p-2 md:p-10 bg-gradient-to-r from-blue-50 to-purple-50 min-h-screen">
         <!-- Flash Messages -->
         <%- include('../partials/flashMessage') %>
 
+            <!-- Dashboard Header -->
+            <header
+                class="flex flex-col md:flex-row justify-between md:items-center bg-white/80 backdrop-blur-md shadow-lg rounded-xl gap-6 p-6 mb-8">
+                <div>
+                    <h2 class="text-xl md:text-3xl font-bold text-gray-900">Dashboard</h2>
+                    <p class="text-gray-600 text-sm md:text-base sm:mt-4 md:mt-0">Welcome back! Here's an overview of
+                        your school management system.
+                    </p>
+                </div>
 
-            <!-- Quick Overview -->
-            <section class="mt-4 bg-white mb-10 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300">
-                <h3 class="text-2xl font-semibold text-gray-800">Quick Overview</h3>
-                <p class="mt-4 text-gray-600">
-                    Welcome to your School Management System Dashboard. Here, you can get an overview of the
-                    current school
-                    statistics. Explore more by navigating through the sidebar.
-                </p>
+
+            </header>
+
+            <!-- Stats Overview -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <% let stats=[ { icon: 'fa-user-graduate' , title: 'Students' , count: totalStudents, color: 'blue' }, {
+                    icon: 'fa-chalkboard-teacher' , title: 'Teachers' , count: totalTeachers, color: 'green' }, {
+                    icon: 'fa-school' , title: 'Classes' , count: totalClasses, color: 'yellow' }, {
+                    icon: 'fa-money-bill-wave' , title: 'Fees Collected' , count: `PKR
+                    ${feesCollected.toLocaleString()}`, color: 'purple' } ]; %>
+
+                    <% stats.forEach(stat=> { %>
+                        <div
+                            class="bg-white/90 backdrop-blur-md p-6 rounded-xl shadow-lg flex items-center gap-4 hover:shadow-2xl transition-all duration-300">
+                            <div class="bg-<%= stat.color %>-200 p-4 rounded-full animate-pulse">
+                                <i class="fas <%= stat.icon %> text-2xl text-<%= stat.color %>-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">
+                                    <%= stat.title %>
+                                </h3>
+                                <p class="text-2xl font-bold text-<%= stat.color %>-800">
+                                    <%= stat.count %>
+                                </p>
+                            </div>
+                        </div>
+                        <% }); %>
             </section>
 
-            <!-- Dashboard Cards -->
-            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Quick Actions -->
+            <section class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <% let actions=[ { link: '/dashboard/student/reports' , label: '👨‍🎓 View Students' , color: 'blue' },
+                    { link: '/dashboard/teacher/reports' , label: '👨‍🏫 View Teachers' , color: 'green' }, {
+                    link: '/dashboard/class/reports' , label: '🏫 View Classes' , color: 'yellow' }, {
+                    link: '/dashboard/fee/reports' , label: '💰 View Fees' , color: 'purple' }, {
+                    link: '/dashboard/blogs/add' , label: '➕ Add Blog' , color: 'red' }, {
+                    link: '/dashboard/blogs/display' , label: '📄 View Blogs' , color: 'gray' },{
+                    link: '/dashboard/academics/add' , label: '📄 Add Academic' , color: 'red' },{
+                    link: '/dashboard/academics/reports' , label: '📄 View Academics' , color: 'purple' }, {
+                    link: '/dashboard/gallery/add' , label: '📄 Add Gallery' , color: 'yellow' }, {
+                    link: '/dashboard/gallery/reports' , label: '📄 View Gallery' , color: 'green' } ]; %>
 
-
-                <!-- Total Students Card -->
-
-
-                <div
-                    class="bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                    <a href="/dashboard/student/reports">
-                        <div class="flex justify-between items-center">
-                            <div class="text-gray-700">
-                                <h3 class="text-xl font-semibold">Total Students</h3>
-                                <p class="text-3xl font-bold text-blue-700">
-                                    <%= totalStudents %>
-                                </p>
-                            </div>
-                            <div class="icon bg-blue-200 p-3 rounded-full shadow-md">
-                                <i class="fas fa-users text-3xl text-blue-600"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-
-                <!-- Total Teachers Card -->
-                <div
-                    class="bg-gradient-to-br from-green-100 to-green-200 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                    <a href="/dashboard/teacher/reports">
-                        <div class="flex justify-between items-center">
-                            <div class="text-gray-700">
-                                <h3 class="text-xl font-semibold">Total Teachers</h3>
-                                <p class="text-3xl font-bold text-green-700">
-                                    <%= totalTeachers %>
-                                </p>
-                            </div>
-                            <div class="icon bg-green-200 p-3 rounded-full shadow-md">
-                                <i class="fas fa-chalkboard-teacher text-3xl text-green-600"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Total Classes Card -->
-                <div
-                    class="bg-gradient-to-br from-orange-100 to-orange-200 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                    <a href="/dashboard/class/reports">
-                        <div class="flex justify-between items-center">
-                            <div class="text-gray-700">
-                                <h3 class="text-xl font-semibold">Total Classes</h3>
-                                <p class="text-3xl font-bold text-orange-700">
-                                    <%= totalClasses %>
-                                </p>
-                            </div>
-                            <div class="icon bg-orange-200 p-3 rounded-full shadow-md">
-                                <i class="fas fa-school text-3xl text-orange-600"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Total Fees Collected Card -->
-                <div
-                    class="bg-gradient-to-br from-purple-100 to-purple-200 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                    <a href="/dashboard/fee/reports">
-
-                        <div class="flex justify-between items-center">
-                            <div class="text-gray-700">
-                                <h3 class="text-xl font-semibold">Total Fees Collected</h3>
-                                <p class="text-3xl font-bold text-purple-700">
-                                    PKR <%= feesCollected.toLocaleString() %>
-                                </p>
-                            </div>
-                            <div class="icon bg-purple-200 p-3 rounded-full shadow-md">
-                                <i class="fas fa-money-bill-wave text-3xl text-purple-600"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                    <% actions.forEach(action=> { %>
+                        <a href="<%= action.link %>"
+                            class="bg-gradient-to-r from-<%= action.color %>-500 to-purple-700 text-white p-6 rounded-xl shadow-lg text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out">
+                            <%= action.label %>
+                        </a>
+                        <% }); %>
             </section>
-
-
-            <section
-                class="mt-10 bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-8 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center">
-                <!-- Header -->
-                <header
-                    class="w-full max-w-4xl flex flex-col items-center border-b pb-6 mb-8 rounded-lg bg-blue-500 text-white shadow-lg px-6 py-5">
-                    <div>
-                        <h2 class="text-3xl font-semibold tracking-wide">Blogs Management</h2>
-                        <p class="text-sm hidden sm:block text-gray-200">Manage blogs by adding or viewing them in one
-                            place.</p>
-                    </div>
-                </header>
-
-                <!-- Buttons -->
-                <div class="flex flex-col sm:flex-row gap-6">
-                    <!-- Add Blogs Button -->
-                    <a href="/dashboard/blogs/add"
-                        class="inline-block text-center bg-green-600 text-white font-semibold py-4 px-8 rounded-lg shadow-lg hover:bg-green-800 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                        ➕ Add Blogs
-                    </a>
-                    <!-- Display Blogs Button -->
-                    <a href="/dashboard/blogs/display"
-                        class="inline-block text-center bg-yellow-600 text-white font-semibold py-4 px-8 rounded-lg shadow-lg hover:bg-yellow-800 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                        📄 Display Blogs
-                    </a>
-                </div>
-            </section>
-
-
-
-
     </main>
-
-
 
     <%- include('../partials/dashboardfooter') %>
