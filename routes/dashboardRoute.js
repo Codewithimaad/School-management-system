@@ -8,7 +8,7 @@ const feeAmount = require('../models/feesSChema');
 const authenticateUser = require('../middlewares/authenticateUser');
 const checkRole = require('../middlewares/checkRole');
 
-router.get('/dashboard', authenticateUser, checkRole('admin'), async (req, res) => {
+router.get('/dashboard/home', authenticateUser, checkRole('admin'), async (req, res) => {
     try {
         // Fetch dynamic statistics
         const totalStudents = await studentModel.countDocuments();

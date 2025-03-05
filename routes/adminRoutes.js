@@ -188,53 +188,6 @@ router.get('/dashboard/admin/reports', authenticateUser, checkRole('admin'), asy
 });
 
 
-router.post('/dashboard/admin/change-password', authenticateUser, async (req, res) => {
-    try {
-        const { oldPassword, newPassword, confirmNewPassword } = req.body;
-        const userId = req.user.id; // Extracted from JWT authentication middleware
-
-        // Validate input
-        if (!oldPassword || !newPassword || !confirmNewPassword) {
-            req.flash('error_msg', 'All fields are required.');
-            return res.redirect('/change-password');
-        }
-
-        if (newPassword !== confirmNewPassword) {
-            req.flash('error_msg', 'New passwords do not match.');
-            return res.redirect('/change-password');
-        }
-
-        // Find user by ID (using Admin model)
-        const user = await adminModel.findById(userId);
-        if (!user) {
-            req.flash('error_msg', 'User not found.');
-            return res.redirect('/change-password');
-        }
-
-        // Check if old password is correct
-        const isMatch = await bcrypt.compare(oldPassword, user.password);
-        if (!isMatch) {
-            req.flash('error_msg', 'Old password is incorrect.');
-            return res.redirect('/change-password');
-        }
-
-        // Hash new password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(newPassword, salt);
-
-        // Update password in database
-        user.password = hashedPassword;
-        await user.save();
-
-        req.flash('success_msg', 'Password changed successfully!');
-        res.redirect('/dashboard'); // Redirect to dashboard or login
-    } catch (error) {
-        console.error('Error changing password:', error);
-        req.flash('error_msg', 'Something went wrong.');
-        res.redirect('/dashboard');
-    }
-});
-
 
 // Logout route
 router.get('/dashboard/logout', authenticateUser, logoutUser);

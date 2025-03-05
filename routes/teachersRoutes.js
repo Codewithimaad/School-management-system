@@ -11,12 +11,9 @@ const Principal = require('../models/principalModel');
 const { body, validationResult } = require('express-validator');
 const upload = require('../middlewares/multer-middleware'); // Multer middleware
 const { uploadOnCloudinary } = require('../utils/cloudinary');
+const { postAddTeacher } = require('../controllers/teacherController');
 
 
-
-
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
 
 // Define routes for dashboard pages
 router.get('/dashboard', authenticateUser, checkRole('admin', 'teacher', 'student'), async (req, res) => {
@@ -42,65 +39,15 @@ router.get('/dashboard/teacher/add', authenticateUser, checkRole('admin'), (req,
     res.render("dashboard/teacherpages/teacher", {
         success_msg: req.flash('success_msg'),
         error_msg: req.flash('error_msg')
+
     });
 });
 
-// Add Teacher Route
-router.post(
-    '/dashboard/teacher/add',
-    authenticateUser,
-    checkRole('admin'),
-    upload.single('image'), // Multer middleware
 
-    async (req, res) => {
-        const { name, subject, salary, qualification, gender, email, phone, password, status, description } = req.body;
+// Add Teacher Post Route
+router.post('/dashboard/teacher/add', authenticateUser, checkRole('admin'), upload.single('image'), postAddTeacher);
 
-        let imageUrl = null; // Default to null if no image is uploaded
 
-        try {
-            // Check if an image is uploaded
-            if (req.file) {
-                const cloudinaryResponse = await uploadOnCloudinary(req.file.path); // Upload image
-                if (cloudinaryResponse) {
-                    imageUrl = cloudinaryResponse.url; // Set uploaded image URL
-                } else {
-                    req.flash('error_msg', 'Failed to upload image.');
-                    return res.redirect('/dashboard/teacher/add');
-                }
-            }
-
-            // Hash the password
-            const salt = await bcrypt.genSalt(10);
-            const hashedPassword = await bcrypt.hash(password, salt);
-
-            // Create new teacher
-            const newTeacher = new teacherModel({
-                name,
-                subject,
-                email,
-                phone,
-                gender,
-                password: hashedPassword,
-                salary,
-                status,
-                qualification,
-                description,
-                imageUrl, // Can be null if no image was uploaded
-                role: 'teacher', // Add role for role-based authorization
-            });
-
-            await newTeacher.save();
-
-            // Flash success message
-            req.flash('success_msg', 'Teacher added successfully!');
-            res.redirect('/dashboard/teacher/reports');
-        } catch (error) {
-            console.error(error);
-            req.flash('error_msg', 'Something went wrong while adding the teacher.');
-            res.redirect('/dashboard/teacher/add');
-        }
-    }
-);
 
 
 

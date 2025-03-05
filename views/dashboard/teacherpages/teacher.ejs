@@ -3,6 +3,21 @@
     <main class="flex-grow flex-wrap p-2 md:p-8 lg:p-12">
         <%- include('../../partials/flashMessage') %>
 
+            <style>
+                .input-error {
+                    border: 2px solid red !important;
+                }
+
+                .error-message {
+                    color: red;
+                    font-size: 0.875rem;
+                    margin-top: 4px;
+                    display: none;
+                    /* Hide initially */
+                }
+            </style>
+
+
             <!-- Header Section -->
             <header
                 class="flex items-center justify-between bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg shadow-xl px-8 py-6 mb-8">
@@ -16,19 +31,20 @@
                 </a>
             </header>
 
-            <!-- Teacher Form (Full-width Card Style) -->
-            <section id="teacher-form">
-                <form id="teacher-form" action="/dashboard/teacher/add" method="POST"
-                    class="bg-white dark:bg-gray-800 p-8 shadow-2xl rounded-lg w-full gap-6"
-                    enctype="multipart/form-data">
+            <!-- Teacher Form -->
+            <section>
+                <form id="teacher-form" action="/dashboard/teacher/add" method="POST" enctype="multipart/form-data"
+                    class="bg-white dark:bg-gray-800 p-8 shadow-2xl rounded-lg w-full gap-6">
+
                     <div class="mb-6 md:flex gap-6 justify-between items-center">
                         <!-- Name Input -->
                         <div class="flex-1 mb-5 md:mb-0">
                             <label for="name"
                                 class="block text-sm font-medium text-gray-700 dark:text-white">Name</label>
                             <input type="text" id="name" name="name"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-red-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Enter teacher's full name" />
+                            <p id="name-error" class="error-message"></p> <!-- Error message here -->
                         </div>
 
                         <!-- Subject Input -->
@@ -36,64 +52,121 @@
                             <label for="subject"
                                 class="block text-sm font-medium text-gray-700 dark:text-white">Subject</label>
                             <input type="text" id="subject" name="subject"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-red-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="e.g., Mathematics, Science" />
+                            <p id="subject-error" class="error-message"></p> <!-- Error message here -->
                         </div>
+                    </div>
 
-                        <!-- Qualification Input -->
+                    <div class="mb-6 md:flex gap-6 justify-between items-center">
+                        <!-- Qualification -->
                         <div class="flex-1 mb-5 md:mb-0">
                             <label for="qualification"
                                 class="block text-sm font-medium text-gray-700 dark:text-white">Qualification</label>
                             <input type="text" id="qualification" name="qualification"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-red-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Qualification" />
-                        </div>
-                    </div>
-
-                    <div class="mb-6 md:flex gap-6 justify-between items-center">
-                        <!-- Phone Input -->
-                        <div class="flex-1 mb-5 md:mb-0">
-                            <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-white">Phone
-                                No</label>
-                            <input type="number" id="phone" name="phone"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
-                                placeholder="Phone no" />
+                            <p id="qualification-error" class="error-message"></p> <!-- Error message here -->
                         </div>
 
-                        <!-- Email Input -->
-                        <div class="flex-1 mb-5 md:mb-0">
-                            <label for="email"
-                                class="block text-sm font-medium text-gray-700 dark:text-white">Email</label>
-                            <input type="email" id="email" name="email"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
-                                placeholder="Email" />
-                        </div>
-
-                        <!-- Password Input -->
-                        <div class="flex-1 mb-5 md:mb-0">
-                            <label for="password"
-                                class="block text-sm font-medium text-gray-700 dark:text-white">Password</label>
-                            <input type="password" id="password" name="password"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
-                                placeholder="Enter New Password" />
-                        </div>
-                    </div>
-
-                    <div class="mb-6 md:flex gap-6 justify-between items-center">
-                        <!-- Salary Input -->
+                        <!-- Salary -->
                         <div class="flex-1 mb-5 md:mb-0">
                             <label for="salary"
                                 class="block text-sm font-medium text-gray-700 dark:text-white">Salary</label>
                             <input type="number" id="salary" name="salary"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-red-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Salary" />
+                            <p id="salary-error" class="error-message"></p> <!-- Error message here -->
                         </div>
                     </div>
 
+                    <div class="mb-6 md:flex gap-6 justify-between items-center">
+                        <!-- Phone -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-white">Phone
+                                No</label>
+                            <input type="number" id="phone" name="phone"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-red-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                placeholder="Phone No" />
+                            <p id="phone-error" class="error-message"></p> <!-- Error message here -->
+                        </div>
+
+                        <!-- Email -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="email"
+                                class="block text-sm font-medium text-gray-700 dark:text-white">Email</label>
+                            <input type="email" id="email" name="email"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-red-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                placeholder="Email" />
+                            <p id="email-error" class="error-message"></p> <!-- Error message here -->
+                        </div>
+                    </div>
+
+                    <div class="mb-6 md:flex gap-6 justify-between items-center">
+                        <!-- Status -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="status"
+                                class="block text-sm font-medium text-gray-700 dark:text-white">Status</label>
+                            <select id="status" name="status"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white outline-none rounded-md border-red-600  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400">
+                                <option value="" selected disabled>Select Status</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                            <p id="status-error" class="error-message"></p> <!-- Error message here -->
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="gender"
+                                class="block text-sm font-medium text-gray-700 dark:text-white">Gender</label>
+                            <select id="gender" name="gender"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white outline-none rounded-md border-red-600  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400">
+                                <option value="" selected disabled>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <p id="gender-error" class="error-message"></p> <!-- Error message here -->
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-6">
+                        <label for="description"
+                            class="block text-sm font-medium text-gray-700 dark:text-white">Description</label>
+                        <textarea id="description" name="description"
+                            class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-red-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                            placeholder="Description"></textarea>
+                        <p id="description-error" class="error-message"></p> <!-- Error message here -->
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-6">
+                        <label for="password"
+                            class="block text-sm font-medium text-gray-700 dark:text-white">Password</label>
+                        <input type="password" id="password" name="password"
+                            class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-red-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                            placeholder="Password">
+                        <p id="password-error" class="error-message"></p> <!-- Error message here -->
+
+                    </div>
+
+                    <div class="mb-6 md:flex gap-6 justify-between items-center">
+                        <!-- Image Upload Input -->
+                        <div class="flex-1 mb-5 md:mb-0">
+                            <label for="image" class="block text-sm font-medium text-gray-700 dark:text-white">Profile
+                                Image</label>
+                            <input type="file" id="image" name="image"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 outline-none rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400" />
+                            <p id="image-error" class="error-message"></p> <!-- Error message here -->
+
+                        </div>
+                    </div>...
                     <!-- Submit Button -->
                     <div class="flex justify-end">
                         <button type="submit"
-                            class="px-6 py-2 bg-blue-800 text-white text-sm font-semibold rounded-lg shadow hover:bg-blue-700 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400 focus:outline-none">
+                            class="px-6 py-2 bg-blue-800 text-white text-sm font-semibold rounded-lg shadow hover:bg-blue-700 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400 focus:outline-none"
+                            id="submit-button">
                             Add Teacher
                         </button>
                     </div>

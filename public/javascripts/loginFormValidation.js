@@ -1,60 +1,64 @@
-document.getElementById('login-form').addEventListener('submit', function (e) {
-    let valid = true;
+document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.getElementById("login-form");
 
-    // Validate Email
-    const email = document.getElementById('email');
-    const emailError = document.getElementById('email-error');
-    const emailPattern = /\S+@\S+\.\S+/; // Regex for email validation
-    if (!email.value.trim() || !emailPattern.test(email.value)) {
-        emailError.classList.remove('hidden');
-        email.classList.add('border-red-500');
-        valid = false;
-    } else {
-        emailError.classList.add('hidden');
-        email.classList.remove('border-red-500');
-    }
+    loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent default form submission
 
-    // Validate Password
-    const password = document.getElementById('password');
-    const passwordError = document.getElementById('password-error');
-    if (!password.value.trim() || password.value.length < 8) {
-        passwordError.classList.remove('hidden');
-        password.classList.add('border-red-500');
-        valid = false;
-    } else {
-        passwordError.classList.add('hidden');
-        password.classList.remove('border-red-500');
-    }
+        // Clear previous error messages
+        document.getElementById("email-error").textContent = "";
+        document.getElementById("password-error").textContent = "";
+        document.getElementById("role-error").textContent = "";
 
-    // Validate Role
-    const role = document.getElementById('role');
-    const roleError = document.getElementById('role-error');
-    if (!role.value.trim()) {
-        roleError.classList.remove('hidden');
-        role.classList.add('border-red-500');
-        valid = false;
-    } else {
-        roleError.classList.add('hidden');
-        role.classList.remove('border-red-500');
-    }
+        // Get form data
+        const formData = new FormData(loginForm);
+        const data = {
+            email: formData.get("email"),
+            password: formData.get("password"),
+            role: formData.get("role"),
+        };
 
-    // Prevent form submission if validation fails
-    if (!valid) {
-        e.preventDefault();
-    }
+        try {
+            const response = await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (!result.success) {
+                // Display validation errors dynamically
+                if (result.errors.email) {
+                    document.getElementById("email-error").textContent = result.errors.email;
+                    document.getElementById('email').classList.add('border-2', 'border-red-600');
+                } else {
+                    document.getElementById('email').classList.remove('border-2', 'border-red-600');
+
+                }
+                if (result.errors.password) {
+                    document.getElementById("password-error").textContent = result.errors.password;
+                    document.getElementById('password').classList.add('border-2', 'border-red-600');
+                }
+                else {
+                    document.getElementById('password').classList.remove('border-2', 'border-red-600');
+
+                }
+                if (result.errors.role) {
+                    document.getElementById("role-error").textContent = result.errors.role;
+                    document.getElementById('role').classList.add('border-2', 'border-red-600');
+                }
+                else {
+                    document.getElementById('role').classList.remove('border-2', 'border-red-600');
+
+                }
+            } else {
+                // Redirect to dashboard on success
+                window.location.href = result.redirectUrl;
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    });
 });
-
-// Toggle Password Visibility
-function togglePassword() {
-    const passwordField = document.getElementById('password');
-    const eyeIcon = document.getElementById('eye-icon');
-    if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        eyeIcon.classList.remove('fa-eye');
-        eyeIcon.classList.add('fa-eye-slash');
-    } else {
-        passwordField.type = 'password';
-        eyeIcon.classList.remove('fa-eye-slash');
-        eyeIcon.classList.add('fa-eye');
-    }
-}

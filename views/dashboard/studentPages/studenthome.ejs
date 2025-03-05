@@ -21,15 +21,15 @@
             <section id="student-form">
                 <form id="student-form" action="/dashboard/student/add" method="POST"
                     class="bg-white dark:bg-gray-800 p-8 shadow-2xl rounded-2xl w-full mx-auto">
-
                     <div class="grid md:grid-cols-3 gap-6 mb-6">
                         <!-- Name Input -->
                         <div>
                             <label for="name"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
                             <input type="text" id="name" name="name"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-red-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Enter student's Name" />
+                            <span class="error-message text-red-600 hidden" id="name-error">Name is required</span>
                         </div>
 
                         <!-- Father's Name Input -->
@@ -37,8 +37,10 @@
                             <label for="fname"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">Father's Name</label>
                             <input type="text" id="fname" name="fname"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-red-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Enter father's full name" />
+                            <span class="error-message text-red-600 hidden" id="fname-error">Father's name is
+                                required</span>
                         </div>
 
                         <!-- Roll Number Input -->
@@ -46,8 +48,10 @@
                             <label for="roll_number"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">Roll Number</label>
                             <input type="number" id="roll_number" name="roll_number"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-red-600  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Enter roll number" />
+                            <span class="error-message text-red-600 hidden" id="roll_number-error">Roll number is
+                                required</span>
                         </div>
                     </div>
 
@@ -57,33 +61,107 @@
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">Registration
                                 No</label>
                             <input type="text" id="resgistrationNo" name="resgistrationNo"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-red-600  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Registration no" />
+                            <span class="error-message text-red-600 hidden" id="resgistrationNo-error">Registration
+                                number is required</span>
                         </div>
 
                         <div>
                             <label for="email"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
                             <input type="email" id="email" name="email"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-red-600  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Email" />
+                            <span class="error-message text-red-600 hidden" id="email-error">Please enter a valid email
+                                address</span>
                         </div>
 
                         <div>
                             <label for="password"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
                             <input type="password" id="password" name="password"
-                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-red-600  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
                                 placeholder="Password" />
+                            <span class="error-message text-red-600 hidden" id="password-error">Password must be at
+                                least 8 characters long, include an uppercase letter, a lowercase letter, and a
+                                number.</span>
                         </div>
                     </div>
 
-                    <div class="mb-6">
-                        <label for="address"
-                            class="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
-                        <input type="text" id="address" name="address"
-                            class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
-                            placeholder="Enter student's address" />
+                    <div class="grid md:grid-cols-3 gap-6 mb-6">
+                        <div>
+                            <label for="address"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
+                            <input type="text" id="address" name="address"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-red-600  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                placeholder="Enter student's address" />
+                            <span class="error-message text-red-600 hidden" id="address-error">Address is
+                                required</span>
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone
+                                No</label>
+                            <input type="number" id="phone" name="phone"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-red-600  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400"
+                                placeholder="Enter student's phone no" />
+                            <span class="error-message text-red-600 hidden" id="phone-error">Phone number is
+                                required</span>
+                        </div>
+
+                        <div>
+                            <label for="gender"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">Gender</label>
+                            <select name="gender" id="gender"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-red-600  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400">
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <span class="error-message text-red-600 hidden" id="gender-error">Please select a
+                                gender</span>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 mb-6">
+                        <div>
+                            <label for="stdClass"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">Class</label>
+                            <select name="stdClass" id="stdClass"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-red-600  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400">
+                                <option value="" disabled selected>Select Class</option>
+                                <% classes.forEach(classItem=> { %>
+                                    <option value="<%= classItem._id %>">
+                                        <%= classItem.name %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                            <span class="error-message text-red-600 hidden" id="stdClass-error">Please select a
+                                class</span>
+                        </div>
+
+                        <!-- Enrollment Date Input -->
+                        <div>
+                            <label for="enrollmentDate"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">Enrollment
+                                Date</label>
+                            <input type="date" name="enrollmentDate" id="enrollmentDate"
+                                value="<%= new Date().toISOString().split('T')[0] %>"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-red-600  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400" />
+                            <span class="error-message text-red-600 hidden" id="enrollmentDate-error">Enrollment date is
+                                required</span>
+                        </div>
+
+                        <!-- DOB Date Input -->
+                        <div>
+                            <label for="dob" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Date of
+                                Birth</label>
+                            <input type="date" name="dob"
+                                class="mt-1 block w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-red-600  shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400" />
+                            <span class="error-message text-red-600 hidden" id="dob-error">Date of birth is
+                                required</span>
+                        </div>
                     </div>
 
                     <!-- Submit Button -->

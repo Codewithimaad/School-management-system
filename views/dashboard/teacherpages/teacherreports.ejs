@@ -1,6 +1,7 @@
 <%- include('../../partials/dashboard') %>
 
     <main class="flex-grow p-2 md:p-6 lg:p-10">
+
         <%- include('../../partials/flashMessage') %>
 
             <!-- Header Section -->
@@ -57,7 +58,7 @@
                         </thead>
                         <tbody>
                             <% teachers.forEach(teacher=> { %>
-                                <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                <tr class="border-b transition">
                                     <td class="p-4 font-medium text-gray-800 dark:text-white">
                                         <%= teacher.name %>
                                     </td>
